@@ -1,0 +1,12 @@
+{
+  "name": "opav-project",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev:frontend": "pnpm -C opav-frontend dev",
+    "dev:cms": "pnpm -C opav-cms develop",
+    "build:frontend": "pnpm -C opav-frontend build",
+    "build:cms": "pnpm -C opav-cms build",
+    "lint:frontend": "pnpm -C opav-frontend lint"
+  }
+}

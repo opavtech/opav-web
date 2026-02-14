@@ -1,0 +1,27 @@
+{
+  "name": "OPAV SAS - Administración de Propiedades",
+  "short_name": "OPAV",
+  "description": "Líder en administración de propiedades corporativas y facilities management en Colombia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#d50058",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logos/opav-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logos/opav-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "es-CO",
+  "dir": "ltr"
+}

@@ -1,0 +1,142 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vacantes",
+  "info": {
+    "singularName": "vacante",
+    "pluralName": "vacantes",
+    "displayName": "Vacante",
+    "description": "Ofertas laborales"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "titulo": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "descripcion": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "tipoContrato": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "indefinido",
+        "temporal",
+        "por_obra",
+        "freelance"
+      ]
+    },
+    "salario": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "ciudad": {
+      "type": "string",
+      "required": true
+    },
+    "area": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "nivelEducativo": {
+      "type": "enumeration",
+      "enum": [
+        "bachiller",
+        "tecnico",
+        "tecnologico",
+        "profesional",
+        "especializacion",
+        "maestria",
+        "doctorado"
+      ]
+    },
+    "fechaCierre": {
+      "type": "date"
+    },
+    "activa": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "requisitos": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "archivoDescripcion": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "experienciaRequerida": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "slug": {
+      "type": "uid",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "targetField": "titulo"
+    },
+    "empresa": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
+      "enum": [
+        "B&S",
+        "OPAV"
+      ]
+    },
+    "destacado": {
+      "type": "boolean",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    }
+  }
+}

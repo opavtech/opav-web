@@ -1,0 +1,134 @@
+{
+  "kind": "collectionType",
+  "collectionName": "casos_exito",
+  "info": {
+    "singularName": "caso-exito",
+    "pluralName": "casos-exito",
+    "displayName": "Caso de Éxito",
+    "description": "Success cases de OPAV y B&S"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "empresa": {
+      "type": "enumeration",
+      "required": true,
+      "default": "OPAV",
+      "enum": ["OPAV", "B&S"]
+    },
+    "imagenPrincipal": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "descripcion": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "ubicacion": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "galeria": {
+      "type": "dynamiczone",
+      "components": [
+        "galeria.galeria-opav",
+        "galeria.comparacion-antes-despues"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "destacado": {
+      "type": "boolean",
+      "default": false
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "nombre",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "metaTitle": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "maxLength": 60
+    },
+    "metaDescription": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "maxLength": 160
+    },
+    "keywords": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "ogTitle": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "maxLength": 60
+    },
+    "ogDescription": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "maxLength": 160
+    }
+  }
+}

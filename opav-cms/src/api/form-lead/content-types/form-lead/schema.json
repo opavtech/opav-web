@@ -1,0 +1,93 @@
+{
+  "kind": "collectionType",
+  "collectionName": "form_leads",
+  "info": {
+    "singularName": "form-lead",
+    "pluralName": "form-leads",
+    "displayName": "Form Lead",
+    "description": "Formularios centralizados (RFP, Contacto, Inmuebles, Proveedores, Vacantes)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombreCompleto": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "telefono": {
+      "type": "string"
+    },
+    "empresa": {
+      "type": "string"
+    },
+    "tipoFormulario": {
+      "type": "enumeration",
+      "enum": ["rfp", "contacto", "inmueble", "proveedor", "vacante"],
+      "required": true
+    },
+    "mensaje": {
+      "type": "text"
+    },
+    "servicioSolicitado": {
+      "type": "string"
+    },
+    "inmuebleInteres": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::inmueble.inmueble"
+    },
+    "vacanteInteres": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vacante.vacante"
+    },
+    "archivosAdjuntos": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["files", "images"]
+    },
+    "estado": {
+      "type": "enumeration",
+      "enum": ["nuevo", "en_proceso", "contactado", "cerrado"],
+      "default": "nuevo",
+      "required": true
+    },
+    "idioma": {
+      "type": "enumeration",
+      "enum": ["es", "en"],
+      "default": "es",
+      "required": true
+    },
+    "notas": {
+      "type": "text"
+    },
+    "enviadoHubspot": {
+      "type": "boolean",
+      "default": false
+    },
+    "hubspotContactId": {
+      "type": "string"
+    },
+    "presupuestoEstimado": {
+      "type": "string"
+    },
+    "fechaPreferidaVisita": {
+      "type": "date"
+    },
+    "tipoProveedor": {
+      "type": "string"
+    },
+    "nit": {
+      "type": "string"
+    },
+    "añosExperiencia": {
+      "type": "integer"
+    }
+  }
+}

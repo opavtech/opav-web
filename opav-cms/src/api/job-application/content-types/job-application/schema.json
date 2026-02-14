@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_applications",
+  "info": {
+    "singularName": "job-application",
+    "pluralName": "job-applications",
+    "displayName": "Job Application",
+    "description": "Applications received from the job application form"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "maxLength": 100
+    },
+    "phone": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20
+    },
+    "resumeUrl": {
+      "type": "string",
+      "required": true
+    },
+    "coverLetter": {
+      "type": "richtext"
+    },
+    "positionOfInterest": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "salaryExpectation": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "vacante": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vacante.vacante"
+    },
+    "source": {
+      "type": "enumeration",
+      "enum": ["specific", "spontaneous"],
+      "default": "spontaneous",
+      "required": true
+    },
+    "applicationStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "reviewing", "interview", "rejected", "accepted"],
+      "default": "pending",
+      "required": true
+    },
+    "applicationLocale": {
+      "type": "enumeration",
+      "enum": ["es", "en"],
+      "default": "es",
+      "required": true
+    }
+  }
+}

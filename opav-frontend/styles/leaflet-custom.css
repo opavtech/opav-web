@@ -1,0 +1,60 @@
+/* Estilos personalizados para los popups de Leaflet */
+.leaflet-popup-content-wrapper {
+  background: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+.leaflet-popup-tip {
+  background: white !important;
+}
+
+.custom-popup .leaflet-popup-close-button {
+  color: #e91e63 !important;
+  font-size: 24px !important;
+  font-weight: bold !important;
+  padding: 8px !important;
+}
+
+.custom-popup .leaflet-popup-close-button:hover {
+  color: #00bcd4 !important;
+}
+
+/* Mejorar contraste del mapa */
+.map-tiles {
+  filter: contrast(1.15) brightness(0.95) saturate(1.1);
+}
+
+/* Ajustar controles del mapa con más contraste */
+.leaflet-control-zoom a {
+  background-color: rgba(30, 41, 59, 0.95) !important;
+  color: white !important;
+  border: 1px solid rgba(233, 30, 99, 0.3) !important;
+  backdrop-filter: blur(8px);
+  font-weight: bold !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: rgba(51, 65, 85, 1) !important;
+  border-color: #e91e63 !important;
+  box-shadow: 0 0 12px rgba(233, 30, 99, 0.4);
+}
+
+.leaflet-control-attribution {
+  background-color: rgba(30, 41, 59, 0.9) !important;
+  color: rgba(203, 213, 225, 0.9) !important;
+  backdrop-filter: blur(4px);
+  font-size: 10px !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+}
+
+.leaflet-control-attribution a {
+  color: #00bcd4 !important;
+  font-weight: 500 !important;
+}

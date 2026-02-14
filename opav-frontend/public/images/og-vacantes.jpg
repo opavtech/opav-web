@@ -1,0 +1,56 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7f7f8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#d50058;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5347b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Diagonal accent -->
+  <path d="M 0 410 L 1200 280 L 1200 630 L 0 630 Z" fill="rgba(251,106,157,0.08)"/>
+  
+  <!-- Logo/Brand area (top left) -->
+  <text x="60" y="80" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="#1a1a1a">
+    OPAV
+  </text>
+  <rect x="60" y="95" width="80" height="3" fill="url(#accentGradient)"/>
+  
+  <!-- Main content -->
+  <text x="60" y="250" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="300" fill="#1a1a1a" letter-spacing="-2">
+    Únete a
+  </text>
+  <text x="60" y="340" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="300" fill="#1a1a1a" letter-spacing="-2">
+    Nuestro Equipo
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="60" y="420" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="300" fill="#666666">
+    Oportunidades profesionales en OPAV y B&amp;S Facilities
+  </text>
+  
+  <!-- Badge/Stats -->
+  <rect x="60" y="480" width="280" height="60" rx="30" fill="rgba(255,255,255,0.9)" stroke="#e0e0e0" stroke-width="1"/>
+  <circle cx="90" cy="510" r="6" fill="#f5347b">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <text x="110" y="518" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="600" fill="#1a1a1a">
+    Vacantes Disponibles
+  </text>
+  
+  <!-- Icon decoration (right side) -->
+  <g opacity="0.15">
+    <rect x="900" y="150" width="200" height="200" rx="20" fill="none" stroke="#d50058" stroke-width="3"/>
+    <path d="M 950 200 L 950 250 M 950 250 L 1000 250 M 1000 200 L 1000 250 M 1000 250 L 1050 250" 
+          stroke="#d50058" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="975" cy="230" r="8" fill="#d50058"/>
+    <circle cx="1025" cy="230" r="8" fill="#d50058"/>
+  </g>
+</svg>

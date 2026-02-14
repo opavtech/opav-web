@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "provider_applications",
+  "info": {
+    "singularName": "provider-application",
+    "pluralName": "provider-applications",
+    "displayName": "Provider Application",
+    "description": "Applications received from providers wanting to work with OPAV"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "companyName": {
+      "type": "string",
+      "maxLength": 150,
+      "required": true
+    },
+    "nit": {
+      "type": "string",
+      "maxLength": 50,
+      "required": true
+    },
+    "legalRepresentative": {
+      "type": "string",
+      "maxLength": 100,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "maxLength": 100
+    },
+    "phone": {
+      "type": "string",
+      "maxLength": 20,
+      "required": true
+    },
+    "address": {
+      "type": "string",
+      "maxLength": 250,
+      "required": true
+    },
+    "providerType": {
+      "type": "enumeration",
+      "required": true,
+      "enum": ["service", "product", "both"]
+    },
+    "operationalContactName": {
+      "type": "string",
+      "maxLength": 100,
+      "required": true
+    },
+    "dataConsent": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "applicationStatus": {
+      "type": "enumeration",
+      "required": true,
+      "default": "pending",
+      "enum": ["pending", "reviewing", "contacted", "rejected", "approved"]
+    },
+    "locale": {
+      "type": "string",
+      "maxLength": 5,
+      "default": "es"
+    }
+  }
+}

@@ -1,0 +1,817 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Nosotros",
+    "services": "Servicios",
+    "certified": "Certificación",
+    "successCases": "Casos de Éxito",
+    "properties": "Inmuebles",
+    "suppliers": "Proveedores",
+    "jobs": "Trabaja con Nosotros",
+    "contact": "Contacto",
+    "productsServices": "Productos/Servicios",
+    "locations": "Cobertura",
+    "company": "Compañía",
+    "projects": "Proyectos",
+    "privacy": "Protección de Datos",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+  "home": {
+    "metadata": {
+      "title": "OPAV SAS | Administración de Propiedades y Facilities Management Colombia",
+      "description": "Empresa líder en administración de propiedades corporativas y facilities management en Bogotá, Colombia. 8 años de experiencia, certificación ISO 9001:2015 en proceso, +210.000 m² administrados. Soluciones integrales para edificios corporativos.",
+      "keywords": "administración de propiedades Colombia, facilities management Bogotá, administración de edificios corporativos, mantenimiento de edificios, gestión de propiedades, administración inmobiliaria Bogotá, property management Colombia, ISO 9001 certificado, OPAV, B&S Facilities, administración propiedad horizontal, gestión de activos inmobiliarios",
+      "ogTitle": "OPAV SAS | Gestión Profesional de Propiedades en Colombia",
+      "ogDescription": "Soluciones integrales en administración de propiedades y facilities management. 8 años de experiencia | Certificación ISO 9001:2015 en proceso | +210.000 m² administrados en Colombia.",
+      "twitterTitle": "OPAV SAS | Administración de Propiedades Colombia",
+      "twitterDescription": "Líder en gestión de propiedades corporativas en Colombia. 8 años | ISO 9001:2015 en proceso | +210k m² administrados | Bogotá y ciudades principales"
+    },
+    "hero": {
+      "title": "Gestión Integral de Propiedades",
+      "subtitle": "Soluciones profesionales en administración y facilities management con más de 8 años de experiencia",
+      "cta": "Solicitar Propuesta",
+      "metric1": "Años de Experiencia",
+      "metric2": "Proyectos Exitosos",
+      "metric3": "m² Administrados",
+      "isoTitle": "Certificación ISO 9001",
+      "isoBadge": "En Proceso 2026",
+      "isoDescription": "En proceso de certificación para el 2026. Garantizamos los más altos estándares de calidad en todos nuestros servicios y procesos",
+      "isoLink": "Ver Certificado →"
+    },
+    "company": {
+      "title": "Nuestras Empresas",
+      "intro": "Dos marcas especializadas que trabajan de forma integrada para ofrecer soluciones corporativas en administración de propiedades y facilities management.",
+      "learnMore": "Ver detalles",
+      "requestQuote": "Solicitar Propuesta",
+      "opav": {
+        "subtitle1": "Expertos en Administración de Propiedades",
+        "subtitle2": "Gestión corporativa con visión estratégica",
+        "badge1": "Administración Integral",
+        "badge2": "Gestión de Arrendamientos",
+        "badge3": "Asesoría Inmobiliaria"
+      },
+      "bs": {
+        "subtitle1": "Especialistas en Facilities Management",
+        "subtitle2": "Mantenimiento y servicios generales de excelencia",
+        "badge1": "Mantenimiento Preventivo",
+        "badge2": "Servicios Generales",
+        "badge3": "Gestión de Proveedores"
+      }
+    },
+    "certification": {
+      "title": "Certificación ISO 9001:2015",
+      "description": "Estamos en proceso de certificación ISO 9001 para el 2026, lo que garantizará que todos nuestros procesos cumplen con los más altos estándares internacionales de calidad, mejora continua y satisfacción del cliente.",
+      "viewDetails": "Ver Detalles de Certificación",
+      "benefit1": "Estándares internacionales de calidad",
+      "benefit2": "Mejora continua de procesos",
+      "benefit3": "Satisfacción garantizada del cliente"
+    },
+    "testimonials": {
+      "title": "Solidez Empresarial",
+      "subtitle": "Testimonios de nuestros profesionales",
+      "employees": [
+        {
+          "name": "Miguel Ángel Figueroa",
+          "position": "Director de Seguridad de OPAV",
+          "quote": "Me siento complacido de pertenecer a la empresa OPAV, por la oportunidad, la enseñanza y la gratitud por la confianza y gracias por permitirme expresar mis ideas y mi experiencia en pro de la empresa."
+        },
+        {
+          "name": "Luz Mary Tapiero",
+          "position": "Asistente Administrativa",
+          "quote": "Gracias a OPAV en estos 6 años de trabajar en la empresa, donde he tenido la oportunidad de ascender de cargo, logrando mis objetivos, me tienen en cuenta mis opiniones, estoy agradecida."
+        },
+        {
+          "name": "Juan Urquijo",
+          "position": "Auxiliar de Mantenimiento en Jardinería",
+          "quote": "Agradecimiento por poder emprender mis objetivos personales y de mi familia, gracias a la empresa por el apoyo y confianza, gracias por día a día ser mejor en mi trabajo. Admiro a mis líderes en OPAV."
+        }
+      ],
+      "institutionalPhrase": "Nuestro equipo y nuestros clientes hablan por nosotros.",
+      "cta": "Únete a Nuestro Equipo"
+    },
+    "success": {
+      "title": "Proyectos de Referencia",
+      "subtitle": "Soluciones reales que generan resultados medibles",
+      "viewAll": "Ver Todos los Proyectos",
+      "filterAll": "Todos los Proyectos",
+      "filterOpav": "OPAV",
+      "filterBs": "B&S Facilities",
+      "opavDescription": "Administración de propiedades corporativas con enfoque estratégico",
+      "bsDescription": "Facilities management y servicios especializados de mantenimiento"
+    },
+    "insights": {
+      "badge": "Editorial",
+      "title": "Ideas & Opinión",
+      "subtitle": "Reflexiones estratégicas para navegar la complejidad empresarial actual.",
+      "updateFrequency": "Actualizamos esta sección cada mes con nuevos artículos.",
+      "readArticle": "Leer artículo",
+      "viewAll": "Ver todos los artículos",
+      "readTime": "min de lectura",
+      "noArticles": "No hay artículos disponibles en este momento.",
+      "exploreCta": "Desliza para explorar más artículos →"
+    },
+    "cta": {
+      "title": "¿Listo para optimizar la gestión de sus propiedades?",
+      "subtitle": "Contáctenos hoy y descubra cómo nuestras soluciones pueden transformar la administración de sus activos inmobiliarios",
+      "button": "Contactar Ahora"
+    }
+  },
+  "common": {
+    "learnMore": "Conocer Más",
+    "contactUs": "Contáctanos",
+    "download": "Descargar"
+  },
+  "company": {
+    "seo": {
+      "title": "Sobre OPAV & B&S – Gestión Corporativa de Propiedades y Facilities Management",
+      "description": "Conozca OPAV y B&S Facilities. 8 años de experiencia en administración de propiedades corporativas y facilities management en Colombia. Certificación ISO 9001:2015 en proceso.",
+      "keywords": "OPAV, B&S Facilities, administración de propiedades, facilities management, ISO 9001, gestión corporativa, Colombia",
+      "ogTitle": "Sobre OPAV & B&S – Gestión Corporativa de Propiedades",
+      "ogDescription": "Líderes en administración de propiedades corporativas y facilities management en Colombia. Certificación ISO 9001."
+    },
+    "hero": {
+      "badge": "Soluciones Corporativas Integrales",
+      "title": "Quiénes Somos",
+      "subtitle": "Más de 10 años optimizando la administración, operación y mantenimiento de activos corporativos, comerciales e industriales."
+    },
+    "mission": {
+      "title": "Misión",
+      "content": "En OPAV, brindamos soluciones de calidad en Administración de propiedades y facilities, anticipándonos a las necesidades de nuestros clientes, con enfoque sostenible, de innovación y compromiso social."
+    },
+    "vision": {
+      "title": "Visión",
+      "content": "Ser líderes en administración de propiedades horizontales y gestión de facilities, reconocidos por nuestra excelencia, sostenibilidad e impacto positivo en clientes y comunidades, con una proyección nacional e internacional."
+    },
+    "values": {
+      "title": "Nuestros Valores",
+      "quote": "Estos valores nos definen como organización y guían cada decisión que tomamos",
+      "value1": {
+        "title": "Profesionalismo",
+        "description": "Actuamos con ética y excelencia en cada proyecto"
+      },
+      "value2": {
+        "title": "Compromiso",
+        "description": "Dedicación total con nuestros clientes y su éxito"
+      },
+      "value3": {
+        "title": "Calidad",
+        "description": "Superamos expectativas en cada servicio que brindamos"
+      },
+      "value4": {
+        "title": "Transparencia",
+        "description": "Comunicación clara y honesta en todo momento"
+      },
+      "value5": {
+        "title": "Innovación",
+        "description": "Implementamos soluciones tecnológicas y eficientes"
+      },
+      "value6": {
+        "title": "Sostenibilidad",
+        "description": "Compromiso con prácticas ambientalmente responsables"
+      }
+    },
+    "history": {
+      "title": "Nuestra Historia",
+      "items": [
+        {
+          "year": "2018",
+          "title": "Fundación de OPAV",
+          "description": "Iniciamos operaciones con un equipo comprometido y la visión de revolucionar la administración de propiedades en Colombia"
+        },
+        {
+          "year": "2020",
+          "title": "Expansión de Servicios",
+          "description": "Creación de B&S Facilities para ofrecer soluciones integrales de facilities management"
+        },
+        {
+          "year": "2026",
+          "title": "Certificación ISO 9001",
+          "description": "Obtención de la certificación ISO 9001, consolidando nuestro compromiso con la calidad"
+        },
+        {
+          "year": "2026",
+          "title": "Líder del Mercado",
+          "description": "Consolidados como referente en el sector con más de 172 mil m² bajo administración"
+        }
+      ]
+    },
+    "team": {
+      "title": "Nuestro Equipo",
+      "description": "Un equipo multidisciplinario de profesionales altamente capacitados comprometidos con la excelencia",
+      "stat1": "Profesionales Especializados",
+      "stat2": "Satisfacción del Cliente",
+      "stat3": "Años de Experiencia Promedio",
+      "cta": "Únete a Nuestro Equipo"
+    },
+    "management": {
+      "title": "Modelo de Gestión",
+      "subtitle": "Un enfoque estructurado y certificado que garantiza excelencia operativa en cada etapa de la administración de propiedades corporativas",
+      "p1": {
+        "title": "Levantamiento de Información",
+        "description": "Levantamiento de información para identificar necesidades del cliente/ocupante",
+        "items": [
+          "Presupuestos",
+          "Estructura operativa",
+          "Servicios diferenciales"
+        ]
+      },
+      "p2": {
+        "title": "Presupuestos",
+        "description": "Elaboración de presupuestos estratégicos para optimizar recursos y generar valor",
+        "items": [
+          "Presupuesto de la Operación",
+          "Propuesta para generar ingresos no operativos",
+          "Presupuesto de actualización de la infraestructura",
+          "Auditoria"
+        ]
+      },
+      "p3": {
+        "title": "Estructura Operativa",
+        "description": "Diseño e implementación de sistemas de gestión integral",
+        "items": [
+          "Plan Continuidad de Negocio",
+          "Diseño del Plan Mejora",
+          "Generación Informes Periódicos",
+          "Gestión de la Operación",
+          "Edición OPAV (Comunicación directa con el cliente)"
+        ]
+      },
+      "p4": {
+        "title": "Servicios Diferenciales",
+        "description": "Innovación aplicada con sencillez para generar impacto",
+        "items": [
+          "Detalles de Innovación",
+          "Sencillez",
+          "Hacerlo en micro, para convertirlo en macro"
+        ]
+      }
+    },
+    "bsManagement": {
+      "title": "Servicios Integrales",
+      "subtitle": "Brindamos soluciones integrales en instalaciones de uso corporativo, comercial e industrial, que aportan calidad, eficacia y satisfacción en el servicio que ofrecemos a nuestros clientes",
+      "card1": {
+        "title": "Calidad",
+        "description": "Trabajamos con las habilidades, talentos y experticia de nuestros colaboradores, que nos permiten ofrecer alto nivel de calidad en las actividades que realizamos."
+      },
+      "card2": {
+        "title": "Responsabilidad",
+        "description": "La satisfacción de nuestros clientes es la nuestra propia, por lo que es vital para nosotros cumplir con los tiempos de atención y respuesta a sus solicitudes."
+      },
+      "card3": {
+        "title": "Servicio",
+        "description": "Nuestro equipo de trabajo conformado por personal directo y tercerizado, es la sinergia de habilidades, destrezas, valores y calidad humana, lo que deriva en la prestación de un servicio integral."
+      },
+      "card4": {
+        "title": "Servicios Integrales",
+        "description": "Nuestro portafolio de servicio está orientado al desarrollo de actividades que apoyen los procesos y actividades de nuestros clientes."
+      }
+    },
+    "cta": {
+      "title": "Trabajemos Juntos",
+      "subtitle": "Descubra cómo podemos ayudarle a optimizar la gestión de sus propiedades",
+      "button": "Solicitar Consulta"
+    }
+  },
+  "contact": {
+    "hero": {
+      "badge": "Contáctanos",
+      "title": "Contáctenos",
+      "subtitle": "Estamos aquí para ayudarle con sus necesidades de administración de propiedades"
+    },
+    "info": {
+      "title": "Información de Contacto",
+      "address": {
+        "title": "Dirección",
+        "line1": "Calle 100 #19-61",
+        "line2": "Bogotá, Colombia"
+      },
+      "phone": {
+        "title": "Teléfono",
+        "number": "+57 (1) 123 4567"
+      },
+      "email": {
+        "title": "Email",
+        "address": "info@opav.com.co"
+      },
+      "hours": {
+        "title": "Horario de Atención",
+        "weekdays": "Lunes a Viernes: 8:00 AM - 6:00 PM",
+        "weekend": "Sábados: 9:00 AM - 1:00 PM"
+      }
+    },
+    "form": {
+      "title": "Envíenos un Mensaje",
+      "subtitle": "Complete el formulario y nos pondremos en contacto con usted a la brevedad",
+      "fullName": "Nombre Completo",
+      "fullNamePlaceholder": "Juan Pérez",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "juan@empresa.com",
+      "phone": "Teléfono",
+      "phonePlaceholder": "+57 300 123 4567",
+      "company": "Empresa",
+      "companyPlaceholder": "Nombre de su empresa",
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntenos cómo podemos ayudarle...",
+      "attachment": "Adjuntar Archivo",
+      "attachmentHelp": "Adjunta un archivo en formato PDF o Word (máx. 5MB)",
+      "privacyConsent": "Acepto el tratamiento de mis datos personales según la",
+      "privacyLink": "/documents/politica-tratamiento-datos.pdf",
+      "privacyLinkText": "Política de Privacidad",
+      "submit": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "successMessage": "¡Mensaje enviado exitosamente! Nos pondremos en contacto pronto.",
+      "errorMessage": "Hubo un error al enviar el mensaje. Por favor intente nuevamente.",
+      "required": "Este campo es obligatorio",
+      "invalidEmail": "Correo electrónico inválido",
+      "invalidPhone": "Número de teléfono inválido",
+      "fileTooBig": "El archivo es demasiado grande (máx. 5MB)",
+      "invalidFileType": "Solo se permiten archivos PDF o Word"
+    },
+    "cta": {
+      "title": "¿Listo para empezar?",
+      "subtitle": "Solicite una consulta gratuita y descubra cómo podemos ayudarle"
+    }
+  },
+  "services": {
+    "hero": {
+      "title": "Nuestros Servicios",
+      "subtitle": "Soluciones integrales en administración de propiedades y facilities management"
+    },
+    "opav": {
+      "title": "OPAV - Administración de Propiedades",
+      "subtitle": "Gestión integral y profesional de activos inmobiliarios corporativos",
+      "noServices": "No hay servicios disponibles en este momento",
+      "buttons": {
+        "cases": "Ver Casos de Éxito",
+        "rfp": "Solicitar Cotización",
+        "brochure": "Descargar Brochure OPAV"
+      }
+    },
+    "bs": {
+      "title": "B&S Facilities - Servicios Integrales",
+      "subtitle": "Mantenimiento y servicios generales con estándares de excelencia",
+      "noServices": "No hay servicios disponibles en este momento",
+      "buttons": {
+        "cases": "Ver Casos de Éxito",
+        "rfp": "Solicitar Cotización",
+        "brochure": "Descargar Brochure B&S"
+      }
+    },
+    "why": {
+      "title": "¿Por Qué Elegirnos?",
+      "subtitle": "Resultados comprobados y experiencia que marca la diferencia",
+      "isoBadge": "En Proceso 2026",
+      "counters": {
+        "experience": "Años de experiencia",
+        "projects": "Proyectos en desarrollo",
+        "satisfaction": "De buen trabajo realizado"
+      },
+      "reason1": {
+        "title": "Experiencia Comprobada",
+        "description": "Más de 8 años gestionando exitosamente propiedades corporativas en Colombia"
+      },
+      "reason2": {
+        "title": "Certificación ISO 9001",
+        "description": "Procesos certificados que garantizan la más alta calidad en nuestros servicios"
+      },
+      "reason3": {
+        "title": "Equipo Especializado",
+        "description": "Profesionales altamente capacitados comprometidos con la excelencia"
+      },
+      "reason4": {
+        "title": "Tecnología Avanzada",
+        "description": "Sistemas de gestión modernos para máxima eficiencia y transparencia"
+      }
+    },
+    "cta": {
+      "title": "¿Listo para optimizar la gestión de sus propiedades?",
+      "subtitle": "Solicite una consulta gratuita y descubra cómo nuestros servicios pueden transformar su operación",
+      "button": "Solicitar Consulta"
+    }
+  },
+
+  "successCases": {
+    "hero": {
+      "badge": "Proyectos Exitosos",
+      "title": "Red de Casos de Éxito",
+      "subtitle": "Cada proyecto es un nodo en nuestra red de excelencia. Descubre cómo hemos transformado organizaciones a través de soluciones innovadoras y resultados medibles.",
+      "description": "Cada proyecto es un nodo en nuestra red de excelencia. Descubre cómo hemos transformado organizaciones a través de soluciones innovadoras y resultados medibles.",
+      "scrollIndicator": "Explorar"
+    },
+    "filters": {
+      "all": "Todos",
+      "opav": "OPAV",
+      "bs": "B&S",
+      "results": "Resultados",
+      "loadMore": "Mostrar más casos"
+    },
+    "cta": {
+      "title": "¿Listo para ser nuestro próximo caso de éxito?",
+      "subtitle": "Contáctenos hoy y descubra cómo podemos transformar la gestión de sus propiedades",
+      "button": "Solicitar Consulta"
+    }
+  },
+
+  "successCase": {
+    "breadcrumb": {
+      "home": "Inicio",
+      "successCases": "Casos de Éxito"
+    },
+    "metrics": {
+      "area": "Área",
+      "savings": "Ahorro",
+      "employees": "Empleados",
+      "duration": "Duración"
+    },
+    "journey": {
+      "objective": "Objetivo del Cliente",
+      "challenge": "El Desafío",
+      "solution": "Nuestra Solución",
+      "results": "Resultados Obtenidos",
+      "projectDescription": "Descripción del Proyecto"
+    },
+    "details": {
+      "title": "Detalles del Proyecto",
+      "company": "Empresa",
+      "client": "Cliente",
+      "industry": "Industria",
+      "location": "Ubicación",
+      "date": "Fecha",
+      "duration": "Duración",
+      "tags": "Etiquetas"
+    },
+    "cta": {
+      "title": "¿Interesado en resultados similares?",
+      "text": "Contáctanos para conocer cómo podemos ayudarte a alcanzar tus objetivos de negocio.",
+      "button": "Contactar Ahora"
+    },
+    "related": {
+      "title": "Casos Relacionados",
+      "viewAll": "Ver todos"
+    },
+    "navigation": {
+      "backToAll": "Ver todos los casos de éxito"
+    },
+    "gallery": {
+      "title": "Galería del Proyecto",
+      "viewLarger": "Ver imagen ampliada",
+      "closeGallery": "Cerrar galería",
+      "imageOf": "Imagen"
+    }
+  },
+
+  "certificaciones": {
+    "hero": {
+      "title": "Certificaciones",
+      "subtitle": "Comprometidos con los más altos estándares de calidad y excelencia en nuestros servicios",
+      "description": "Nuestras certificaciones ISO y acreditaciones internacionales garantizan procesos de calidad certificados en toda nuestra operación",
+      "stats": {
+        "total": "Certificaciones Activas",
+        "totalLabel": "Total Certificaciones",
+        "vigentes": "Vigentes",
+        "vigentesLabel": "Certificaciones Vigentes",
+        "destacadas": "Destacadas",
+        "destacadasLabel": "Certificaciones Destacadas"
+      }
+    },
+    "section": {
+      "title": "Nuestras Certificaciones",
+      "subtitle": "Acreditaciones y estándares internacionales que respaldan nuestros servicios y procesos"
+    },
+    "filters": {
+      "all": "Todas",
+      "vigentes": "Vigentes",
+      "vencidas": "No vigentes",
+      "destacadas": "Destacadas",
+      "results": "certificaciones encontradas",
+      "noResults": "No se encontraron certificaciones",
+      "filterBy": "Filtrar por:",
+      "viewDetails": "Ver Detalles",
+      "issuedBy": "Emitida por",
+      "issuedOn": "Emitido",
+      "validUntil": "Válida hasta",
+      "expired": "No vigente",
+      "active": "Vigente",
+      "whatItBrings": "¿Qué aporta?",
+      "showMore": "Ver más",
+      "showLess": "Ver menos"
+    },
+    "trust": {
+      "title": "¿Por qué confiar en nuestras certificaciones?",
+      "subtitle": "Nuestras acreditaciones garantizan los más altos estándares de calidad, seguridad y sostenibilidad en cada servicio",
+      "verified": "Verificado",
+      "updated": "Actualizado",
+      "audited": "Auditado",
+      "reason1": {
+        "title": "Calidad Certificada",
+        "description": "Cumplimos con estándares internacionales auditados anualmente por entidades independientes"
+      },
+      "reason2": {
+        "title": "Cumplimiento Normativo",
+        "description": "Garantizamos el cumplimiento de todas las regulaciones locales e internacionales aplicables"
+      },
+      "reason3": {
+        "title": "Mejora Continua",
+        "description": "Nuestros sistemas de gestión aseguran la optimización constante de procesos y resultados"
+      },
+      "reason4": {
+        "title": "Reconocimiento Global",
+        "description": "Acreditaciones reconocidas internacionalmente que validan nuestra excelencia operacional"
+      }
+    },
+    "cta": {
+      "title": "¿Busca una empresa para administrar sus Edificios corporativos de oficinas, centros comerciales y parques industriales?",
+      "subtitle": "Conoce cómo nuestras certificaciones garantizan la calidad y confiabilidad de nuestros servicios",
+      "button": "Contactar Ahora"
+    },
+    "badge": {
+      "active": "Vigente"
+    },
+    "issuedBy": "Emitida por:",
+    "whatItBrings": "¿Qué aporta al cliente?",
+    "info": {
+      "registrationNumber": "Número de Registro:",
+      "issueDate": "Fecha de Emisión:",
+      "expirationDate": "Fecha de Vencimiento:"
+    },
+    "buttons": {
+      "requestProposal": "Solicitar Propuesta",
+      "downloadCertificate": "Descargar Certificado"
+    }
+  },
+
+  "jobs": {
+    "seo": {
+      "title": "Trabaja con Nosotros | Vacantes OPAV y B&S Facilities",
+      "description": "Descubre oportunidades profesionales en OPAV y B&S Facilities. Vacantes en diferentes ciudades y áreas. Únete a nuestro equipo.",
+      "keywords": "vacantes, empleo, trabajo, OPAV, B&S Facilities, oportunidades laborales, bolsa de empleo"
+    },
+    "hero": {
+      "title": "Únete a Nuestro Equipo",
+      "subtitle": "Descubre oportunidades para crecer profesionalmente en OPAV y B&S Facilities",
+      "badge": "Vacantes disponibles"
+    },
+    "intro": {
+      "title": "Tu Próxima Oportunidad Profesional",
+      "description": "Ofrecemos posiciones en diversas áreas, con beneficios competitivos y un excelente ambiente laboral. Encuentra la vacante ideal para ti."
+    },
+    "filters": {
+      "all": "Todas las Vacantes",
+      "opav": "OPAV",
+      "bs": "B&S Facilities",
+      "byCity": "Por Ciudad",
+      "byArea": "Por Área",
+      "search": "Buscar vacantes",
+      "searchPlaceholder": "Buscar por título, descripción o área...",
+      "searchLabel": "Búsqueda y filtros de vacantes",
+      "clear": "Limpiar Filtros",
+      "showing": "Mostrando",
+      "results": "vacantes",
+      "active": "Filtro activo"
+    },
+    "card": {
+      "company": "Empresa",
+      "salary": "Salario",
+      "negotiable": "A convenir",
+      "location": "Ubicación",
+      "contractType": "Tipo de Contrato",
+      "area": "Área",
+      "experience": "Experiencia Requerida",
+      "education": "Nivel Educativo",
+      "closingDate": "Fecha de Cierre",
+      "applyNow": "Aplicar Ahora",
+      "viewDetails": "Ver Detalles"
+    },
+    "contractTypes": {
+      "indefinido": "Indefinido",
+      "temporal": "Temporal",
+      "porObra": "Por Obra"
+    },
+    "educationLevels": {
+      "bachiller": "Bachiller",
+      "tecnico": "Técnico",
+      "tecnologo": "Tecnólogo",
+      "tecnologico": "Tecnólogo",
+      "profesional": "Profesional",
+      "especializacion": "Especialización",
+      "maestria": "Maestría",
+      "doctorado": "Doctorado"
+    },
+    "experienceLevels": {
+      "sinExperiencia": "Sin Experiencia",
+      "1-2años": "1-2 años",
+      "3-5años": "3-5 años",
+      "5+años": "5+ años"
+    },
+    "detail": {
+      "backToJobs": "← Volver a Vacantes",
+      "jobDescription": "Descripción del Cargo",
+      "requirements": "Requisitos",
+      "jobInfo": "Información del Cargo",
+      "applyForPosition": "Aplicar a esta Vacante",
+      "downloadDescription": "Descargar Descripción Completa",
+      "shareJob": "Compartir Vacante"
+    },
+    "application": {
+      "title": "Aplicar a la Vacante",
+      "subtitle": "Completa el formulario para postularte a esta posición",
+      "fullName": "Nombre Completo",
+      "fullNamePlaceholder": "Ingresa tu nombre completo",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "tu@email.com",
+      "phone": "Teléfono",
+      "phonePlaceholder": "+57 300 123 4567",
+      "resume": "Hoja de Vida",
+      "resumeButton": "Seleccionar archivo",
+      "resumeHelp": "Adjunta tu CV en formato PDF o Word (máx. 5MB)",
+      "coverLetter": "Carta de Presentación",
+      "coverLetterPlaceholder": "Cuéntanos por qué eres el candidato ideal para este cargo...",
+      "coverLetterModeText": "Escribir texto",
+      "coverLetterModeFile": "Subir archivo",
+      "coverLetterFileButton": "Seleccionar archivo",
+      "coverLetterUpload": "O adjunta un archivo",
+      "positionOfInterest": "Cargo o Área de Interés",
+      "positionOfInterestPlaceholder": "Ej: Desarrollador Full Stack, Administrador de Propiedades...",
+      "positionPlaceholder": "Ej: Desarrollador Full Stack, Administrador de Propiedades...",
+      "salaryExpectation": "Expectativa Salarial",
+      "salaryExpectationPlaceholder": "Ej: $3,000,000 - $4,000,000 COP",
+      "salaryPlaceholder": "Ej: $3,000,000 - $4,000,000 COP",
+      "salaryOptional": "(Opcional)",
+      "privacyConsent": "Acepto el tratamiento de mis datos personales según la",
+      "privacyLink": "/documents/politica-tratamiento-datos.pdf",
+      "privacyLinkText": "Política de Privacidad",
+      "submit": "Enviar Aplicación",
+      "sending": "Enviando...",
+      "successTitle": "¡Aplicación Enviada!",
+      "successMessage": "Hemos recibido tu aplicación correctamente. Nos pondremos en contacto pronto.",
+      "errorTitle": "Error al Enviar",
+      "errorMessage": "Hubo un problema al procesar tu aplicación. Por favor intenta nuevamente.",
+      "required": "Este campo es obligatorio",
+      "invalidEmail": "Correo electrónico inválido",
+      "invalidPhone": "Número de teléfono inválido",
+      "fileTooBig": "El archivo es demasiado grande (máx. 5MB)",
+      "invalidFileType": "Solo se permiten archivos PDF o Word"
+    },
+    "noJobs": {
+      "title": "No hay vacantes disponibles",
+      "description": "En este momento no tenemos posiciones abiertas que coincidan con tu búsqueda.",
+      "contactUs": "Contáctanos",
+      "contactText": "Si estás interesado en trabajar con nosotros, envíanos tu hoja de vida a"
+    },
+    "cta": {
+      "title": "¿No encontraste la vacante ideal?",
+      "description": "Envíanos tu hoja de vida y te contactaremos cuando haya oportunidades que se ajusten a tu perfil.",
+      "button": "Enviar Hoja de Vida",
+      "buttonAria": "Enviar hoja de vida espontánea"
+    },
+    "spontaneous": {
+      "metaTitle": "Aplicación Espontánea - OPAV",
+      "metaDescription": "Envíanos tu hoja de vida y te contactaremos cuando tengamos oportunidades que se ajusten a tu perfil profesional.",
+      "badge": "Aplicación Espontánea",
+      "title": "Únete a Nuestro Equipo",
+      "description": "Aunque no tengamos una vacante específica ahora, siempre estamos buscando talento excepcional. Envíanos tu información y te contactaremos cuando surja una oportunidad.",
+      "formTitle": "Envía tu Hoja de Vida",
+      "formSubtitle": "Completa el formulario y nos pondremos en contacto cuando tengamos una oportunidad que se ajuste a tu perfil"
+    }
+  },
+  "cookies": {
+    "title": "Configuración de Privacidad",
+    "subtitle": "Tu privacidad es importante para nosotros",
+    "description": "Utilizamos cookies en nuestro sitio web. Algunas son esenciales para el funcionamiento básico, mientras que otras nos ayudan a mejorar tu experiencia y analizar el uso del sitio.",
+    "close": "Cerrar",
+    "alwaysActive": "Siempre activo",
+    "tabs": {
+      "categories": "Categorías",
+      "services": "Servicios"
+    },
+    "categories": {
+      "essential": {
+        "title": "Cookies Esenciales",
+        "description": "Necesarias para las funciones básicas del sitio web. Sin ellas, el sitio no funcionaría correctamente.",
+        "details": "Estas cookies son estrictamente necesarias para el funcionamiento del sitio web y no se pueden desactivar. Incluyen cookies de sesión, autenticación y preferencias básicas del usuario."
+      },
+      "analytics": {
+        "title": "Análisis y Rendimiento",
+        "description": "Nos ayudan a entender cómo los visitantes interactúan con el sitio para mejorar la experiencia.",
+        "details": "Estas cookies recopilan información sobre cómo usas nuestro sitio web, como las páginas que visitas y si encuentras errores. Toda la información es anónima y se utiliza solo para mejorar el funcionamiento del sitio."
+      },
+      "marketing": {
+        "title": "Medios Externos y Marketing",
+        "description": "Utilizamos contenido de terceros como videos y mapas. Requiere tu consentimiento para cargarse.",
+        "details": "Estas cookies permiten mostrar contenido de plataformas externas como YouTube, Google Maps y redes sociales. También pueden utilizarse para personalizar la publicidad."
+      }
+    },
+    "servicesInfo": "Información detallada de servicios de terceros próximamente.",
+    "buttons": {
+      "acceptAll": "Aceptar Todo",
+      "rejectAll": "Rechazar Todo",
+      "savePreferences": "Guardar Preferencias"
+    }
+  },
+  "cobertura": {
+    "metadata": {
+      "title": "Cobertura Nacional | OPAV & B&S",
+      "description": "Descubre nuestra presencia en las principales ciudades de Colombia. Proyectos de excelencia en construcción e ingeniería a lo largo del país."
+    },
+    "title": "Nuestra Cobertura Nacional",
+    "subtitle": "Presencia estratégica en las principales ciudades de Colombia",
+    "description": "Descubre dónde hemos llevado nuestros proyectos de excelencia. Cada punto en el mapa representa historias de éxito y transformación.",
+    "filterTitle": "Filtrar por empresa",
+    "filterAll": "Todas",
+    "noCitySelected": "Selecciona una ciudad",
+    "selectCity": "Haz clic en un punto del mapa para ver los proyectos",
+    "projects": "proyectos",
+    "project": "proyecto",
+    "viewCase": "Ver caso",
+    "statsCities": "Ciudades",
+    "statsProjects": "Proyectos",
+    "cta": {
+      "title": "¿Tienes un proyecto en mente?",
+      "description": "Únete a las empresas que confían en nuestra experiencia. Llevamos excelencia a cualquier rincón de Colombia.",
+      "button": "Contáctanos"
+    }
+  },
+  "providers": {
+    "seo": {
+      "title": "Proveedores | OPAV & B&S",
+      "description": "Únete a nuestra red de proveedores de confianza. Oportunidades de negocio en administración de propiedades y facilities management en Colombia.",
+      "keywords": "proveedores OPAV, alianzas comerciales, red de proveedores Colombia, oportunidades de negocio, proveedores facilities management, proveedores administración propiedades"
+    },
+    "breadcrumb": {
+      "home": "Inicio",
+      "providers": "Proveedores"
+    },
+    "hero": {
+      "badge": "Red de Aliados",
+      "title": "Únete a Nuestra Red de Proveedores",
+      "subtitle": "Buscamos aliados estratégicos comprometidos con la excelencia y la calidad en el servicio"
+    },
+    "benefits": {
+      "title": "¿Por qué ser nuestro proveedor?",
+      "opportunity": {
+        "title": "Oportunidades de Crecimiento",
+        "description": "Accede a proyectos de gran escala y expande tu negocio con contratos continuos"
+      },
+      "trust": {
+        "title": "Relaciones de Confianza",
+        "description": "Construimos alianzas duraderas basadas en la transparencia y el respeto mutuo"
+      },
+      "growth": {
+        "title": "Desarrollo Conjunto",
+        "description": "Crecemos juntos, fortaleciendo capacidades y compartiendo mejores prácticas"
+      }
+    },
+    "requirements": {
+      "title": "Requisitos para ser proveedor",
+      "item1": "Empresa legalmente constituida con documentos vigentes",
+      "item2": "Experiencia comprobable en el sector de servicios o productos que ofrece",
+      "item3": "Cumplimiento de normas de seguridad, calidad y medio ambiente",
+      "item4": "Referencias comerciales verificables",
+      "item5": "Capacidad técnica y financiera para proyectos de mediana y gran escala"
+    },
+    "cta": {
+      "title": "¿Listo para comenzar?",
+      "subtitle": "Completa el formulario y nos pondremos en contacto contigo pronto",
+      "button": "Completar Formulario"
+    },
+    "form": {
+      "title": "Formulario de Registro",
+      "subtitle": "Por favor completa la siguiente información para evaluar tu solicitud",
+      "companyName": "Nombre de la Empresa",
+      "companyNamePlaceholder": "Ej: Constructora ABC S.A.S",
+      "nit": "NIT",
+      "nitPlaceholder": "900.123.456-7",
+      "legalRepresentative": "Representante Legal",
+      "legalRepresentativePlaceholder": "Ej: Juan Pérez Gómez",
+      "email": "Correo de Contacto",
+      "emailPlaceholder": "contacto@empresa.com",
+      "phone": "Teléfono",
+      "phonePlaceholder": "+57 300 123 4567",
+      "address": "Dirección",
+      "addressPlaceholder": "Calle 123 #45-67, Bogotá, Colombia",
+      "providerType": "Tipo de Proveedor",
+      "selectProviderType": "Selecciona el tipo de proveedor...",
+      "providerTypeService": "Servicios",
+      "providerTypeProduct": "Productos",
+      "providerTypeBoth": "Servicios y Productos",
+      "operationalContactName": "Nombre del Contacto Operativo",
+      "operationalContactNamePlaceholder": "Ej: María López (persona de contacto diario)",
+      "dataConsentText": "Acepto el tratamiento de mis datos personales según la",
+      "privacyPolicyLink": "Política de Privacidad",
+      "consentRequired": "Debes aceptar el tratamiento de datos personales para continuar.",
+      "required": "Este campo es requerido",
+      "invalidEmail": "Por favor ingresa un correo electrónico válido",
+      "invalidPhone": "Por favor ingresa un número de teléfono válido",
+      "recaptchaNotice": "Este sitio está protegido por reCAPTCHA y aplican la Política de Privacidad y los Términos de Servicio de Google.",
+      "privacyPolicyLink": "política de protección de datos",
+      "submit": "Enviar Solicitud",
+      "sending": "Enviando...",
+      "successTitle": "¡Solicitud Enviada!",
+      "successMessage": "¡Solicitud enviada exitosamente! Nos pondremos en contacto pronto.",
+      "errorTitle": "Error al Enviar",
+      "errorMessage": "Error al enviar la solicitud. Por favor intenta de nuevo."
+    }
+  }
+}

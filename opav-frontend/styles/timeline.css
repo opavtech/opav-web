@@ -1,0 +1,549 @@
+/* =============================================
+   COMPANY HISTORY - TIMELINE CINEMATOGRÁFICO
+   Diseño: Ensamble Telescópico de Cristal
+============================================= */
+
+/* =====================================
+   CSS VARIABLES
+   Usa los colores magenta de globals.css:
+   --magenta: #d50058
+   --magenta-light: #ff1a8c
+===================================== */
+:root {
+  /* Colores magenta corporativos */
+  --timeline-primary: #d50058;
+  --timeline-primary-light: #ff1a8c;
+  --timeline-secondary: #a30045;
+
+  /* Glass effects con tono magenta */
+  --glass-bg: rgba(213, 0, 88, 0.04);
+  --glass-border: rgba(213, 0, 88, 0.15);
+  --glass-blur: 12px;
+}
+
+/* =====================================
+   TIMELINE CONTAINER
+===================================== */
+.company-history-section {
+  position: relative;
+  width: 100%;
+  /* Gradiente radial sutil desde el centro - guía la vista al timeline */
+  background: radial-gradient(
+      ellipse 80% 50% at 50% 40%,
+      rgba(213, 0, 88, 0.04) 0%,
+      rgba(213, 0, 88, 0.02) 30%,
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(253, 248, 250, 1) 50%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  overflow: visible;
+}
+
+.history-header {
+  position: relative;
+  z-index: 10;
+}
+
+.history-title {
+  color: #171717;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+
+.history-content-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* =====================================
+   SVG PATH - LÍNEA CURVA ANIMADA
+===================================== */
+.history-path-svg {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+.history-path-svg path {
+  filter: drop-shadow(0 0 8px rgba(213, 0, 88, 0.5));
+}
+
+/* =====================================
+   HISTORY ITEMS CONTAINER
+===================================== */
+.history-items-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* =====================================
+   HISTORY ITEM WRAPPER
+===================================== */
+.history-item-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* Items izquierdos (impares) - card a la derecha del centro */
+.history-item-wrapper.item-left {
+  justify-content: flex-start;
+  padding-left: calc(50% + 5rem);
+}
+
+/* Items derechos (pares) - card a la izquierda del centro */
+.history-item-wrapper.item-right {
+  justify-content: flex-end;
+  padding-right: calc(50% + 5rem);
+}
+
+/* =====================================
+   HEXÁGONO - NODO DEL TIMELINE
+===================================== */
+.hex-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  flex-shrink: 0;
+}
+
+.hex {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hex-inner {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(
+    135deg,
+    var(--timeline-primary),
+    var(--timeline-primary-light)
+  );
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  box-shadow: 0 4px 16px rgba(213, 0, 88, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15);
+  z-index: 2;
+}
+
+.hex-glow {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 26, 140, 0.8) 0%,
+    rgba(213, 0, 88, 0.3) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 1;
+  filter: blur(4px);
+}
+
+/* =====================================
+   CONNECTOR LINE
+===================================== */
+.connector-line {
+  position: absolute;
+  top: 50%;
+  height: 3px;
+  width: 3rem;
+  background: linear-gradient(
+    90deg,
+    var(--timeline-secondary) 0%,
+    var(--timeline-primary) 50%,
+    var(--timeline-primary-light) 100%
+  );
+  z-index: 15;
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(213, 0, 88, 0.3);
+}
+
+/* Conector para items izquierdos - va del hex hacia la card (derecha) */
+.connector-left {
+  left: 50%;
+  margin-left: 26px;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+/* Conector para items derechos - va del hex hacia la card (izquierda) */
+.connector-right {
+  right: 50%;
+  margin-right: 26px;
+  transform: translateY(-50%);
+  transform-origin: right center;
+}
+
+/* =====================================
+   CARD CONTAINER (para fragmentos)
+===================================== */
+.history-card-container {
+  position: relative;
+  width: 380px;
+  min-height: 180px;
+  z-index: 10;
+  /* Perspectiva para efecto 3D parallax */
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* =====================================
+   FRAGMENTOS TELESCÓPICOS
+===================================== */
+.crystal-fragment {
+  position: absolute;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+/* Fragmento izquierdo */
+.fragment-left {
+  top: 10%;
+  left: -10px;
+  width: 50%;
+  height: 80%;
+  z-index: 1;
+  box-shadow: -8px 0 24px rgba(10, 58, 83, 0.15),
+    inset 1px 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Fragmento derecho */
+.fragment-right {
+  top: 15%;
+  right: -10px;
+  width: 50%;
+  height: 75%;
+  z-index: 2;
+  box-shadow: 8px 0 24px rgba(10, 58, 83, 0.15),
+    inset -1px 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Fragmento central */
+.fragment-center {
+  top: 5%;
+  left: 15%;
+  width: 70%;
+  height: 90%;
+  z-index: 3;
+  box-shadow: 0 12px 32px rgba(10, 58, 83, 0.2),
+    inset 0 1px 3px rgba(255, 255, 255, 0.15);
+}
+
+/* =====================================
+   HISTORY CARD - GLASS/LIQUID EFFECT
+===================================== */
+.history-card {
+  position: relative;
+  width: 100%;
+  padding: 2rem;
+  /* Efecto liquid/cristal puro - sin tonos magenta */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.7) 20%,
+    rgba(255, 255, 255, 0.6) 40%,
+    rgba(255, 255, 255, 0.65) 60%,
+    rgba(255, 255, 255, 0.75) 80%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px 60px 24px 60px;
+  /* Sombras liquid más pronunciadas - sin magenta */
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08), 0 10px 25px rgba(0, 0, 0, 0.05),
+    inset 0 2px 4px rgba(255, 255, 255, 1), inset 0 -2px 6px rgba(0, 0, 0, 0.02),
+    inset 4px 0 12px rgba(255, 255, 255, 0.5),
+    inset -4px 0 12px rgba(255, 255, 255, 0.5),
+    inset 0 4px 20px rgba(255, 255, 255, 0.4);
+  z-index: 10;
+  overflow: hidden;
+  /* 3D parallax */
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  transition: border-radius 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto de borde brillante liquid - sin magenta */
+.history-card::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 1;
+  transition: all 0.4s ease;
+}
+
+.history-card:hover {
+  border-radius: 60px 24px 60px 24px;
+  /* Borde magenta sutil únicamente - sin iluminación interior */
+  border: 1px solid rgba(213, 0, 88, 0.25);
+  box-shadow: 0 0 15px rgba(213, 0, 88, 0.12), 0 0 30px rgba(213, 0, 88, 0.06);
+}
+
+/* =====================================
+   SHEEN EFFECT - BRILLO DIAGONAL
+===================================== */
+.sheen-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.4) 45%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.4) 55%,
+    transparent 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 15;
+  transform: translateX(-100%);
+}
+
+/* =====================================
+   YEAR WATERMARK - PARALLAX
+===================================== */
+.year-watermark {
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.year-text {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: var(--timeline-primary);
+  opacity: 0.08;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  user-select: none;
+}
+
+/* =====================================
+   CARD CONTENT
+===================================== */
+.card-content {
+  position: relative;
+  z-index: 20;
+  padding-top: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--timeline-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.card-description {
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* =====================================
+   RESPONSIVE - TABLET
+===================================== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .history-item-wrapper {
+    padding: 2.5rem 0;
+  }
+
+  .history-item-wrapper.item-left {
+    padding-left: calc(50% + 3rem);
+  }
+
+  .history-item-wrapper.item-right {
+    padding-right: calc(50% + 3rem);
+  }
+
+  .history-card-container {
+    width: 300px;
+  }
+
+  .hex {
+    width: 46px;
+    height: 46px;
+  }
+
+  .hex-inner {
+    width: 38px;
+    height: 38px;
+  }
+
+  .connector-line {
+    width: 2rem;
+  }
+
+  .year-text {
+    font-size: 3.5rem;
+  }
+}
+
+/* =====================================
+   RESPONSIVE - MOBILE
+===================================== */
+@media (max-width: 767px) {
+  .company-history-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .history-header {
+    margin-bottom: 2rem;
+  }
+
+  .history-title {
+    font-size: 1.75rem;
+  }
+
+  .history-items-container {
+    gap: 2rem;
+  }
+
+  .history-item-wrapper {
+    padding: 2rem 1rem;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .hex-wrapper {
+    position: relative;
+    left: auto;
+    transform: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .connector-line {
+    display: none;
+  }
+
+  .history-card-container {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .history-card {
+    padding: 1.5rem;
+  }
+
+  .crystal-fragment {
+    display: none;
+  }
+
+  .year-text {
+    font-size: 3rem;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .card-description {
+    font-size: 0.9rem;
+  }
+
+  .history-path-svg {
+    display: none;
+  }
+}
+
+/* =====================================
+   DARK MODE SUPPORT
+===================================== */
+@media (prefers-color-scheme: dark) {
+  .history-card {
+    background: rgba(213, 0, 88, 0.08);
+    border-color: rgba(255, 26, 140, 0.25);
+  }
+
+  .card-title {
+    color: #e2e8f0;
+  }
+
+  .card-description {
+    color: #a0aec0;
+  }
+
+  .year-text {
+    color: var(--timeline-primary-light);
+    opacity: 0.1;
+  }
+}
+
+/* =====================================
+   PERFORMANCE OPTIMIZATIONS
+===================================== */
+.history-card,
+.crystal-fragment,
+.hex,
+.hex-glow,
+.connector-line,
+.sheen-effect,
+.year-watermark {
+  will-change: transform, opacity;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .history-card,
+  .crystal-fragment,
+  .hex,
+  .hex-glow,
+  .connector-line,
+  .sheen-effect,
+  .year-watermark {
+    animation: none !important;
+    transition: none !important;
+  }
+}

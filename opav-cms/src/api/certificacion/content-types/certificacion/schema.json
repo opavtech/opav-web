@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "certificaciones",
+  "info": {
+    "singularName": "certificacion",
+    "pluralName": "certificaciones",
+    "displayName": "Certificación",
+    "description": "Certificaciones de OPAV (ISO 9000, etc.)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "descripcion": {
+      "type": "richtext",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "fechaEmision": {
+      "type": "date"
+    },
+    "fechaVencimiento": {
+      "type": "date"
+    },
+    "vigente": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "entidadEmisora": {
+      "type": "string"
+    },
+    "destacado": {
+      "type": "boolean",
+      "default": false
+    },
+    "queAporta": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

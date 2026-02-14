@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_galeria_galeria_opav",
+  "info": {
+    "displayName": "Galería OPAV",
+    "icon": "images",
+    "description": "Galería de imágenes secundarias para proyectos OPAV"
+  },
+  "options": {},
+  "attributes": {
+    "imagenesSecundarias": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

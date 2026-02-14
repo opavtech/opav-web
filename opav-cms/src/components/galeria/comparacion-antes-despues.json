@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_galeria_comparacion_antes_despues",
+  "info": {
+    "displayName": "Comparación Antes/Después",
+    "icon": "compare",
+    "description": "Fotos antes y después para proyectos B&S"
+  },
+  "options": {},
+  "attributes": {
+    "imagenAntes": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "imagenDespues": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "descripcionAntes": {
+      "type": "string",
+      "required": false
+    },
+    "descripcionDespues": {
+      "type": "string",
+      "required": false
+    }
+  }
+}
