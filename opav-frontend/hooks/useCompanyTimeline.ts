@@ -17,7 +17,7 @@ export function useCompanyTimeline({ container, path, items }: TimelineRefs) {
 
     // Pequeño delay para asegurar que el DOM esté renderizado
     const timeoutId = setTimeout(() => {
-      if (!container.current || !path.current) return;
+      if (!container.current || !path.current || !items.current) return;
 
       const svgPath = path.current;
       const historyItems = items.current.filter(Boolean) as HTMLDivElement[];

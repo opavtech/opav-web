@@ -1,6 +1,5 @@
 "use client";
 
-import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getStrapiMedia } from "@/lib/strapi";
@@ -131,4 +130,4 @@ function BlogInsightCard({
   );
 }
 
-export default memo(BlogInsightCard);
+export default BlogInsightCard;

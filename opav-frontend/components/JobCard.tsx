@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { memo } from "react";
 import { motion } from "framer-motion";
 
 interface Vacante {
@@ -336,4 +335,4 @@ function JobCard({
   );
 }
 
-export default memo(JobCard);
+export default JobCard;

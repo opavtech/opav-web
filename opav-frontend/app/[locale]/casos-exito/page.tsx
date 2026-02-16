@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { getCasosExito } from "@/lib/strapi";
@@ -176,27 +175,19 @@ export default async function SuccessCasesPage({
       {/* Content Section */}
       <div className="relative py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
-          <Suspense
-            fallback={
-              <div className="flex justify-center py-20">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-magenta-500"></div>
-              </div>
-            }
-          >
-            <CasosExitoGrid
-              casosExito={casosExito}
-              casosOPAV={casosOPAV}
-              casosBS={casosBS}
-              locale={locale}
-              translations={{
-                all: t("filters.all"),
-                opav: t("filters.opav"),
-                bs: t("filters.bs"),
-                results: t("filters.results"),
-                loadMore: t("filters.loadMore"),
-              }}
-            />
-          </Suspense>
+          <CasosExitoGrid
+            casosExito={casosExito}
+            casosOPAV={casosOPAV}
+            casosBS={casosBS}
+            locale={locale}
+            translations={{
+              all: t("filters.all"),
+              opav: t("filters.opav"),
+              bs: t("filters.bs"),
+              results: t("filters.results"),
+              loadMore: t("filters.loadMore"),
+            }}
+          />
         </div>
       </div>
 
