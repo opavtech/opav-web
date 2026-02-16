@@ -22,7 +22,7 @@ export default function AnimatedSection({
       transition={{ duration: 0.6, delay }}
       className={className}
     >
-      {children}
+      {children as any}
     </motion.div>
   );
 }

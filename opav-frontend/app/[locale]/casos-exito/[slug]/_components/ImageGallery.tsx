@@ -323,10 +323,10 @@ export default function ImageGallery({
               </div>
 
               {/* Caption if available */}
-              {imagenes[selectedImageIndex].caption && (
+              {allImages[selectedImageIndex].caption && (
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
                   <p className="text-white text-center text-sm">
-                    {imagenes[selectedImageIndex].caption}
+                    {allImages[selectedImageIndex].caption}
                   </p>
                 </div>
               )}

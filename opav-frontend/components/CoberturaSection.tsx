@@ -57,7 +57,7 @@ function CoberturaAnimatedSection({
 }: CoberturaAnimatedSectionProps) {
   return (
     <div className={`cobertura-fade-up ${className}`} style={{ animationDelay: `${delay}s` }}>
-      {children}
+      {children as any}
     </div>
   );
 }
