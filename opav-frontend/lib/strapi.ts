@@ -48,23 +48,40 @@ export async function fetchAPI(path: string, options: FetchOptions = {}) {
   const queryString = params ? buildStrapiQuery(params) : "";
   const url = `${STRAPI_API_URL}${path}${queryString ? `?${queryString}` : ""}`;
 
-  const response = await fetch(url, {
-    ...fetchOptions,
-    headers: {
-      "Content-Type": "application/json",
-      ...fetchOptions.headers,
-    },
-    // Revalidar cada 60 segundos en producción, sin caché en desarrollo
-    next: {
-      revalidate: process.env.NODE_ENV === "development" ? 0 : 60,
-    },
-  });
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
 
-  if (!response.ok) {
-    throw new Error(`Error fetching ${path}: ${response.statusText}`);
+    const response = await fetch(url, {
+      ...fetchOptions,
+      signal: controller.signal,
+      headers: {
+        "Content-Type": "application/json",
+        ...fetchOptions.headers,
+      },
+      // Revalidar cada 60 segundos en producción, sin caché en desarrollo
+      next: {
+        revalidate: process.env.NODE_ENV === "development" ? 0 : 60,
+      },
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      console.warn(`[Strapi] Error fetching ${path}: ${response.statusText}`);
+      return null;
+    }
+
+    return response.json();
+  } catch (error) {
+    // Durante build, CMS puede no estar disponible - retornar null en lugar de throw
+    if (process.env.NODE_ENV === "production" || process.env.NEXT_PHASE === "phase-production-build") {
+      console.warn(`[Strapi] CMS not available during build for ${path}, returning null`);
+      return null;
+    }
+    console.error(`[Strapi] Error fetching ${path}:`, error);
+    return null;
   }
-
-  return response.json();
 }
 
 // Helper para obtener URL completa de imágenes con optimización
@@ -101,25 +118,27 @@ export function getStrapiMedia(
 
 // Funciones específicas
 export async function getInmuebles(locale: string = "es") {
-  return fetchAPI("/inmuebles", {
+  const result = await fetchAPI("/inmuebles", {
     params: {
       locale,
       populate: "*",
     },
   });
+  return result || { data: [] };
 }
 
 export async function getServicios(locale: string = "es") {
-  return fetchAPI("/servicios", {
+  const result = await fetchAPI("/servicios", {
     params: {
       locale,
       populate: "*",
     },
   });
+  return result || { data: [] };
 }
 
 export async function getCertificaciones(locale: string = "es") {
-  return fetchAPI("/certificaciones", {
+  const result = await fetchAPI("/certificaciones", {
     params: {
       locale,
       "populate[logo][fields][0]": "url",
@@ -136,21 +155,23 @@ export async function getCertificaciones(locale: string = "es") {
     },
     next: { revalidate: 3600 }, // Cache por 1 hora
   });
+  return result || { data: [] };
 }
 
 export async function getCasosExito(locale: string = "es") {
-  return fetchAPI("/casos-exito", {
+  const result = await fetchAPI("/casos-exito", {
     params: {
       locale,
       populate: "*",
     },
     next: { revalidate: 1800 }, // Cache por 30 minutos
   });
+  return result || { data: [] };
 }
 
 // Obtener todos los casos de éxito con ubicación para el mapa
 export async function getCasosExitoConUbicacion(locale: string = "es") {
-  return fetchAPI("/casos-exito", {
+  const result = await fetchAPI("/casos-exito", {
     params: {
       locale,
       populate: "imagenPrincipal",
@@ -158,10 +179,11 @@ export async function getCasosExitoConUbicacion(locale: string = "es") {
     },
     next: { revalidate: 3600 }, // Cache por 1 hora
   });
+  return result || { data: [] };
 }
 
 export async function getCasosExitoDestacados(locale: string = "es") {
-  return fetchAPI("/casos-exito", {
+  const result = await fetchAPI("/casos-exito", {
     params: {
       locale,
       populate: "*",
@@ -170,16 +192,18 @@ export async function getCasosExitoDestacados(locale: string = "es") {
       sort: "createdAt:desc",
     },
   });
+  return result || { data: [] };
 }
 
 export async function getCasoExito(slug: string, locale: string = "es") {
-  return fetchAPI("/casos-exito", {
+  const result = await fetchAPI("/casos-exito", {
     params: {
       locale,
       populate: "*",
       "filters[Slug][$eq]": slug,
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener caso con sus localizaciones para cambio de idioma
@@ -187,13 +211,14 @@ export async function getCasoExitoWithLocalizations(
   slug: string,
   locale: string = "es",
 ) {
-  return fetchAPI("/casos-exito", {
+  const result = await fetchAPI("/casos-exito", {
     params: {
       locale,
       populate: "localizations",
       "filters[Slug][$eq]": slug,
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener caso por documentId (fallback)
@@ -201,13 +226,14 @@ export async function getCasoExitoByDocumentId(
   documentId: string,
   locale: string = "es",
 ) {
-  return fetchAPI("/casos-exito", {
+  const result = await fetchAPI("/casos-exito", {
     params: {
       locale,
       populate: "*",
       "filters[documentId][$eq]": documentId,
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener vacante con sus localizaciones para cambio de idioma
@@ -215,13 +241,14 @@ export async function getVacanteWithLocalizations(
   slug: string,
   locale: string = "es",
 ) {
-  return fetchAPI("/vacantes", {
+  const result = await fetchAPI("/vacantes", {
     params: {
       locale,
       populate: "localizations",
       "filters[slug][$eq]": slug,
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener vacante por documentId (fallback)
@@ -229,25 +256,27 @@ export async function getVacanteByDocumentId(
   documentId: string,
   locale: string = "es",
 ) {
-  return fetchAPI("/vacantes", {
+  const result = await fetchAPI("/vacantes", {
     params: {
       locale,
       populate: "*",
       "filters[documentId][$eq]": documentId,
     },
   });
+  return result || { data: [] };
 }
 
 export async function createFormLead(data: any) {
-  return fetchAPI("/form-leads", {
+  const result = await fetchAPI("/form-leads", {
     method: "POST",
     body: JSON.stringify({ data }),
   });
+  return result || { data: null };
 }
 
 // Funciones para Vacantes
 export async function getVacantes(locale: string = "es") {
-  return fetchAPI("/vacantes", {
+  const result = await fetchAPI("/vacantes", {
     params: {
       locale,
       populate: "*",
@@ -257,10 +286,11 @@ export async function getVacantes(locale: string = "es") {
       sort: "createdAt:desc",
     },
   });
+  return result || { data: [] };
 }
 
 export async function getVacante(slug: string, locale: string = "es") {
-  return fetchAPI("/vacantes", {
+  const result = await fetchAPI("/vacantes", {
     params: {
       locale,
       populate: "*",
@@ -269,16 +299,19 @@ export async function getVacante(slug: string, locale: string = "es") {
       "filters[destacado][$eq]": true,
     },
   });
+  return result || { data: [] };
 }
 
 export async function getCiudadesVacantes(locale: string = "es") {
   const response = await getVacantes(locale);
+  if (!response?.data) return [];
   const ciudades = [...new Set(response.data.map((v: any) => v.ciudad))];
   return ciudades.sort();
 }
 
 export async function getAreasVacantes(locale: string = "es") {
   const response = await getVacantes(locale);
+  if (!response?.data) return [];
   const areas = [
     ...new Set(response.data.map((v: any) => v.area).filter(Boolean)),
   ];
@@ -291,7 +324,7 @@ export async function getAreasVacantes(locale: string = "es") {
 
 // Obtener posts destacados (featured) para el home
 export async function getBlogPostsDestacados(locale: string = "es") {
-  return fetchAPI("/blog-posts", {
+  const result = await fetchAPI("/blog-posts", {
     params: {
       locale,
       "filters[isFeatured][$eq]": true,
@@ -301,6 +334,7 @@ export async function getBlogPostsDestacados(locale: string = "es") {
       sort: "fechaPublicacion:desc",
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener todos los posts con paginación
@@ -318,7 +352,7 @@ export async function getBlogPosts(
     filters["filters[category][slug][$eq]"] = categorySlug;
   }
 
-  return fetchAPI("/blog-posts", {
+  const result = await fetchAPI("/blog-posts", {
     params: {
       locale,
       ...filters,
@@ -328,6 +362,7 @@ export async function getBlogPosts(
       sort: "fechaPublicacion:desc",
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener un post por slug
@@ -359,7 +394,7 @@ export async function getRelatedBlogPosts(
   locale: string = "es",
   limit: number = 3,
 ) {
-  return fetchAPI("/blog-posts", {
+  const result = await fetchAPI("/blog-posts", {
     params: {
       locale,
       "filters[category][id][$eq]": categoryId,
@@ -370,25 +405,28 @@ export async function getRelatedBlogPosts(
       sort: "fechaPublicacion:desc",
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener todas las categorías
 export async function getBlogCategories(locale: string = "es") {
-  return fetchAPI("/blog-categories", {
+  const result = await fetchAPI("/blog-categories", {
     params: {
       locale,
       sort: "name:asc",
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener todas las tags
 export async function getBlogTags() {
-  return fetchAPI("/blog-tags", {
+  const result = await fetchAPI("/blog-tags", {
     params: {
       sort: "name:asc",
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener posts por tag
@@ -398,7 +436,7 @@ export async function getBlogPostsByTag(
   page: number = 1,
   pageSize: number = 12,
 ) {
-  return fetchAPI("/blog-posts", {
+  const result = await fetchAPI("/blog-posts", {
     params: {
       locale,
       "filters[tags][slug][$eq]": tagSlug,
@@ -409,6 +447,7 @@ export async function getBlogPostsByTag(
       sort: "fechaPublicacion:desc",
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener posts por autor
@@ -418,7 +457,7 @@ export async function getBlogPostsByAuthor(
   page: number = 1,
   pageSize: number = 12,
 ) {
-  return fetchAPI("/blog-posts", {
+  const result = await fetchAPI("/blog-posts", {
     params: {
       locale,
       "filters[author][id][$eq]": authorId,
@@ -429,16 +468,18 @@ export async function getBlogPostsByAuthor(
       sort: "fechaPublicacion:desc",
     },
   });
+  return result || { data: [] };
 }
 
 // Obtener configuración del blog
 export async function getBlogSettings(locale: string = "es") {
-  return fetchAPI("/blog-setting", {
+  const result = await fetchAPI("/blog-setting", {
     params: {
       locale,
       populate: "defaultSeoImage",
     },
   });
+  return result || { data: null };
 }
 
 // Búsqueda de posts
@@ -448,7 +489,7 @@ export async function searchBlogPosts(
   page: number = 1,
   pageSize: number = 12,
 ) {
-  return fetchAPI("/blog-posts", {
+  const result = await fetchAPI("/blog-posts", {
     params: {
       locale,
       "filters[$or][0][titulo][$containsi]": query,
@@ -460,4 +501,5 @@ export async function searchBlogPosts(
       sort: "fechaPublicacion:desc",
     },
   });
+  return result || { data: [] };
 }

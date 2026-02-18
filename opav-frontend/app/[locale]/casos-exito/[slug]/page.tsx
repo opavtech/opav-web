@@ -3,7 +3,6 @@ import { getCasoExito, getCasosExito, getStrapiMedia } from "@/lib/strapi";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
 
 // Client Components - Critical (no lazy)
 import CaseHero from "./_components/CaseHero";
@@ -134,6 +133,9 @@ export async function generateMetadata({
   }
 }
 
+// ISR: Revalidate every 5 minutes
+export const revalidate = 300;
+
 // Generar páginas estáticas en build time
 export async function generateStaticParams() {
   const locales = ["es", "en"];
@@ -142,8 +144,12 @@ export async function generateStaticParams() {
   for (const locale of locales) {
     try {
       const response = await getCasosExito(locale);
-      const casos = response.data || [];
+      if (!response?.data) {
+        console.warn(`[Build] CMS not available for casos-exito (${locale}), skipping static generation`);
+        continue;
+      }
 
+      const casos = response.data || [];
       casos.forEach((caso: any) => {
         if (caso.Slug) {
           params.push({
@@ -153,7 +159,7 @@ export async function generateStaticParams() {
         }
       });
     } catch (error) {
-      console.error(`Error fetching casos for locale ${locale}:`, error);
+      console.warn(`[Build] Error fetching casos for locale ${locale}, skipping:`, error);
     }
   }
 

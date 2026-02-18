@@ -19,6 +19,9 @@ import RecommendedArticles from "./components/RecommendedArticles";
 import ShareButtons from "./components/ShareButtons";
 import BackToTopButton from "./components/BackToTopButton";
 
+// ISR: Revalidate every 10 minutes
+export const revalidate = 600;
+
 interface PageProps {
   params: Promise<{
     locale: string;
