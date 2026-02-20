@@ -102,9 +102,9 @@ export default function AnimatedBackground3D() {
           const z = j * gridSpacing - 200;
 
           // 3D rotation
-          let x1 = x;
-          let y1 = y * Math.cos(rotX) - z * Math.sin(rotX);
-          let z1 = y * Math.sin(rotX) + z * Math.cos(rotX);
+          const x1 = x;
+          const y1 = y * Math.cos(rotX) - z * Math.sin(rotX);
+          const z1 = y * Math.sin(rotX) + z * Math.cos(rotX);
 
           const x2 = x1 * Math.cos(rotY) + z1 * Math.sin(rotY);
           const z2 = -x1 * Math.sin(rotY) + z1 * Math.cos(rotY);
@@ -131,9 +131,9 @@ export default function AnimatedBackground3D() {
           const y = 0;
           const z = i * gridSpacing - 200;
 
-          let x1 = x;
-          let y1 = y * Math.cos(rotX) - z * Math.sin(rotX);
-          let z1 = y * Math.sin(rotX) + z * Math.cos(rotX);
+          const x1 = x;
+          const y1 = y * Math.cos(rotX) - z * Math.sin(rotX);
+          const z1 = y * Math.sin(rotX) + z * Math.cos(rotX);
 
           const x2 = x1 * Math.cos(rotY) + z1 * Math.sin(rotY);
           const z2 = -x1 * Math.sin(rotY) + z1 * Math.cos(rotY);
