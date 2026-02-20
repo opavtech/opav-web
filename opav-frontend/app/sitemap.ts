@@ -1,208 +1,194 @@
 import { MetadataRoute } from "next";
-import { getCasosExito } from "@/lib/strapi";
-import { transformStrapiPosts } from "@/lib/strapi-blog";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
-  const locales = ["es", "en"];
+// ─── Helpers ────────────────────────────────────────────────────────────────
 
-  // Rutas estáticas
-  const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-      alternates: {
-        languages: {
-          es: `${baseUrl}/es`,
-          en: `${baseUrl}/en`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/es/casos-exito`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-      alternates: {
-        languages: {
-          es: `${baseUrl}/es/casos-exito`,
-          en: `${baseUrl}/en/casos-exito`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/en/casos-exito`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-      alternates: {
-        languages: {
-          es: `${baseUrl}/es/casos-exito`,
-          en: `${baseUrl}/en/casos-exito`,
-        },
-      },
-    },
-    // Blog routes
-    {
-      url: `${baseUrl}/es/blog`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.9,
-      alternates: {
-        languages: {
-          es: `${baseUrl}/es/blog`,
-          en: `${baseUrl}/en/blog`,
-        },
-      },
-    },
-  ];
+const BASE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com"
+).replace(/\/+$/, "");
 
-  // Obtener casos de éxito dinámicos
-  const dynamicRoutes: MetadataRoute.Sitemap = [];
+const STRAPI_URL =
+  process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+const LOCALES = ["es", "en"] as const;
+
+/** Nombres de ruta localizados */
+const STATIC_PAGES: Record<string, Record<string, string>> = {
+  compania: { es: "company", en: "company" },
+  servicios: { es: "services", en: "services" },
+  cobertura: { es: "cobertura", en: "cobertura" },
+  contacto: { es: "contact", en: "contact" },
+  certificaciones: { es: "certificaciones", en: "certificaciones" },
+  proveedores: { es: "proveedores", en: "proveedores" },
+  "casos-exito": { es: "casos-exito", en: "casos-exito" },
+  blog: { es: "blog", en: "blog" },
+  vacantes: { es: "vacantes", en: "vacantes" },
+};
+
+type SitemapEntry = MetadataRoute.Sitemap[number];
+
+function entry(
+  url: string,
+  opts?: { priority?: number; changeFrequency?: SitemapEntry["changeFrequency"]; lastModified?: Date }
+): SitemapEntry {
+  return {
+    url,
+    lastModified: opts?.lastModified ?? new Date(),
+    changeFrequency: opts?.changeFrequency ?? "weekly",
+    priority: opts?.priority ?? 0.8,
+  };
+}
+
+/**
+ * Fetch con timeout y tolerancia a fallo.
+ * Retorna `null` si falla — nunca lanza excepción.
+ */
+async function safeFetch<T = any>(
+  url: string,
+  timeoutMs = 8_000
+): Promise<T | null> {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+    const res = await fetch(url, { signal: controller.signal });
+    clearTimeout(timer);
+
+    if (!res.ok) {
+      console.warn(`[sitemap] fetch ${url} responded ${res.status}`);
+      return null;
+    }
+
+    return (await res.json()) as T;
+  } catch (err) {
+    console.warn(`[sitemap] fetch failed for ${url}:`, (err as Error).message);
+    return null;
+  }
+}
+
+// ─── CAPA 1: Rutas estáticas (nunca dependen del CMS) ──────────────────────
+
+function buildStaticRoutes(): MetadataRoute.Sitemap {
+  const routes: MetadataRoute.Sitemap = [];
+
+  // Raíz por idioma: /es  /en
+  for (const locale of LOCALES) {
+    routes.push(entry(`${BASE_URL}/${locale}`, { priority: 1, changeFrequency: "monthly" }));
+  }
+
+  // Páginas estáticas en cada idioma
+  for (const [, paths] of Object.entries(STATIC_PAGES)) {
+    for (const locale of LOCALES) {
+      routes.push(entry(`${BASE_URL}/${locale}/${paths[locale]}`));
+    }
+  }
+
+  return routes;
+}
+
+// ─── CAPA 2: Rutas dinámicas con tolerancia a fallo ─────────────────────────
+
+interface StrapiItem {
+  documentId: string;
+  slug?: string;
+  Slug?: string;
+  updatedAt?: string;
+  fechaPublicacion?: string;
+}
+
+interface StrapiResponse {
+  data: StrapiItem[] | null;
+}
+
+async function buildDynamicRoutes(): Promise<MetadataRoute.Sitemap> {
+  const routes: MetadataRoute.Sitemap = [];
 
   try {
-    // Obtener casos en español
-    const casosES = await getCasosExito("es");
-    const casosEN = await getCasosExito("en");
+    // Fetch todos los endpoints en paralelo
+    const [casosES, casosEN, blogES, blogEN] = await Promise.all([
+      safeFetch<StrapiResponse>(
+        `${STRAPI_URL}/api/casos-de-exito?locale=es&pagination[limit]=100&fields[0]=Slug&fields[1]=updatedAt&fields[2]=documentId`
+      ),
+      safeFetch<StrapiResponse>(
+        `${STRAPI_URL}/api/casos-de-exito?locale=en&pagination[limit]=100&fields[0]=Slug&fields[1]=updatedAt&fields[2]=documentId`
+      ),
+      safeFetch<StrapiResponse>(
+        `${STRAPI_URL}/api/blog-posts?locale=es&pagination[limit]=100&fields[0]=slug&fields[1]=updatedAt&fields[2]=fechaPublicacion&fields[3]=documentId`
+      ),
+      safeFetch<StrapiResponse>(
+        `${STRAPI_URL}/api/blog-posts?locale=en&pagination[limit]=100&fields[0]=slug&fields[1]=updatedAt&fields[2]=fechaPublicacion&fields[3]=documentId`
+      ),
+    ]);
 
-    // Obtener blog posts
-    const blogPostsES = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blog-posts?locale=es&populate[0]=author&pagination[limit]=100`,
-      { next: { revalidate: 3600 } }
-    ).then((res) => (res.ok ? res.json() : { data: [] }));
+    // ── Casos de éxito ──
+    buildLocalizedEntries(
+      casosES?.data,
+      casosEN?.data,
+      (item) => item.Slug,
+      "casos-exito",
+      routes
+    );
 
-    const blogPostsEN = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/blog-posts?locale=en&populate[0]=author&pagination[limit]=100`,
-      { next: { revalidate: 3600 } }
-    ).then((res) => (res.ok ? res.json() : { data: [] }));
-
-    // Crear un mapa de casos por documentId para enlazar localizaciones
-    const casosByDocumentId = new Map<string, { es?: any; en?: any }>();
-
-    casosES.data?.forEach((caso: any) => {
-      const docId = caso.documentId;
-      if (!casosByDocumentId.has(docId)) {
-        casosByDocumentId.set(docId, {});
-      }
-      casosByDocumentId.get(docId)!.es = caso;
-    });
-
-    casosEN.data?.forEach((caso: any) => {
-      const docId = caso.documentId;
-      if (!casosByDocumentId.has(docId)) {
-        casosByDocumentId.set(docId, {});
-      }
-      casosByDocumentId.get(docId)!.en = caso;
-    });
-
-    // Generar entradas del sitemap con alternates
-    casosByDocumentId.forEach((casos, documentId) => {
-      const esSlug = casos.es?.Slug;
-      const enSlug = casos.en?.Slug;
-      const updatedAt = casos.es?.updatedAt || casos.en?.updatedAt;
-
-      // Si existe la versión en español
-      if (esSlug) {
-        dynamicRoutes.push({
-          url: `${baseUrl}/es/casos-exito/${esSlug}`,
-          lastModified: updatedAt ? new Date(updatedAt) : new Date(),
-          changeFrequency: "monthly",
-          priority: 0.7,
-          alternates: {
-            languages: {
-              es: `${baseUrl}/es/casos-exito/${esSlug}`,
-              ...(enSlug && { en: `${baseUrl}/en/casos-exito/${enSlug}` }),
-            },
-          },
-        });
-      }
-
-      // Si existe la versión en inglés
-      if (enSlug) {
-        dynamicRoutes.push({
-          url: `${baseUrl}/en/casos-exito/${enSlug}`,
-          lastModified: updatedAt ? new Date(updatedAt) : new Date(),
-          changeFrequency: "monthly",
-          priority: 0.7,
-          alternates: {
-            languages: {
-              ...(esSlug && { es: `${baseUrl}/es/casos-exito/${esSlug}` }),
-              en: `${baseUrl}/en/casos-exito/${enSlug}`,
-            },
-          },
-        });
-      }
-    });
-
-    // Generar entradas para blog posts
-    const blogPostsByDocumentId = new Map<string, { es?: any; en?: any }>();
-
-    blogPostsES.data?.forEach((post: any) => {
-      const docId = post.documentId;
-      if (!blogPostsByDocumentId.has(docId)) {
-        blogPostsByDocumentId.set(docId, {});
-      }
-      blogPostsByDocumentId.get(docId)!.es = post;
-    });
-
-    blogPostsEN.data?.forEach((post: any) => {
-      const docId = post.documentId;
-      if (!blogPostsByDocumentId.has(docId)) {
-        blogPostsByDocumentId.set(docId, {});
-      }
-      blogPostsByDocumentId.get(docId)!.en = post;
-    });
-
-    blogPostsByDocumentId.forEach((posts) => {
-      const esSlug = posts.es?.slug;
-      const enSlug = posts.en?.slug;
-      const publishedAt =
-        posts.es?.fechaPublicacion || posts.en?.fechaPublicacion;
-      const updatedAt = posts.es?.updatedAt || posts.en?.updatedAt;
-
-      if (esSlug) {
-        dynamicRoutes.push({
-          url: `${baseUrl}/es/blog/${esSlug}`,
-          lastModified: updatedAt
-            ? new Date(updatedAt)
-            : publishedAt
-            ? new Date(publishedAt)
-            : new Date(),
-          changeFrequency: "weekly",
-          priority: 0.8,
-          alternates: {
-            languages: {
-              es: `${baseUrl}/es/blog/${esSlug}`,
-              ...(enSlug && { en: `${baseUrl}/en/blog/${enSlug}` }),
-            },
-          },
-        });
-      }
-
-      if (enSlug && enSlug !== esSlug) {
-        dynamicRoutes.push({
-          url: `${baseUrl}/en/blog/${enSlug}`,
-          lastModified: updatedAt
-            ? new Date(updatedAt)
-            : publishedAt
-            ? new Date(publishedAt)
-            : new Date(),
-          changeFrequency: "weekly",
-          priority: 0.8,
-          alternates: {
-            languages: {
-              en: `${baseUrl}/en/blog/${enSlug}`,
-              ...(esSlug && { es: `${baseUrl}/es/blog/${esSlug}` }),
-            },
-          },
-        });
-      }
-    });
-  } catch (error) {
-    console.error("Error generando sitemap para casos de éxito:", error);
+    // ── Blog posts ──
+    buildLocalizedEntries(
+      blogES?.data,
+      blogEN?.data,
+      (item) => item.slug,
+      "blog",
+      routes
+    );
+  } catch (err) {
+    console.warn("[sitemap] Error fetching dynamic routes, returning static-only:", (err as Error).message);
   }
+
+  return routes;
+}
+
+function buildLocalizedEntries(
+  itemsES: StrapiItem[] | null | undefined,
+  itemsEN: StrapiItem[] | null | undefined,
+  getSlug: (item: StrapiItem) => string | undefined,
+  basePath: string,
+  routes: MetadataRoute.Sitemap
+): void {
+  const byDocId = new Map<string, { es?: StrapiItem; en?: StrapiItem }>();
+
+  for (const item of itemsES ?? []) {
+    if (!byDocId.has(item.documentId)) byDocId.set(item.documentId, {});
+    byDocId.get(item.documentId)!.es = item;
+  }
+  for (const item of itemsEN ?? []) {
+    if (!byDocId.has(item.documentId)) byDocId.set(item.documentId, {});
+    byDocId.get(item.documentId)!.en = item;
+  }
+
+  byDocId.forEach((variants) => {
+    const esSlug = variants.es ? getSlug(variants.es) : undefined;
+    const enSlug = variants.en ? getSlug(variants.en) : undefined;
+    const updated = variants.es?.updatedAt || variants.en?.updatedAt;
+    const lastMod = updated ? new Date(updated) : new Date();
+
+    if (esSlug) {
+      routes.push(entry(`${BASE_URL}/es/${basePath}/${esSlug}`, {
+        priority: 0.7,
+        changeFrequency: "monthly",
+        lastModified: lastMod,
+      }));
+    }
+    if (enSlug) {
+      routes.push(entry(`${BASE_URL}/en/${basePath}/${enSlug}`, {
+        priority: 0.7,
+        changeFrequency: "monthly",
+        lastModified: lastMod,
+      }));
+    }
+  });
+}
+
+// ─── CAPA 3: Construcción final SEO-correcta ────────────────────────────────
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticRoutes = buildStaticRoutes();
+  const dynamicRoutes = await buildDynamicRoutes();
 
   return [...staticRoutes, ...dynamicRoutes];
 }
