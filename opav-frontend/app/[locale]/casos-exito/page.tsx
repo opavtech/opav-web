@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { getCasosExito } from "@/lib/strapi";

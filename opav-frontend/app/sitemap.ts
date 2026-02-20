@@ -42,7 +42,7 @@ function entry(
  * Fetch con timeout y tolerancia a fallo.
  * Retorna `null` si falla — nunca lanza excepción.
  */
-async function safeFetch<T = any>(
+async function safeFetch<T = unknown>(
   url: string,
   timeoutMs = 8_000
 ): Promise<T | null> {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getTranslations } from "next-intl/server";
 import { getCasoExito, getCasosExito, getStrapiMedia } from "@/lib/strapi";
 import { notFound } from "next/navigation";
