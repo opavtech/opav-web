@@ -112,13 +112,13 @@ export default function CorporateTestimonials({
               {/* Quote */}
               <blockquote className="relative mb-8">
                 <div className="absolute -top-4 -left-2 text-6xl text-gray-300 font-serif leading-none">
-                  "
+                  &ldquo;
                 </div>
                 <p className="text-xl md:text-2xl text-gray-800 leading-relaxed text-center font-['Inter'] font-light relative z-10 px-4">
                   {testimonials[currentIndex].quote}
                 </p>
                 <div className="absolute -bottom-8 -right-2 text-6xl text-gray-300 font-serif leading-none">
-                  "
+                  &rdquo;
                 </div>
               </blockquote>
 

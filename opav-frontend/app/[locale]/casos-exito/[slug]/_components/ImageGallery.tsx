@@ -6,8 +6,15 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { getStrapiMedia } from "@/lib/strapi";
 
+interface GalleryImage {
+  id?: number;
+  url?: string;
+  alternativeText?: string;
+  caption?: string;
+}
+
 interface ImageGalleryProps {
-  galeria: any[];
+  galeria: Record<string, unknown>[];
   empresa: "OPAV" | "B&S";
   translations: {
     title: string;
@@ -32,34 +39,34 @@ export default function ImageGallery({
   const isOPAV = empresa === "OPAV";
   const brandColor = isOPAV ? "#d50058" : "#0e7490";
 
-  if (!galeria || galeria.length === 0) return null;
-
-  // Extraer todas las imágenes del dynamic zone
-  const allImages: any[] = [];
-  galeria.forEach((item) => {
-    if (item.__component === "galeria.galeria-opav" && item.imagenesSecundarias) {
-      // Agregar todas las imágenes secundarias
-      item.imagenesSecundarias.forEach((img: any) => {
-        allImages.push(img);
-      });
-    } else if (item.__component === "galeria.comparacion-antes-despues") {
-      // Agregar imagenAntes e imagenDespues
-      if (item.imagenAntes) {
-        allImages.push({
-          ...item.imagenAntes,
-          alternativeText: item.descripcionAntes || item.imagenAntes.alternativeText || "Antes"
+  // Extraer todas las imágenes del dynamic zone (antes de hooks para estabilidad)
+  const allImages: GalleryImage[] = [];
+  if (galeria && galeria.length > 0) {
+    galeria.forEach((item: Record<string, unknown>) => {
+      if (item.__component === "galeria.galeria-opav" && Array.isArray(item.imagenesSecundarias)) {
+        item.imagenesSecundarias.forEach((img: GalleryImage) => {
+          allImages.push(img);
         });
+      } else if (item.__component === "galeria.comparacion-antes-despues") {
+        const imgAntes = item.imagenAntes as Record<string, unknown> | undefined;
+        const imgDespues = item.imagenDespues as Record<string, unknown> | undefined;
+        if (imgAntes) {
+          allImages.push({
+            ...imgAntes,
+            alternativeText: (item.descripcionAntes as string) || (imgAntes.alternativeText as string) || "Antes"
+          });
+        }
+        if (imgDespues) {
+          allImages.push({
+            ...imgDespues,
+            alternativeText: (item.descripcionDespues as string) || (imgDespues.alternativeText as string) || "Después"
+          });
+        }
       }
-      if (item.imagenDespues) {
-        allImages.push({
-          ...item.imagenDespues,
-          alternativeText: item.descripcionDespues || item.imagenDespues.alternativeText || "Después"
-        });
-      }
-    }
-  });
+    });
+  }
 
-  if (allImages.length === 0) return null;
+  const hasImages = allImages.length > 0;
 
   const openLightbox = (index: number) => {
     setSelectedImageIndex(index);
@@ -71,7 +78,23 @@ export default function ImageGallery({
     document.body.style.overflow = "unset";
   };
 
-  // Focus trap effect
+  const goToPrevious = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(
+        selectedImageIndex === 0 ? allImages.length - 1 : selectedImageIndex - 1
+      );
+    }
+  };
+
+  const goToNext = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex(
+        selectedImageIndex === allImages.length - 1 ? 0 : selectedImageIndex + 1
+      );
+    }
+  };
+
+  // Focus trap effect — hook siempre se declara, guarda internamente
   useEffect(() => {
     if (selectedImageIndex === null) return;
 
@@ -102,41 +125,27 @@ export default function ImageGallery({
       }
     };
 
-    // Focus first element
     firstElement?.focus();
 
     document.addEventListener("keydown", handleTabKey);
     return () => document.removeEventListener("keydown", handleTabKey);
   }, [selectedImageIndex]);
 
-  const goToPrevious = () => {
-    if (selectedImageIndex !== null) {
-      setSelectedImageIndex(
-        selectedImageIndex === 0 ? allImages.length - 1 : selectedImageIndex - 1
-      );
-    }
-  };
-
-  const goToNext = () => {
-    if (selectedImageIndex !== null) {
-      setSelectedImageIndex(
-        selectedImageIndex === allImages.length - 1 ? 0 : selectedImageIndex + 1
-      );
-    }
-  };
-
-  // Keyboard navigation
-  const handleKeyDown = (e: KeyboardEvent) => {
+  // Keyboard navigation — hook siempre se declara
+  useEffect(() => {
     if (selectedImageIndex === null) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") goToPrevious();
-    if (e.key === "ArrowRight") goToNext();
-  };
 
-  // Add keyboard listener
-  if (typeof window !== "undefined") {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") goToPrevious();
+      if (e.key === "ArrowRight") goToNext();
+    };
+
     window.addEventListener("keydown", handleKeyDown);
-  }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  });
+
+  if (!hasImages) return null;
 
   return (
     <>
@@ -176,7 +185,7 @@ export default function ImageGallery({
             {/* Gallery Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {allImages.map((imagen, index) => {
-                const imageUrl = getStrapiMedia(imagen.url || imagen, "medium");
+                const imageUrl = getStrapiMedia(imagen.url, "medium");
                 if (!imageUrl) return null;
 
                 return (
@@ -305,8 +314,7 @@ export default function ImageGallery({
                 <Image
                   src={
                     getStrapiMedia(
-                      allImages[selectedImageIndex].url ||
-                        allImages[selectedImageIndex],
+                      allImages[selectedImageIndex].url,
                       "large"
                     ) || ""
                   }

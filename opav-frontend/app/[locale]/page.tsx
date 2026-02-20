@@ -861,7 +861,7 @@ export default async function HomePage({ params }: HomePageProps) {
             <AnimatedSection delay={0.4}>
               <div className="text-center mt-20 mb-16">
                 <p className="text-2xl md:text-3xl font-light text-gray-800 font-['Inter'] italic">
-                  "{t("testimonials.institutionalPhrase")}"
+                  &quot;{t("testimonials.institutionalPhrase")}&quot;
                 </p>
               </div>
             </AnimatedSection>
