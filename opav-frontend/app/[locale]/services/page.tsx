@@ -9,12 +9,7 @@ import Service3DCard from "./_components/Service3DCard";
 import BSInteractiveCard from "./_components/BSInteractiveCard";
 import AnimatedCounters from "./_components/AnimatedCounters";
 import type { Metadata } from "next";
-import { JSDOM } from "jsdom";
-import createDOMPurify from "dompurify";
-
-// Crear instancia de DOMPurify para servidor
-const window = new JSDOM("").window;
-const DOMPurify = createDOMPurify(window as unknown as typeof globalThis);
+import sanitizeHtml from "sanitize-html";
 
 interface ServicesPageProps {
   params: Promise<{ locale: string }>;
@@ -110,16 +105,16 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
       )
       .map((s: any) => ({
         ...s,
-        descripcion: s.descripcion ? DOMPurify.sanitize(s.descripcion) : "",
-        beneficios: s.beneficios ? DOMPurify.sanitize(s.beneficios) : "",
+        descripcion: s.descripcion ? sanitizeHtml(s.descripcion) : "",
+        beneficios: s.beneficios ? sanitizeHtml(s.beneficios) : "",
       }));
 
     serviciosBS = servicios
       .filter((s: any) => s.categoria === "facilities")
       .map((s: any) => ({
         ...s,
-        descripcion: s.descripcion ? DOMPurify.sanitize(s.descripcion) : "",
-        beneficios: s.beneficios ? DOMPurify.sanitize(s.beneficios) : "",
+        descripcion: s.descripcion ? sanitizeHtml(s.descripcion) : "",
+        beneficios: s.beneficios ? sanitizeHtml(s.beneficios) : "",
       }));
   } catch (error) {
     console.error("Error fetching servicios:", error);

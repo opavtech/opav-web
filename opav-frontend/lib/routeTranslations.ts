@@ -86,4 +86,6 @@ export const slugToCanonical: Record<string, RouteKey> = {
   "success-cases": "casos-exito",
   certifications: "certificaciones",
   jobs: "vacantes",
+  coverage: "cobertura",
+  providers: "proveedores",
 };
