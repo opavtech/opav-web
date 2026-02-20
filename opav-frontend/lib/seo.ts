@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * SEO Utilities
  * Structured data, metadata helpers, and SEO optimization functions

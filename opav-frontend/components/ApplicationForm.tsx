@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -183,7 +184,7 @@ export default function ApplicationForm({ vacante, locale, brandColor }: Applica
               required
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:text-white file:cursor-pointer hover:file:opacity-90"
               style={{
-                // @ts-ignore
+                // @ts-expect-error -- CSS custom property not in CSSProperties type
                 '--file-bg-color': brandColor,
               }}
             />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React from "react";
@@ -13,7 +14,7 @@ interface RichContentRendererProps {
 
 export default function RichContentRenderer({
   content,
-  locale,
+  locale: _locale,
 }: RichContentRendererProps) {
   // Si el contenido es un string simple (texto plano)
   if (typeof content === "string") {

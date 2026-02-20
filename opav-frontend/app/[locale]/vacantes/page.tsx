@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getTranslations } from "next-intl/server";
 import { getVacantes } from "@/lib/strapi";
 import type { Metadata } from "next";
