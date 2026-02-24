@@ -119,10 +119,9 @@ export default function JobApplicationForm({
     if (!formData.resume) {
       newErrors.resume = translations.required;
     } else {
-      if (formData.resume.size > 5 * 1024 * 1024) {
+      if (formData.resume.size > 4 * 1024 * 1024) {
         newErrors.resume = translations.fileTooBig;
-      }
-      if (
+      } else if (
         !formData.resume.type.includes("pdf") &&
         !formData.resume.type.includes("word")
       ) {
@@ -134,8 +133,12 @@ export default function JobApplicationForm({
       newErrors.coverLetter = translations.required;
     }
 
-    if (coverLetterMode === "file" && !formData.coverLetterFile) {
-      newErrors.coverLetter = translations.required;
+    if (coverLetterMode === "file") {
+      if (!formData.coverLetterFile) {
+        newErrors.coverLetter = translations.required;
+      } else if (formData.coverLetterFile.size > 4 * 1024 * 1024) {
+        newErrors.coverLetter = translations.fileTooBig;
+      }
     }
 
     if (!formData.positionOfInterest.trim()) {
@@ -184,10 +187,11 @@ export default function JobApplicationForm({
       });
 
       if (!uploadResponse.ok) {
-        throw new Error("Upload failed");
+        const uploadError = await uploadResponse.json().catch(() => ({}));
+        throw new Error(uploadError.error || "Upload failed");
       }
 
-      const { resumeUrl, coverLetterUrl } = await uploadResponse.json();
+      const uploadResult = await uploadResponse.json();
       setUploadProgress(60);
 
       // 2. Enviar aplicación
@@ -195,15 +199,18 @@ export default function JobApplicationForm({
         fullName: formData.fullName,
         email: formData.email,
         phone: formData.phone,
-        resumeUrl,
+        resumeData: uploadResult.resume,
+        coverLetterData: uploadResult.coverLetter || null,
         coverLetter:
-          coverLetterMode === "text" ? formData.coverLetter : coverLetterUrl,
+          coverLetterMode === "text"
+            ? formData.coverLetter
+            : (uploadResult.coverLetter?.name ?? ""),
         positionOfInterest: formData.positionOfInterest,
         salaryExpectation: formData.salaryExpectation || null,
         vacanteId: vacanteId || null,
         locale,
-        recaptchaToken, // Include reCAPTCHA token
-        website: formData.website, // Include honeypot field
+        recaptchaToken,
+        website: formData.website,
       };
 
       setUploadProgress(80);
@@ -217,7 +224,12 @@ export default function JobApplicationForm({
       });
 
       if (!response.ok) {
-        throw new Error("Application submission failed");
+        const errorData = await response.json().catch(() => ({}));
+        // Surface server-side field errors if provided
+        if (errorData.fields) {
+          setErrors((prev) => ({ ...prev, ...errorData.fields }));
+        }
+        throw new Error(errorData.error || "Application submission failed");
       }
 
       setUploadProgress(100);

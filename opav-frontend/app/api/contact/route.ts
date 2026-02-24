@@ -1,19 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
 const STRAPI_URL =
   process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 const STRAPI_API_TOKEN = process.env.STRAPI_API_TOKEN;
 const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
+
 // Rate limiting
 const contactAttempts = new Map<string, number[]>();
 
-// Verify reCAPTCHA token
 async function verifyRecaptcha(token: string, ip: string): Promise<boolean> {
   if (!RECAPTCHA_SECRET_KEY) {
     console.warn("reCAPTCHA not configured, skipping verification");
-    return true; // Skip if not configured
+    return true;
   }
 
   try {
@@ -23,12 +27,9 @@ async function verifyRecaptcha(token: string, ip: string): Promise<boolean> {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `secret=${RECAPTCHA_SECRET_KEY}&response=${token}&remoteip=${ip}`,
-      }
+      },
     );
-
     const data = await response.json();
-
-    // Score threshold: 0.5 (0 = bot, 1 = human)
     return data.success && data.score >= 0.5;
   } catch (error) {
     console.error("reCAPTCHA verification failed:", error);
@@ -38,47 +39,79 @@ async function verifyRecaptcha(token: string, ip: string): Promise<boolean> {
 
 function rateLimit(ip: string): boolean {
   const now = Date.now();
-  const windowMs = 60 * 60 * 1000; // 1 hora
-  const maxAttempts = 10; // Más permisivo que job-application
+  const windowMs = 60 * 60 * 1000;
+  const maxAttempts = 10;
 
   const attempts = contactAttempts.get(ip) || [];
   const recentAttempts = attempts.filter((time) => now - time < windowMs);
 
-  if (recentAttempts.length >= maxAttempts) {
-    return false;
-  }
+  if (recentAttempts.length >= maxAttempts) return false;
 
   recentAttempts.push(now);
   contactAttempts.set(ip, recentAttempts);
   return true;
 }
 
-// Validación server-side
-function validateContact(data: any): { valid: boolean; errors: string[] } {
-  const errors: string[] = [];
+function validateContact(data: any): {
+  valid: boolean;
+  fields: Record<string, string>;
+} {
+  const fields: Record<string, string> = {};
 
   if (!data.fullName || data.fullName.trim().length < 2) {
-    errors.push("Full name is required (min 2 characters)");
+    fields.fullName = "Full name is required (min 2 characters)";
   }
-
   if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-    errors.push("Valid email is required");
+    fields.email = "Valid email is required";
   }
-
   if (!data.phone || !/^\+?[\d\s\-()]{10,}$/.test(data.phone)) {
-    errors.push("Valid phone number is required");
+    fields.phone = "Valid phone number is required";
   }
-
   if (!data.message || data.message.trim().length < 10) {
-    errors.push("Message is required (min 10 characters)");
+    fields.message = "Message is required (min 10 characters)";
   }
 
-  return { valid: errors.length === 0, errors };
+  return { valid: Object.keys(fields).length === 0, fields };
+}
+
+async function sendContactEmail(data: any): Promise<void> {
+  const toEmail = process.env.CONTACT_TO_EMAIL;
+  if (!resend || !toEmail) {
+    console.warn(
+      "[Email] Resend not configured or CONTACT_TO_EMAIL missing — skipping email",
+    );
+    return;
+  }
+
+  const isEn = data.contactLocale === "en";
+  const subject = isEn
+    ? `New contact message from ${data.fullName}`
+    : `Nuevo mensaje de contacto de ${data.fullName}`;
+
+  await resend.emails.send({
+    from: process.env.RESEND_FROM_EMAIL || "noreply@opav.com.co",
+    to: toEmail,
+    replyTo: data.email,
+    subject,
+    html: `
+      <h2 style="color:#d50058">${isEn ? "New Contact Message" : "Nuevo Mensaje de Contacto"}</h2>
+      <table style="border-collapse:collapse;width:100%;font-family:sans-serif">
+        <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5;width:140px">${isEn ? "Name" : "Nombre"}</td><td style="padding:8px 12px">${data.fullName}</td></tr>
+        <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">Email</td><td style="padding:8px 12px"><a href="mailto:${data.email}">${data.email}</a></td></tr>
+        <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">${isEn ? "Phone" : "Teléfono"}</td><td style="padding:8px 12px">${data.phone}</td></tr>
+        ${data.company ? `<tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">${isEn ? "Company" : "Empresa"}</td><td style="padding:8px 12px">${data.company}</td></tr>` : ""}
+        <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5;vertical-align:top">${isEn ? "Message" : "Mensaje"}</td><td style="padding:8px 12px;white-space:pre-wrap">${data.message}</td></tr>
+        <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">${isEn ? "Language" : "Idioma"}</td><td style="padding:8px 12px">${data.contactLocale}</td></tr>
+      </table>
+      ${data.attachmentUrl ? `<p><strong>${isEn ? "Attachment" : "Adjunto"}:</strong> <a href="${data.attachmentUrl}">${data.attachmentUrl}</a></p>` : ""}
+      <hr style="margin-top:24px"/>
+      <p style="color:#888;font-size:12px">OPAV.com.co – ${isEn ? "Contact form" : "Formulario de contacto"}</p>
+    `,
+  });
 }
 
 export async function POST(request: NextRequest) {
   try {
-    // Rate limiting
     const ip =
       request.headers.get("x-forwarded-for") ||
       request.headers.get("x-real-ip") ||
@@ -87,43 +120,43 @@ export async function POST(request: NextRequest) {
     if (!rateLimit(ip)) {
       return NextResponse.json(
         { error: "Too many contact attempts. Please try again later." },
-        { status: 429 }
+        { status: 429 },
       );
     }
 
     const data = await request.json();
 
-    // reCAPTCHA verification
-    if (data.recaptchaToken) {
-      const isValidRecaptcha = await verifyRecaptcha(data.recaptchaToken, ip);
-      if (!isValidRecaptcha) {
-        console.warn("reCAPTCHA verification failed for IP:", ip);
-        return NextResponse.json(
-          { error: "reCAPTCHA verification failed" },
-          { status: 400 }
-        );
-      }
-    }
-
-    // Honeypot check - if filled, it's a bot
-    if (data.website) {
-      console.warn("Bot detected via honeypot field:", ip);
+    if (!data.recaptchaToken) {
       return NextResponse.json(
-        { error: "Invalid submission" },
-        { status: 400 }
+        { error: "reCAPTCHA token requerido" },
+        { status: 400 },
       );
     }
 
-    // Validación
+    const isValidCaptcha = await verifyRecaptcha(data.recaptchaToken, ip);
+    if (!isValidCaptcha) {
+      return NextResponse.json(
+        { error: "reCAPTCHA inválido" },
+        { status: 400 },
+      );
+    }
+
+    // Honeypot check
+    if (data.website) {
+      return NextResponse.json(
+        { error: "Invalid submission" },
+        { status: 400 },
+      );
+    }
+
     const validation = validateContact(data);
     if (!validation.valid) {
       return NextResponse.json(
-        { error: "Validation failed", details: validation.errors },
-        { status: 400 }
+        { error: "Validation failed", fields: validation.fields },
+        { status: 400 },
       );
     }
 
-    // Sanitización básica
     const sanitizedData = {
       fullName: data.fullName.trim().substring(0, 100),
       email: data.email.trim().toLowerCase().substring(0, 100),
@@ -136,39 +169,53 @@ export async function POST(request: NextRequest) {
       ipAddress: ip !== "unknown" ? ip : null,
     };
 
-    // Guardar en Strapi
-    const strapiResponse = await fetch(`${STRAPI_URL}/api/contact-submissions`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${STRAPI_API_TOKEN}`,
-      },
-      body: JSON.stringify({
-        data: sanitizedData,
-      }),
-    });
-
-    if (!strapiResponse.ok) {
-      const errorText = await strapiResponse.text();
-      console.error("Strapi error:", errorText);
-      throw new Error("Failed to save contact to Strapi");
+    // Send email (primary — always attempted)
+    try {
+      await sendContactEmail(sanitizedData);
+    } catch (emailError) {
+      console.error("[Email] Failed to send contact email:", emailError);
+      // Don't block the response — Strapi save is the secondary record
     }
 
-    const strapiData = await strapiResponse.json();
+    // Save to Strapi (secondary — graceful fail)
+    let strapiId: number | null = null;
+    try {
+      const strapiResponse = await fetch(
+        `${STRAPI_URL}/api/contact-submissions`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${STRAPI_API_TOKEN}`,
+          },
+          body: JSON.stringify({ data: sanitizedData }),
+          signal: AbortSignal.timeout(5000),
+        },
+      );
 
-    // HubSpot se enviará automáticamente vía webhook de Strapi
-    // (si está configurado en lifecycle de contact-submissions)
+      if (strapiResponse.ok) {
+        const strapiData = await strapiResponse.json();
+        strapiId = strapiData.data?.id ?? null;
+      } else {
+        console.warn(
+          "[Strapi] Contact submission failed:",
+          strapiResponse.status,
+        );
+      }
+    } catch (strapiError) {
+      console.warn("[Strapi] Not reachable, skipping CMS save:", strapiError);
+    }
 
     return NextResponse.json({
       success: true,
-      id: strapiData.data.id,
+      id: strapiId,
       message: "Contact form submitted successfully",
     });
   } catch (error) {
     console.error("Contact form submission error:", error);
     return NextResponse.json(
       { error: "Failed to submit contact form" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
