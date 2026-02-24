@@ -186,9 +186,13 @@ export default function ContactForm({
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({}));
         console.error("Contact form error:", errorData);
-        throw new Error("Contact form submission failed");
+        // Surface server-side per-field errors if provided
+        if (errorData.fields) {
+          setErrors((prev) => ({ ...prev, ...errorData.fields }));
+        }
+        throw new Error(errorData.error || "Contact form submission failed");
       }
 
       setSubmitProgress(100);

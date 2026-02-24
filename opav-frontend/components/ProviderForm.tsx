@@ -171,9 +171,12 @@ export default function ProviderForm({ locale }: ProviderFormProps) {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({}));
         console.error("Provider application error:", errorData);
-        throw new Error("Provider application submission failed");
+        if (errorData.fields) {
+          setErrors((prev) => ({ ...prev, ...errorData.fields }));
+        }
+        throw new Error(errorData.error || "Provider application submission failed");
       }
 
       setSubmitStatus("success");
