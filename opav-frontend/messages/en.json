@@ -16,7 +16,13 @@
     "privacy": "Privacy Policy",
     "linkedin": "LinkedIn",
     "instagram": "Instagram",
-    "facebook": "Facebook"
+    "facebook": "Facebook",
+    "footerDesc": "Comprehensive solutions in property management and facilities management.",
+    "footerContactUs": "Contact us",
+    "footerQuickLinks": "Quick Links",
+    "footerCopyright": "All rights reserved.",
+    "footerCookieSettings": "Cookie Settings",
+    "footerPrivacy": "Privacy"
   },
   "home": {
     "metadata": {
@@ -44,6 +50,8 @@
       "title": "Our Companies",
       "intro": "Two specialized brands working in synergy to offer comprehensive solutions in property management and facilities management",
       "learnMore": "Learn More",
+      "knowMore": "Learn More",
+      "requestConsultation": "Request Consultation",
       "requestQuote": "Request Quote",
       "opav": {
         "subtitle1": "Property Management Experts",
@@ -66,7 +74,9 @@
       "viewDetails": "View Certification Details",
       "benefit1": "International quality standards",
       "benefit2": "Continuous process improvement",
-      "benefit3": "Guaranteed customer satisfaction"
+      "benefit3": "Guaranteed customer satisfaction",
+      "qualityLabel": "Quality Certification",
+      "qmsLabel": "Quality Management System"
     },
     "testimonials": {
       "title": "Corporate Strength",
@@ -99,7 +109,8 @@
       "filterOpav": "OPAV",
       "filterBs": "B&S Facilities",
       "opavDescription": "Corporate property management with strategic approach",
-      "bsDescription": "Facilities management and specialized maintenance services"
+      "bsDescription": "Facilities management and specialized maintenance services",
+      "noResults": "No success cases available at this time."
     },
     "insights": {
       "badge": "Editorial",
@@ -242,7 +253,8 @@
           "Simplicity",
           "Do it in micro, to turn it into macro"
         ]
-      }
+      },
+      "isoBadge": "ISO 9001:2015 Certified"
     },
     "bsManagement": {
       "title": "Integrated Services",
@@ -333,7 +345,10 @@
   "services": {
     "hero": {
       "title": "Our Services",
-      "subtitle": "Comprehensive solutions in property management and facilities management"
+      "subtitle": "Comprehensive solutions in property management and facilities management",
+      "badge": "Quality Services",
+      "cta": "Explore Services",
+      "brochureUnavailable": "Brochures are not yet available. Coming soon!"
     },
     "opav": {
       "title": "OPAV - Property Management",
@@ -400,7 +415,9 @@
       "opav": "OPAV",
       "bs": "B&S",
       "results": "Results",
-      "loadMore": "Show more cases"
+      "loadMore": "Show more cases",
+      "noResults": "No success cases available",
+      "adjustFilters": "Adjust the filters to see more results"
     },
     "cta": {
       "title": "Ready to be our next success story?",
@@ -745,6 +762,7 @@
     },
     "benefits": {
       "title": "Why become our supplier?",
+      "subtitle": "Join our network of strategic partners and access exclusive opportunities",
       "opportunity": {
         "title": "Growth Opportunities",
         "description": "Access large-scale projects and expand your business with ongoing contracts"

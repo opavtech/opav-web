@@ -338,15 +338,14 @@ export default function Footer({ locale }: FooterProps) {
                 </h3>
 
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Soluciones integrales en administración de propiedades y
-                  facilities management.
+                  {t("footerDesc")}
                 </p>
               </div>
 
               {/* Social Media Icons */}
               <div>
                 <h4 className="text-sm font-semibold text-gray-300 mb-4">
-                  Contáctanos
+                  {t("footerContactUs")}
                 </h4>
                 <div className="flex gap-3">
                   <a
@@ -388,7 +387,7 @@ export default function Footer({ locale }: FooterProps) {
             {/* Enlaces rápidos */}
             <div>
               <h4 className="font-bold text-lg mb-6 text-gray-100">
-                Enlaces Rápidos
+                {t("footerQuickLinks")}
               </h4>
               <ul className="space-y-3">
                 <li>
@@ -501,7 +500,7 @@ export default function Footer({ locale }: FooterProps) {
                       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  <span>info@opav.com.co</span>
+                  <span>ivan.espinosa@opavsas.com</span>
                 </li>
               </ul>
             </div>
@@ -513,14 +512,14 @@ export default function Footer({ locale }: FooterProps) {
           <div className="container mx-auto px-4 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#5b6770]">
               <p>
-                &copy; {new Date().getFullYear()} OPAV SAS. Todos los derechos reservados.
+                &copy; {new Date().getFullYear()} OPAV SAS. {t("footerCopyright")}
               </p>
               <div className="flex gap-6">
                 <button
                   onClick={() => setShowPrivacyModal(true)}
                   className="hover:text-white transition-colors underline underline-offset-4 decoration-[#d50058]"
                 >
-                  Configuración de Cookies
+                  {t("footerCookieSettings")}
                 </button>
                 <a
                   href="/documents/politica-tratamiento-datos.pdf"
@@ -528,7 +527,7 @@ export default function Footer({ locale }: FooterProps) {
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  Privacidad
+                  {t("footerPrivacy")}
                 </a>
               </div>
             </div>

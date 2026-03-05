@@ -16,7 +16,13 @@
     "privacy": "Protección de Datos",
     "linkedin": "LinkedIn",
     "instagram": "Instagram",
-    "facebook": "Facebook"
+    "facebook": "Facebook",
+    "footerDesc": "Soluciones integrales en administración de propiedades y facilities management.",
+    "footerContactUs": "Contáctanos",
+    "footerQuickLinks": "Enlaces Rápidos",
+    "footerCopyright": "Todos los derechos reservados.",
+    "footerCookieSettings": "Configuración de Cookies",
+    "footerPrivacy": "Privacidad"
   },
   "home": {
     "metadata": {
@@ -44,6 +50,8 @@
       "title": "Nuestras Empresas",
       "intro": "Dos marcas especializadas que trabajan de forma integrada para ofrecer soluciones corporativas en administración de propiedades y facilities management.",
       "learnMore": "Ver detalles",
+      "knowMore": "Conocer más",
+      "requestConsultation": "Solicitar asesoría",
       "requestQuote": "Solicitar Propuesta",
       "opav": {
         "subtitle1": "Expertos en Administración de Propiedades",
@@ -66,7 +74,9 @@
       "viewDetails": "Ver Detalles de Certificación",
       "benefit1": "Estándares internacionales de calidad",
       "benefit2": "Mejora continua de procesos",
-      "benefit3": "Satisfacción garantizada del cliente"
+      "benefit3": "Satisfacción garantizada del cliente",
+      "qualityLabel": "Certificación de Calidad",
+      "qmsLabel": "Sistema de Gestión de Calidad"
     },
     "testimonials": {
       "title": "Solidez Empresarial",
@@ -99,7 +109,8 @@
       "filterOpav": "OPAV",
       "filterBs": "B&S Facilities",
       "opavDescription": "Administración de propiedades corporativas con enfoque estratégico",
-      "bsDescription": "Facilities management y servicios especializados de mantenimiento"
+      "bsDescription": "Facilities management y servicios especializados de mantenimiento",
+      "noResults": "No hay casos de éxito disponibles en este momento."
     },
     "insights": {
       "badge": "Editorial",
@@ -246,7 +257,8 @@
           "Sencillez",
           "Hacerlo en micro, para convertirlo en macro"
         ]
-      }
+      },
+      "isoBadge": "Certificado ISO 9001:2015"
     },
     "bsManagement": {
       "title": "Servicios Integrales",
@@ -337,7 +349,10 @@
   "services": {
     "hero": {
       "title": "Nuestros Servicios",
-      "subtitle": "Soluciones integrales en administración de propiedades y facilities management"
+      "subtitle": "Soluciones integrales en administración de propiedades y facilities management",
+      "badge": "Servicios de Calidad",
+      "cta": "Explorar Servicios",
+      "brochureUnavailable": "Los brochures aún no están disponibles. ¡Próximamente!"
     },
     "opav": {
       "title": "OPAV - Administración de Propiedades",
@@ -405,7 +420,9 @@
       "opav": "OPAV",
       "bs": "B&S",
       "results": "Resultados",
-      "loadMore": "Mostrar más casos"
+      "loadMore": "Mostrar más casos",
+      "noResults": "No hay casos de éxito disponibles",
+      "adjustFilters": "Ajusta los filtros para ver más resultados"
     },
     "cta": {
       "title": "¿Listo para ser nuestro próximo caso de éxito?",
@@ -750,6 +767,7 @@
     },
     "benefits": {
       "title": "¿Por qué ser nuestro proveedor?",
+      "subtitle": "Únete a nuestra red de aliados estratégicos y accede a oportunidades exclusivas",
       "opportunity": {
         "title": "Oportunidades de Crecimiento",
         "description": "Accede a proyectos de gran escala y expande tu negocio con contratos continuos"
