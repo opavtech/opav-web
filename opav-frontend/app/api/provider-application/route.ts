@@ -117,12 +117,20 @@ async function sendProviderEmail(data: any): Promise<void> {
     ? `New provider application: ${data.companyName}`
     : `Nueva solicitud de proveedor: ${data.companyName}`;
 
+  if (!process.env.RESEND_FROM_EMAIL) {
+    throw new Error("RESEND_FROM_EMAIL no está configurado");
+  }
+
   await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL || "noreply@opav.com.co",
+    from: process.env.RESEND_FROM_EMAIL,
     to: toEmail,
     replyTo: data.email,
     subject,
     html: `
+      <div style="display:none;max-height:0;overflow:hidden;mso-hide:all">
+        ${isEn ? `Provider application from ${data.companyName} – ${PROVIDER_TYPE_LABELS[data.providerType] || data.providerType}` : `Solicitud de proveedor de ${data.companyName} – ${PROVIDER_TYPE_LABELS[data.providerType] || data.providerType}`}
+        &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+      </div>
       <h2 style="color:#d50058">${isEn ? "New Provider Application" : "Nueva Solicitud de Proveedor"}</h2>
       <table style="border-collapse:collapse;width:100%;font-family:sans-serif">
         <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5;width:200px">${isEn ? "Company" : "Empresa"}</td><td style="padding:8px 12px">${data.companyName}</td></tr>
@@ -135,7 +143,7 @@ async function sendProviderEmail(data: any): Promise<void> {
         <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">${isEn ? "Operational Contact" : "Contacto Operativo"}</td><td style="padding:8px 12px">${data.operationalContactName}</td></tr>
       </table>
       <hr style="margin-top:24px"/>
-      <p style="color:#888;font-size:12px">OPAV.com.co – ${isEn ? "Provider application form" : "Formulario de solicitud de proveedor"}</p>
+      <p style="color:#888;font-size:12px">opavsas.com – ${isEn ? "Provider application form" : "Formulario de solicitud de proveedor"}</p>
     `,
   });
 }

@@ -88,12 +88,20 @@ async function sendContactEmail(data: any): Promise<void> {
     ? `New contact message from ${data.fullName}`
     : `Nuevo mensaje de contacto de ${data.fullName}`;
 
+  if (!process.env.RESEND_FROM_EMAIL) {
+    throw new Error("RESEND_FROM_EMAIL no está configurado");
+  }
+
   await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL || "noreply@opav.com.co",
+    from: process.env.RESEND_FROM_EMAIL,
     to: toEmail,
     replyTo: data.email,
     subject,
     html: `
+      <div style="display:none;max-height:0;overflow:hidden;mso-hide:all">
+        ${isEn ? `New message from ${data.fullName} – ${data.phone}` : `Nuevo mensaje de ${data.fullName} – ${data.phone}`}
+        &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+      </div>
       <h2 style="color:#d50058">${isEn ? "New Contact Message" : "Nuevo Mensaje de Contacto"}</h2>
       <table style="border-collapse:collapse;width:100%;font-family:sans-serif">
         <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5;width:140px">${isEn ? "Name" : "Nombre"}</td><td style="padding:8px 12px">${data.fullName}</td></tr>
@@ -105,7 +113,7 @@ async function sendContactEmail(data: any): Promise<void> {
       </table>
       ${data.attachmentUrl ? `<p><strong>${isEn ? "Attachment" : "Adjunto"}:</strong> <a href="${data.attachmentUrl}">${data.attachmentUrl}</a></p>` : ""}
       <hr style="margin-top:24px"/>
-      <p style="color:#888;font-size:12px">OPAV.com.co – ${isEn ? "Contact form" : "Formulario de contacto"}</p>
+      <p style="color:#888;font-size:12px">opavsas.com – ${isEn ? "Contact form" : "Formulario de contacto"}</p>
     `,
   });
 }
