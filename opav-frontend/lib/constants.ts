@@ -8,12 +8,12 @@ export const COMPANY_INFO = {
     country: 'Colombia',
   },
   contact: {
-    phone: '+57 (1) 123 4567',
+    phone: '+57 320 703 6539',
     email: 'info@opav.com.co',
-    whatsapp: '+57 300 123 4567',
+    whatsapp: '+57 320 703 6539',
   },
   social: {
-    linkedin: '#',
+    linkedin: 'https://www.linkedin.com/company/opav-sas/',
     facebook: '#',
     instagram: '#',
   },

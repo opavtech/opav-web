@@ -110,12 +110,20 @@ async function sendJobApplicationEmail(data: any): Promise<void> {
     });
   }
 
+  if (!process.env.RESEND_FROM_EMAIL) {
+    throw new Error("RESEND_FROM_EMAIL no está configurado");
+  }
+
   await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL || "noreply@opav.com.co",
+    from: process.env.RESEND_FROM_EMAIL,
     to: toEmail,
     replyTo: data.email,
     subject,
     html: `
+      <div style="display:none;max-height:0;overflow:hidden;mso-hide:all">
+        ${isEn ? `Application from ${data.fullName} for ${data.positionOfInterest}` : `Aplicación de ${data.fullName} para ${data.positionOfInterest}`}
+        &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+      </div>
       <h2 style="color:#d50058">${isEn ? "New Job Application" : "Nueva Solicitud de Empleo"}</h2>
       <table style="border-collapse:collapse;width:100%;font-family:sans-serif">
         <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5;width:180px">${isEn ? "Name" : "Nombre"}</td><td style="padding:8px 12px">${data.fullName}</td></tr>
@@ -128,7 +136,7 @@ async function sendJobApplicationEmail(data: any): Promise<void> {
       </table>
       <p style="color:#888;margin-top:16px">📎 ${isEn ? "Files attached above" : "Archivos adjuntos arriba"}</p>
       <hr style="margin-top:24px"/>
-      <p style="color:#888;font-size:12px">OPAV.com.co – ${isEn ? "Job application form" : "Formulario de aplicación de empleo"}</p>
+      <p style="color:#888;font-size:12px">opavsas.com – ${isEn ? "Job application form" : "Formulario de aplicación de empleo"}</p>
     `,
     attachments,
   });

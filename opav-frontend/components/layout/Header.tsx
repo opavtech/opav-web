@@ -280,7 +280,7 @@ export default function Header({ locale }: HeaderProps) {
               aria-label="Redes sociales"
             >
               <a
-                href="https://www.linkedin.com/company/opav"
+                href="https://www.linkedin.com/company/opav-sas/"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="p-2 text-gray-400 hover:text-[#0077b5] hover:bg-white/5 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#0077b5] focus:ring-offset-2 focus:ring-offset-[#1a1f26]"
@@ -296,7 +296,7 @@ export default function Header({ locale }: HeaderProps) {
                 </svg>
               </a>
               <a
-                href="https://wa.me/573016113151"
+                href="https://wa.me/573207036539"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="p-2 text-gray-400 hover:text-[#25D366] hover:bg-white/5 rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#25D366] focus:ring-offset-2 focus:ring-offset-[#1a1f26]"
@@ -323,7 +323,7 @@ export default function Header({ locale }: HeaderProps) {
             </Link>
 
             <div className="text-center text-gray-400 text-xs pt-2">
-              © 2025 OPAV SAS & B&S Facilities
+              © {new Date().getFullYear()} OPAV SAS
             </div>
           </div>
         </div>
