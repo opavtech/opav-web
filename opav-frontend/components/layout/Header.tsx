@@ -314,13 +314,15 @@ export default function Header({ locale }: HeaderProps) {
             </div>
 
             {/* Protección de Datos */}
-            <Link
-              href={`/${locale}/privacy`}
+            <a
+              href="/documents/politica-tratamiento-datos.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
               className="block text-center text-gray-400 text-xs hover:text-white transition-all py-2"
             >
               {t("privacy")}
-            </Link>
+            </a>
 
             <div className="text-center text-gray-400 text-xs pt-2">
               © {new Date().getFullYear()} OPAV SAS

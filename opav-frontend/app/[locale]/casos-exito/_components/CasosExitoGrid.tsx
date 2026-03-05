@@ -29,6 +29,8 @@ interface CasosExitoGridProps {
     bs: string;
     results: string;
     loadMore: string;
+    noResults: string;
+    adjustFilters: string;
   };
 }
 
@@ -337,10 +339,10 @@ export default function CasosExitoGrid({
         {filteredCases.length === 0 && (
           <div className="text-center py-20">
             <div className="text-gray-500 text-lg mb-4">
-              No hay casos de éxito disponibles
+              {translations.noResults}
             </div>
             <div className="text-gray-400">
-              Ajusta los filtros para ver más resultados
+              {translations.adjustFilters}
             </div>
           </div>
         )}

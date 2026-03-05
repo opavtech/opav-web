@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 interface ServicesHeroProps {
   title: string;
   subtitle: string;
+  badgeText: string;
+  ctaText: string;
 }
 
 interface Block {
@@ -27,7 +29,7 @@ interface Particle {
   color: string;
 }
 
-export default function ServicesHero({ title, subtitle }: ServicesHeroProps) {
+export default function ServicesHero({ title, subtitle, badgeText, ctaText }: ServicesHeroProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const blocksRef = useRef<Block[]>([]);
@@ -403,7 +405,7 @@ export default function ServicesHero({ title, subtitle }: ServicesHeroProps) {
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#f5347b] animate-pulse" />
             <span className="text-xs uppercase tracking-[0.18em] font-medium text-white/90">
-              Servicios de Calidad
+              {badgeText}
             </span>
           </motion.div>
 
@@ -452,18 +454,9 @@ export default function ServicesHero({ title, subtitle }: ServicesHeroProps) {
               whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -2 }}
               whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
               onClick={() => {
-                const opavSection =
-                  document.querySelector(
-                    'section[aria-label="OPAV Services"]'
-                  ) ||
-                  document.querySelector(
-                    ".py-24.bg-linear-to-b.from-white.to-gray-50"
-                  );
-                if (opavSection) {
-                  opavSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
+                const target = document.getElementById("opav-services");
+                if (target) {
+                  target.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
               }}
               className="relative px-10 py-5 rounded-2xl font-bold text-lg transition-all duration-300 overflow-hidden group cursor-pointer"
@@ -476,7 +469,7 @@ export default function ServicesHero({ title, subtitle }: ServicesHeroProps) {
               }}
               aria-label="Explorar servicios"
             >
-              <span className="relative z-10">Explorar Servicios</span>
+              <span className="relative z-10">{ctaText}</span>
 
               {/* Animated shine */}
               <motion.div

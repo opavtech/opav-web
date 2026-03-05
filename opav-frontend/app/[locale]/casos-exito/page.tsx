@@ -187,6 +187,8 @@ export default async function SuccessCasesPage({
               bs: t("filters.bs"),
               results: t("filters.results"),
               loadMore: t("filters.loadMore"),
+              noResults: t("filters.noResults"),
+              adjustFilters: t("filters.adjustFilters"),
             }}
           />
         </div>

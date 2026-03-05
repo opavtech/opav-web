@@ -193,8 +193,7 @@ export default async function ProveedoresPage({
                   {t("benefits.title")}
                 </h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto font-['Inter']">
-                  Únete a nuestra red de aliados estratégicos y accede a
-                  oportunidades exclusivas
+                  {t("benefits.subtitle")}
                 </p>
               </AnimatedSection>
             </div>

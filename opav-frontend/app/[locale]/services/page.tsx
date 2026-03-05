@@ -200,7 +200,12 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
       />
 
       {/* Hero Section with Particles */}
-      <ServicesHero title={t("hero.title")} subtitle={t("hero.subtitle")} />
+      <ServicesHero
+        title={t("hero.title")}
+        subtitle={t("hero.subtitle")}
+        badgeText={t("hero.badge")}
+        ctaText={t("hero.cta")}
+      />
 
       {/* OPAV Services - 3D Flip Cards */}
       <section
@@ -310,7 +315,7 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
                 {t("opav.buttons.rfp")}
               </Link>
               <DownloadButton
-                type="OPAV"
+                unavailableMessage={t("hero.brochureUnavailable")}
                 className="px-8 py-4 md:px-10 md:py-5 rounded-full font-bold font-['Inter'] bg-white transition-all duration-300 transform hover:scale-105 border-2 border-[#d50058] text-[#d50058] shadow-[0_5px_20px_rgba(213,0,88,0.15)] focus:outline-none focus:ring-4 focus:ring-magenta-300"
                 style={{ minHeight: "48px", minWidth: "48px" }}
               >
@@ -430,7 +435,7 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
                 {t("bs.buttons.rfp")}
               </Link>
               <DownloadButton
-                type="B&S"
+                unavailableMessage={t("hero.brochureUnavailable")}
                 className="px-8 py-4 md:px-10 md:py-5 rounded-full font-bold font-['Inter'] bg-white transition-all duration-300 transform hover:scale-105 border-2 border-[#00acc8] text-[#00acc8] shadow-[0_5px_20px_rgba(0,172,200,0.15)] focus:outline-none focus:ring-4 focus:ring-cyan-300"
                 style={{ minHeight: "48px", minWidth: "48px" }}
               >

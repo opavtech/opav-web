@@ -412,7 +412,7 @@ export default async function HomePage({ params }: HomePageProps) {
                           color: "#ffffff",
                         }}
                       >
-                        Solicitar asesoría
+                        {t("company.requestConsultation")}
                       </Link>
                       <Link
                         href={getLocalizedPath(
@@ -426,7 +426,7 @@ export default async function HomePage({ params }: HomePageProps) {
                           backgroundColor: "#ffffff",
                         }}
                       >
-                        Conocer más
+                        {t("company.knowMore")}
                         <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">
                           →
                         </span>
@@ -536,7 +536,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         )}
                         className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-900 hover:scale-105 hover:shadow-lg transition-all duration-300 font-['Inter'] text-center"
                       >
-                        Solicitar cotización
+                        {t("company.requestQuote")}
                       </Link>
                       <Link
                         href={getLocalizedPath(
@@ -545,7 +545,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         )}
                         className="inline-flex items-center justify-center border-2 border-gray-800 text-gray-800 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 hover:scale-105 transition-all duration-300 font-['Inter'] text-center group"
                       >
-                        Conocer más
+                        {t("company.knowMore")}
                         <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">
                           →
                         </span>
@@ -780,10 +780,10 @@ export default async function HomePage({ params }: HomePageProps) {
                             ISO 9001:2015
                           </h3>
                           <p className="text-lg text-gray-600 font-semibold font-['Inter']">
-                            Certificación de Calidad
+                            {t("certification.qualityLabel")}
                           </p>
                           <p className="text-sm text-gray-500 mt-6 font-['Inter']">
-                            Sistema de Gestión de Calidad
+                            {t("certification.qmsLabel")}
                           </p>
                         </div>
                       </div>
@@ -1012,7 +1012,7 @@ export default async function HomePage({ params }: HomePageProps) {
               ) : (
                 <div className="text-center py-12">
                   <p className="text-gray-500 font-['Inter']">
-                    No hay casos de éxito disponibles en este momento.
+                    {t("success.noResults")}
                   </p>
                 </div>
               )}
