@@ -413,7 +413,7 @@ export default function Header({ locale }: HeaderProps) {
             <div className="flex items-center justify-end gap-2 sm:gap-3">
               <LocalizedLink
                 href="vacantes"
-                className="px-2.5 sm:px-4 py-2 bg-[#d50058] text-white text-xs sm:text-sm font-semibold rounded-lg hover:bg-[#b30048] transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0"
+                className="hidden sm:inline-flex px-4 py-2 bg-[#d50058] text-white text-sm font-semibold rounded-lg hover:bg-[#b30048] transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0"
                 aria-label="Ver vacantes disponibles"
               >
                 {t("jobs")}

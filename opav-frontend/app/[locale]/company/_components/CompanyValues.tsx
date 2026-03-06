@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const VALUES_KEYS = [
@@ -15,16 +15,19 @@ const VALUES_KEYS = [
   "values.value8",
 ];
 
+// Degrees per second (slow continuous rotation)
+const SPEED = 6;
+
 export default function CompanyValues() {
   const t = useTranslations("company");
   const sectionRef = useRef<HTMLElement>(null);
+  const rotationMV = useMotionValue(0);
   const [rotation, setRotation] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const angleStep = 360 / VALUES_KEYS.length;
-  // Radio ajustado: xs=140, mobile=170, desktop=350
   const radius = isMobile
     ? typeof window !== "undefined" && window.innerWidth < 400
       ? 140
@@ -41,23 +44,20 @@ export default function CompanyValues() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  useEffect(() => {
+  // Continuous rotation via requestAnimationFrame
+  useAnimationFrame((_, delta) => {
     if (!isMounted || isPaused) return;
-
-    const interval = setInterval(() => {
-      setRotation((prev) => prev - angleStep);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [isMounted, isPaused, angleStep]);
+    const next = rotationMV.get() - (SPEED * delta) / 1000;
+    rotationMV.set(next);
+    setRotation(next);
+  });
 
   const handleCardClick = (index: number) => {
     if (isPaused) {
-      // Segundo click: reanudar
       setIsPaused(false);
     } else {
-      // Primer click: pausar y centrar esa card
       const targetRotation = -index * angleStep;
+      rotationMV.set(targetRotation);
       setRotation(targetRotation);
       setIsPaused(true);
     }
@@ -98,13 +98,7 @@ export default function CompanyValues() {
             className="relative w-full h-full"
             style={{
               transformStyle: "preserve-3d",
-            }}
-            animate={{
-              rotateY: rotation,
-            }}
-            transition={{
-              duration: 1.2,
-              ease: "easeInOut",
+              rotateY: rotationMV,
             }}
           >
             {VALUES_KEYS.map((key, index) => {
