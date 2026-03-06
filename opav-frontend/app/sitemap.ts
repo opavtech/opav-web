@@ -24,6 +24,9 @@ const STATIC_PAGES: Record<string, Record<string, string>> = {
   "casos-exito":    { es: "casos-exito",      en: "success-cases" },
   blog:             { es: "blog",             en: "blog" },
   vacantes:         { es: "vacantes",         en: "jobs" },
+  // RFP — misma ruta en ambos idiomas
+  "rfp/opav":       { es: "rfp/opav",         en: "rfp/opav" },
+  "rfp/bs":         { es: "rfp/bs",           en: "rfp/bs" },
 };
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
