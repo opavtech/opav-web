@@ -356,8 +356,10 @@ export default function Header({ locale }: HeaderProps) {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4"
           aria-label="Navegación principal"
         >
-          <div className="flex items-center justify-between">
-            {/* Menú Hamburguesa - Izquierda */}
+          {/* Grid de 3 columnas: burger | logo | acciones — garantiza que nada se superponga */}
+          <div className="grid grid-cols-3 items-center">
+            {/* Col 1: Menú Hamburguesa */}
+            <div className="flex items-center">
             <button
               onClick={toggleMobileMenu}
               className="flex flex-col gap-1.5 p-2 hover:bg-gray-100/50 rounded-lg transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0"
@@ -385,11 +387,13 @@ export default function Header({ locale }: HeaderProps) {
                 }`}
               ></span>
             </button>
+            </div>
 
-            {/* Logo Centrado */}
+            {/* Col 2: Logo centrado */}
+            <div className="flex justify-center">
             <Link
               href={`/${locale}`}
-              className="absolute left-1/2 -translate-x-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0 rounded"
+              className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0 rounded"
               aria-label="OPAV - Ir a página de inicio"
             >
               <Image
@@ -398,17 +402,18 @@ export default function Header({ locale }: HeaderProps) {
                 width={120}
                 height={40}
                 className={`h-auto transition-all duration-300 ${
-                  isScrolled ? "w-24" : "w-32"
+                  isScrolled ? "w-20 sm:w-24" : "w-24 sm:w-32"
                 }`}
                 priority
               />
             </Link>
+            </div>
 
-            {/* CTA y Language Switcher - Derecha */}
-            <div className="flex items-center gap-3">
+            {/* Col 3: CTA y Language Switcher */}
+            <div className="flex items-center justify-end gap-2 sm:gap-3">
               <LocalizedLink
                 href="vacantes"
-                className="px-4 py-2 bg-[#d50058] text-white text-sm font-semibold rounded-lg hover:bg-[#b30048] transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0"
+                className="px-2.5 sm:px-4 py-2 bg-[#d50058] text-white text-xs sm:text-sm font-semibold rounded-lg hover:bg-[#b30048] transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0"
                 aria-label="Ver vacantes disponibles"
               >
                 {t("jobs")}

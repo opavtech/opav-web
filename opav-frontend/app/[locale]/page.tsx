@@ -291,33 +291,43 @@ export default async function HomePage({ params }: HomePageProps) {
               </div>
 
               {/* Bottom (mobile) / Right (desktop): ISO Certification */}
-              <div
-                className="w-full lg:w-1/2 bg-white/10 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500"
-                role="complementary"
-                aria-labelledby="iso-certification-title"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="text-5xl sm:text-6xl" aria-hidden="true"></div>
-                  <div>
-                    <h3
-                      id="iso-certification-title"
-                      className="text-xl sm:text-2xl font-bold mb-2"
-                    >
-                      {t("hero.isoTitle")}
-                    </h3>
-                    <p className="text-sm sm:text-base text-white/90 mb-4">
-                      {t("hero.isoDescription")}
-                    </p>
-                    <Link
-                      href={getLocalizedPath(
-                        "certifications",
-                        locale as "es" | "en",
-                      )}
-                      className="inline-block px-4 py-2 bg-white/20 hover:bg-white/30 border border-white/30 hover:border-white/50 rounded-lg text-white text-sm sm:text-base font-medium transition-all duration-300 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-                      aria-label="Ver detalles de certificaciones ISO de OPAV"
-                    >
-                      {t("hero.isoLink")}
-                    </Link>
+              {/* Mobile: badge compacto inline. Desktop: card completa */}
+              <div className="w-full lg:w-1/2" role="complementary" aria-labelledby="iso-certification-title">
+                {/* Badge compacto — solo mobile */}
+                <div className="flex lg:hidden items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-xl border border-white/20">
+                  <div className="text-2xl shrink-0" aria-hidden="true"></div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold text-white/70 uppercase tracking-wide">Certificación</p>
+                    <p className="text-sm font-bold text-white truncate" id="iso-certification-title">{t("hero.isoTitle")}</p>
+                  </div>
+                  <Link
+                    href={getLocalizedPath("certifications", locale as "es" | "en")}
+                    className="ml-auto shrink-0 px-3 py-1.5 bg-white/20 hover:bg-white/30 border border-white/30 rounded-lg text-white text-xs font-medium transition-all"
+                    aria-label="Ver detalles de certificaciones ISO de OPAV"
+                  >
+                    {t("hero.isoLink")}
+                  </Link>
+                </div>
+
+                {/* Card completa — solo desktop */}
+                <div className="hidden lg:block bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500">
+                  <div className="flex items-start gap-4">
+                    <div className="text-6xl" aria-hidden="true"></div>
+                    <div>
+                      <h3 id="iso-certification-title" className="text-2xl font-bold mb-2">
+                        {t("hero.isoTitle")}
+                      </h3>
+                      <p className="text-base text-white/90 mb-4">
+                        {t("hero.isoDescription")}
+                      </p>
+                      <Link
+                        href={getLocalizedPath("certifications", locale as "es" | "en")}
+                        className="inline-block px-4 py-2 bg-white/20 hover:bg-white/30 border border-white/30 hover:border-white/50 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                        aria-label="Ver detalles de certificaciones ISO de OPAV"
+                      >
+                        {t("hero.isoLink")}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
