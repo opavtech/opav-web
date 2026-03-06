@@ -328,12 +328,12 @@ export default function Footer({ locale }: FooterProps) {
     <>
       <footer className="bg-gradient-to-b from-[#323e48] to-black text-white">
         {/* Main Footer Content */}
-        <div className="container mx-auto px-4 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
             {/* OPAV Info & Social */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-5xl font-bold text-white mb-6 tracking-tight">
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 tracking-tight">
                   OPAV SAS
                 </h3>
 
@@ -509,8 +509,8 @@ export default function Footer({ locale }: FooterProps) {
 
         {/* Bottom Bar */}
         <div className="border-t border-[#5b6770]/30">
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#5b6770]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-[#5b6770]">
               <p>
                 &copy; {new Date().getFullYear()} OPAV SAS. {t("footerCopyright")}
               </p>

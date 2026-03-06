@@ -200,7 +200,7 @@ export default async function HomePage({ params }: HomePageProps) {
         {/* 1. Hero Section */}
         <section
           key={`hero-section-${locale}`}
-          className="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 text-white py-24 md:py-32 overflow-hidden"
+          className="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 text-white py-16 sm:py-20 lg:py-28 overflow-hidden"
           aria-labelledby="hero-title"
           role="banner"
         >
@@ -220,27 +220,37 @@ export default async function HomePage({ params }: HomePageProps) {
           {/* Background overlay - improved for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              {/* Left: Metrics */}
-              <div className="space-y-8 -mt-8">
-                <div className="space-y-4">
-                  {/*Título blanco */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+              {/* Top (mobile) / Left (desktop): Text + Metrics + CTA */}
+              <div className="w-full lg:w-1/2 space-y-6 sm:space-y-8">
+                <div className="space-y-3 sm:space-y-4">
                   <h1
                     id="hero-title"
-                    className="text-4xl md:text-6xl font-bold leading-tight drop-shadow-lg text-white hero-title-copperplate"
+                    className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight drop-shadow-lg text-white hero-title-copperplate"
                   >
                     {t("hero.title")}
                   </h1>
 
-                  <p className="text-xl md:text-2xl text-white/90 drop-shadow-md">
+                  <p className="text-base sm:text-lg lg:text-xl text-white/90 drop-shadow-md">
                     {t("hero.subtitle")}
                   </p>
                 </div>
 
+                {/* CTA - visible sin scroll en mobile */}
+                <div>
+                  <Link
+                    href={`/${locale}/rfp`}
+                    className="inline-block bg-[#d50058]/90 backdrop-blur-md text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold border border-[#d50058]/30 hover:bg-[#d50058] hover:border-[#d50058]/50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    aria-label="Solicitar propuesta de servicios OPAV"
+                  >
+                    {t("hero.cta")}
+                  </Link>
+                </div>
+
                 {/* Key Metrics */}
                 <div
-                  className="grid grid-cols-3 gap-6 pt-8"
+                  className="grid grid-cols-3 gap-4 sm:gap-6 pt-2"
                   role="region"
                   aria-label="Métricas principales de OPAV"
                 >
@@ -248,10 +258,10 @@ export default async function HomePage({ params }: HomePageProps) {
                     <AnimatedCounter
                       end={8}
                       suffix=""
-                      className="text-4xl font-bold text-white mb-2 drop-shadow-md"
+                      className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 drop-shadow-md"
                       ariaLabel="8 años de experiencia"
                     />
-                    <div className="text-sm text-white/80">
+                    <div className="text-xs sm:text-sm text-white/80 leading-tight">
                       {t("hero.metric1")}
                     </div>
                   </div>
@@ -259,10 +269,10 @@ export default async function HomePage({ params }: HomePageProps) {
                     <AnimatedCounter
                       end={36}
                       suffix=""
-                      className="text-4xl font-bold text-white mb-2 drop-shadow-md"
+                      className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 drop-shadow-md"
                       ariaLabel="36 proyectos exitosos"
                     />
-                    <div className="text-sm text-white/80">
+                    <div className="text-xs sm:text-sm text-white/80 leading-tight">
                       {t("hero.metric2")}
                     </div>
                   </div>
@@ -270,42 +280,32 @@ export default async function HomePage({ params }: HomePageProps) {
                     <AnimatedCounter
                       end={210.45}
                       suffix="K"
-                      className="text-4xl font-bold text-white mb-2 drop-shadow-md"
+                      className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 drop-shadow-md"
                       ariaLabel="210.450 metros cuadrados administrados"
                     />
-                    <div className="text-sm text-white/80">
+                    <div className="text-xs sm:text-sm text-white/80 leading-tight">
                       {t("hero.metric3")}
                     </div>
                   </div>
                 </div>
-
-                <div className="text-center">
-                  <Link
-                    href={`/${locale}/rfp`}
-                    className="inline-block bg-[#d50058]/90 backdrop-blur-md text-white px-8 py-4 rounded-lg font-semibold border border-[#d50058]/30 hover:bg-[#d50058] hover:border-[#d50058]/50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-                    aria-label="Solicitar propuesta de servicios OPAV"
-                  >
-                    {t("hero.cta")}
-                  </Link>
-                </div>
               </div>
 
-              {/* Right: ISO Certification */}
+              {/* Bottom (mobile) / Right (desktop): ISO Certification */}
               <div
-                className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500"
+                className="w-full lg:w-1/2 bg-white/10 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-white/20 shadow-2xl hover:bg-white/15 transition-all duration-500"
                 role="complementary"
                 aria-labelledby="iso-certification-title"
               >
                 <div className="flex items-start gap-4">
-                  <div className="text-6xl" aria-hidden="true"></div>
+                  <div className="text-5xl sm:text-6xl" aria-hidden="true"></div>
                   <div>
                     <h3
                       id="iso-certification-title"
-                      className="text-2xl font-bold mb-2"
+                      className="text-xl sm:text-2xl font-bold mb-2"
                     >
                       {t("hero.isoTitle")}
                     </h3>
-                    <p className="text-white/90 mb-4">
+                    <p className="text-sm sm:text-base text-white/90 mb-4">
                       {t("hero.isoDescription")}
                     </p>
                     <Link
@@ -313,7 +313,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         "certifications",
                         locale as "es" | "en",
                       )}
-                      className="inline-block px-4 py-2 bg-white/20 hover:bg-white/30 border border-white/30 hover:border-white/50 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                      className="inline-block px-4 py-2 bg-white/20 hover:bg-white/30 border border-white/30 hover:border-white/50 rounded-lg text-white text-sm sm:text-base font-medium transition-all duration-300 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                       aria-label="Ver detalles de certificaciones ISO de OPAV"
                     >
                       {t("hero.isoLink")}
@@ -326,24 +326,24 @@ export default async function HomePage({ params }: HomePageProps) {
         </section>
 
         {/* 2. Company Section - OPAV & B&S */}
-        <section className="py-20 bg-[#F7F9FC]" aria-labelledby="company-title">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
+        <section className="py-12 sm:py-16 lg:py-20 bg-[#F7F9FC]" aria-labelledby="company-title">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10 sm:mb-14 lg:mb-16">
               <h2
                 id="company-title"
-                className="text-4xl font-bold text-gray-900 mb-4 font-['Inter']"
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-['Inter']"
               >
                 {t("company.title")}
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto font-['Inter']">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto font-['Inter']">
                 {t("company.intro")}
               </p>
             </div>
 
             {/* OPAV */}
-            <div className="max-w-6xl mx-auto mb-12">
-              <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 md:p-10">
-                <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="max-w-6xl mx-auto mb-8 sm:mb-12">
+              <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 p-6 sm:p-8 lg:p-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                   <div>
                     <div className="mb-6">
                       <Image
@@ -434,14 +434,14 @@ export default async function HomePage({ params }: HomePageProps) {
                     </div>
                   </div>
 
-                  <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden">
+                  <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden">
                     <Image
                       src="/images/company/opav-showcase.jpg"
                       alt="OPAV - Administración de Propiedades"
                       fill
                       loading="lazy"
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 600px"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                     />
                   </div>
                 </div>
@@ -450,8 +450,8 @@ export default async function HomePage({ params }: HomePageProps) {
 
             {/* B&S Facilities */}
             <div className="max-w-6xl mx-auto">
-              <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 p-8 md:p-10">
-                <div className="grid md:grid-cols-2 gap-12 items-start">
+              <div className="bg-white rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 p-6 sm:p-8 lg:p-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                   <div>
                     <div className="mb-6">
                       <Image
@@ -553,14 +553,14 @@ export default async function HomePage({ params }: HomePageProps) {
                     </div>
                   </div>
 
-                  <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden bg-gray-50 flex items-center justify-center p-8">
+                  <div className="w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden bg-gray-50 flex items-center justify-center p-8">
                     <Image
                       src="/images/logos/bs-facilities-logo-hor.png"
                       alt="B&S Facilities - Facilities Management"
                       width={400}
                       height={200}
                       loading="lazy"
-                      className="object-contain"
+                      className="object-contain w-full h-auto max-h-40"
                     />
                   </div>
                 </div>
@@ -570,7 +570,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </section>
 
         {/* 3. Certified Section */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
           {/* Diagonal Split Background */}
           <div className="absolute inset-0 bg-white"></div>
           <div
@@ -581,20 +581,20 @@ export default async function HomePage({ params }: HomePageProps) {
             }}
           ></div>
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-16 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
                   {/* Badge ISO con estilos inline */}
                   <div
-                    className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 shadow-lg"
+                    className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full mb-6 shadow-lg"
                     style={{
                       background:
                         "linear-gradient(135deg, #d50058 0%, #a0003d 100%)",
                     }}
                   >
                     <svg
-                      className="w-10 h-10"
+                      className="w-8 h-8 sm:w-10 sm:h-10"
                       fill="none"
                       stroke="#ffffff"
                       viewBox="0 0 24 24"
@@ -609,7 +609,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   </div>
 
                   {/* Título */}
-                  <h2 className="text-5xl font-extrabold text-gray-900 mb-6 font-['Inter'] leading-tight">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 font-['Inter'] leading-tight">
                     {t("certification.title")}
                   </h2>
 
@@ -796,7 +796,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </section>
 
         {/* 4. Corporate Testimonials Section - European Premium Style */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
           {/* Soft Linear Corporate Strata Background */}
           <div className="absolute inset-0 z-0">
             {/* Base layer - Pure white */}
@@ -822,14 +822,14 @@ export default async function HomePage({ params }: HomePageProps) {
             </div>
           </div>
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Section Header - Corporate & Serious */}
             <AnimatedSection>
-              <div className="text-center mb-20">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-['Inter'] tracking-tight">
+              <div className="text-center mb-10 sm:mb-14 lg:mb-20">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-['Inter'] tracking-tight">
                   {t("testimonials.title")}
                 </h2>
-                <p className="text-lg text-gray-600 font-['Inter'] font-light">
+                <p className="text-base sm:text-lg text-gray-600 font-['Inter'] font-light">
                   {t("testimonials.subtitle")}
                 </p>
               </div>
@@ -894,7 +894,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </section>
 
         {/* 5. Success Section - European Corporate Style with Premium Background */}
-        <section className="relative py-28 overflow-hidden">
+        <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
           {/* 4-Layer Premium Background System */}
           {/* Layer 1: Base white */}
           <div className="absolute inset-0 bg-white"></div>
@@ -926,14 +926,14 @@ export default async function HomePage({ params }: HomePageProps) {
             }}
           ></div>
 
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Header - Centered European Minimal */}
             <AnimatedSection>
-              <div className="text-center mb-20 max-w-3xl mx-auto">
-                <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 font-['Inter'] tracking-tight">
+              <div className="text-center mb-10 sm:mb-14 lg:mb-20 max-w-3xl mx-auto">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 font-['Inter'] tracking-tight">
                   {t("success.title")}
                 </h2>
-                <p className="text-lg text-gray-600 font-['Inter'] font-light">
+                <p className="text-base sm:text-lg text-gray-600 font-['Inter'] font-light">
                   {t("success.subtitle")}
                 </p>
               </div>
@@ -1022,7 +1022,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
         {/* 6. Insights Section - Premium Blog Carousel */}
         {blogPosts && blogPosts.length > 0 && (
-          <section className="relative py-28 overflow-hidden">
+          <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
             {/* 4-Layer Premium Background System */}
             {/* Layer 1: Base color */}
             <div
@@ -1057,7 +1057,7 @@ export default async function HomePage({ params }: HomePageProps) {
               }}
             ></div>
 
-            <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               {/* Header */}
               <AnimatedSection>
                 <div className="text-center mb-2">
@@ -1071,7 +1071,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   </div>
 
                   <h2
-                    className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 font-['Inter']"
+                    className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-['Inter']"
                     style={{ letterSpacing: "-0.02em" }}
                   >
                     {t("insights.title")}

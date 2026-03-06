@@ -29,6 +29,18 @@ export default function Header({ locale }: HeaderProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Bloquear scroll del body cuando el menú está abierto
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -341,7 +353,7 @@ export default function Header({ locale }: HeaderProps) {
         }`}
       >
         <nav
-          className="container mx-auto px-4 py-4"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4"
           aria-label="Navegación principal"
         >
           <div className="flex items-center justify-between">

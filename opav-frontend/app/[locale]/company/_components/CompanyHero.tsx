@@ -12,9 +12,9 @@ export default function CompanyHero({ locale }: { locale: string }) {
           ? "Sección principal - Quiénes Somos"
           : "Hero section - About Us"
       }
-      className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-gray-50 to-white"
+      className="relative py-12 sm:py-16 lg:py-20 overflow-hidden bg-linear-to-b from-gray-50 to-white"
     >
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-50 border border-primary-100 text-primary-600 font-medium text-sm mb-6">
@@ -26,10 +26,10 @@ export default function CompanyHero({ locale }: { locale: string }) {
               : "OPAV & B&S Facilities Group"}
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 tracking-tight">
             {t("title")}
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             {t("subtitle")}
           </p>
         </div>

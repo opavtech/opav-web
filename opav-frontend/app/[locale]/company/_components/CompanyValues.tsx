@@ -11,6 +11,8 @@ const VALUES_KEYS = [
   "values.value4",
   "values.value5",
   "values.value6",
+  "values.value7",
+  "values.value8",
 ];
 
 export default function CompanyValues() {
@@ -22,12 +24,17 @@ export default function CompanyValues() {
   const [isMobile, setIsMobile] = useState(false);
 
   const angleStep = 360 / VALUES_KEYS.length;
-  const radius = isMobile ? 200 : 350;
+  // Radio ajustado: xs=140, mobile=170, desktop=350
+  const radius = isMobile
+    ? typeof window !== "undefined" && window.innerWidth < 400
+      ? 140
+      : 170
+    : 350;
 
   useEffect(() => {
     setIsMounted(true);
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -44,14 +51,16 @@ export default function CompanyValues() {
     return () => clearInterval(interval);
   }, [isMounted, isPaused, angleStep]);
 
-  const goToIndex = (index: number) => {
-    const targetRotation = -index * angleStep;
-    setRotation(targetRotation);
-    setIsPaused(true);
-
-    setTimeout(() => {
+  const handleCardClick = (index: number) => {
+    if (isPaused) {
+      // Segundo click: reanudar
       setIsPaused(false);
-    }, 5000);
+    } else {
+      // Primer click: pausar y centrar esa card
+      const targetRotation = -index * angleStep;
+      setRotation(targetRotation);
+      setIsPaused(true);
+    }
   };
 
   return (
@@ -77,13 +86,13 @@ export default function CompanyValues() {
       {/* CARRUSEL HEXAGONAL 3D */}
       {!isMounted ? (
         // Placeholder durante SSR
-        <div className="relative h-[500px] md:h-[500px] flex items-center justify-center">
+        <div className="relative h-85 sm:h-105 lg:h-125 flex items-center justify-center">
           <div className="text-gray-400 animate-pulse">Cargando valores...</div>
         </div>
       ) : (
         <div
-          className="relative h-[420px] md:h-[500px] flex items-center justify-center"
-          style={{ perspective: isMobile ? "1200px" : "2000px" }}
+          className="relative h-85 sm:h-105 lg:h-125 flex items-center justify-center overflow-hidden"
+          style={{ perspective: isMobile ? "900px" : "2000px" }}
         >
           <motion.div
             className="relative w-full h-full"
@@ -113,8 +122,8 @@ export default function CompanyValues() {
               const isNearFront = currentAngle < 55 || currentAngle > 305;
 
               // Tamaños responsive
-              const cardWidth = isMobile ? "w-[200px]" : "w-[280px]";
-              const cardHeight = isMobile ? "h-[280px]" : "h-[360px]";
+              const cardWidth = isMobile ? "w-40 sm:w-52" : "w-[280px]";
+              const cardHeight = isMobile ? "h-52 sm:h-64" : "h-[360px]";
 
               return (
                 <motion.div
@@ -127,7 +136,7 @@ export default function CompanyValues() {
                 >
                   <button
                     type="button"
-                    onClick={() => goToIndex(index)}
+                    onClick={() => handleCardClick(index)}
                     className={[
                       `relative ${cardWidth} ${cardHeight} rounded-2xl p-4 md:p-8`,
                       "backdrop-blur-xl border",
@@ -153,6 +162,21 @@ export default function CompanyValues() {
                         animate={{ width: 80 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
                       />
+                    )}
+
+                    {/* Indicador pause/play (solo en la card frontal) */}
+                    {isFront && (
+                      <div className="absolute top-3 right-3 w-6 h-6 flex items-center justify-center opacity-40 hover:opacity-80 transition-opacity">
+                        {isPaused ? (
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-[#b8004b]">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        ) : (
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-gray-400">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                          </svg>
+                        )}
+                      </div>
                     )}
 
                     {/* Número elegante */}
