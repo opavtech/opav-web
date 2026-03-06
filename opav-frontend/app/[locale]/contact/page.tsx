@@ -135,37 +135,6 @@ export default async function ContactPage({ params }: ContactPageProps) {
                       </div>
                     </a>
 
-                    {/* Hours */}
-                    <div className="p-5 rounded-xl bg-white border border-gray-200">
-                      <div className="flex gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary-100 flex items-center justify-center text-primary-600">
-                          <svg
-                            className="w-6 h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-bold text-gray-900 mb-1 text-sm">
-                            {t("info.hours.title")}
-                          </h3>
-                          <p className="text-gray-600 text-sm">
-                            {t("info.hours.weekdays")}
-                          </p>
-                          <p className="text-gray-600 text-sm">
-                            {t("info.hours.weekend")}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
 

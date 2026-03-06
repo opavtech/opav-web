@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Rate limiting simple con Map
-const uploadAttempts = new Map<string, number[]>();
+import { applyRateLimit, getClientIp } from "@/lib/rate-limit";
 
 const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4MB
 const ALLOWED_TYPES = [
@@ -34,22 +33,6 @@ async function verifyFileType(file: File | Blob): Promise<boolean> {
   }
 }
 
-function rateLimit(ip: string): boolean {
-  const now = Date.now();
-  const windowMs = 60 * 60 * 1000; // 1 hora
-  const maxAttempts = 10;
-
-  const attempts = uploadAttempts.get(ip) || [];
-  const recentAttempts = attempts.filter((time) => now - time < windowMs);
-
-  if (recentAttempts.length >= maxAttempts) {
-    return false;
-  }
-
-  recentAttempts.push(now);
-  uploadAttempts.set(ip, recentAttempts);
-  return true;
-}
 
 async function validateAndEncodeFile(
   file: File,
@@ -82,17 +65,10 @@ async function validateAndEncodeFile(
 
 export async function POST(request: NextRequest) {
   try {
-    const ip =
-      request.headers.get("x-forwarded-for") ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
+    const ip = getClientIp(request);
 
-    if (!rateLimit(ip)) {
-      return NextResponse.json(
-        { error: "Too many upload attempts. Please try again later." },
-        { status: 429 },
-      );
-    }
+    const rlRes = await applyRateLimit(ip, "upload");
+    if (rlRes) return rlRes;
 
     const formData = await request.formData();
     const resume = formData.get("resume") as File | null;

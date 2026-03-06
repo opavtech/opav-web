@@ -11,7 +11,7 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const providerAttempts = new Map<string, number[]>();
+import { applyRateLimit, getClientIp } from "@/lib/rate-limit";
 
 async function verifyRecaptcha(token: string, ip: string): Promise<boolean> {
   if (!RECAPTCHA_SECRET_KEY) {
@@ -36,20 +36,6 @@ async function verifyRecaptcha(token: string, ip: string): Promise<boolean> {
   }
 }
 
-function rateLimit(ip: string): boolean {
-  const now = Date.now();
-  const windowMs = 60 * 60 * 1000;
-  const maxAttempts = 5;
-
-  const attempts = providerAttempts.get(ip) || [];
-  const recentAttempts = attempts.filter((time) => now - time < windowMs);
-
-  if (recentAttempts.length >= maxAttempts) return false;
-
-  recentAttempts.push(now);
-  providerAttempts.set(ip, recentAttempts);
-  return true;
-}
 
 function validateProviderApplication(data: any): {
   valid: boolean;
@@ -150,17 +136,10 @@ async function sendProviderEmail(data: any): Promise<void> {
 
 export async function POST(request: NextRequest) {
   try {
-    const ip =
-      request.headers.get("x-forwarded-for") ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
+    const ip = getClientIp(request);
 
-    if (!rateLimit(ip)) {
-      return NextResponse.json(
-        { error: "Too many submission attempts. Please try again later." },
-        { status: 429 },
-      );
-    }
+    const rlRes = await applyRateLimit(ip, "provider-application");
+    if (rlRes) return rlRes;
 
     const data = await request.json();
 

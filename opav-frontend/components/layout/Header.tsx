@@ -353,63 +353,61 @@ export default function Header({ locale }: HeaderProps) {
         }`}
       >
         <nav
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4"
+          className="max-w-7xl mx-auto py-3 sm:py-4 relative"
           aria-label="Navegación principal"
         >
-          {/* grid-cols-[auto_1fr_auto]: columnas laterales toman solo su contenido, centro ocupa el resto y centra el logo */}
-          <div className="grid items-center" style={{ gridTemplateColumns: "auto 1fr auto" }}>
-            {/* Col izquierda: Burger */}
-            <div className="flex items-center">
-              <button
-                onClick={toggleMobileMenu}
-                className="flex flex-col gap-1.5 p-2 hover:bg-gray-100/50 rounded-lg transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0"
-                aria-label={
-                  isMobileMenuOpen
-                    ? "Cerrar menú de navegación"
-                    : "Abrir menú de navegación"
-                }
-                aria-expanded={isMobileMenuOpen}
-                aria-controls="sidebar-menu"
-              >
-                <span
-                  className={`block w-6 h-0.5 bg-[#323e48] transition-all duration-300 group-hover:bg-[#d50058] ${
-                    isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
-                  }`}
-                />
-                <span
-                  className={`block w-6 h-0.5 bg-[#323e48] transition-all duration-300 group-hover:bg-[#d50058] ${
-                    isMobileMenuOpen ? "opacity-0" : ""
-                  }`}
-                />
-                <span
-                  className={`block w-6 h-0.5 bg-[#323e48] transition-all duration-300 group-hover:bg-[#d50058] ${
-                    isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
-                  }`}
-                />
-              </button>
-            </div>
+          {/* Logo centrado absolutamente respecto al nav — independiente de los laterales */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <Link
+              href={`/${locale}`}
+              className="pointer-events-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0 rounded"
+              aria-label="OPAV - Ir a página de inicio"
+            >
+              <Image
+                src="/images/logos/opav-logo.png"
+                alt="OPAV - Soluciones integrales en administración de propiedades y facilities management"
+                width={120}
+                height={40}
+                className={`h-auto transition-all duration-300 ${
+                  isScrolled ? "w-20 sm:w-24" : "w-24 sm:w-32"
+                }`}
+                priority
+              />
+            </Link>
+          </div>
 
-            {/* Col centro: Logo centrado */}
-            <div className="flex justify-center">
-              <Link
-                href={`/${locale}`}
-                className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0 rounded"
-                aria-label="OPAV - Ir a página de inicio"
-              >
-                <Image
-                  src="/images/logos/opav-logo.png"
-                  alt="OPAV - Soluciones integrales en administración de propiedades y facilities management"
-                  width={120}
-                  height={40}
-                  className={`h-auto transition-all duration-300 ${
-                    isScrolled ? "w-20 sm:w-24" : "w-24 sm:w-32"
-                  }`}
-                  priority
-                />
-              </Link>
-            </div>
+          {/* Burger (izq) y acciones (der) — flex normal, sin logo aquí */}
+          <div className="flex items-center justify-between px-2 sm:px-3">
+            {/* Izquierda: Burger */}
+            <button
+              onClick={toggleMobileMenu}
+              className="flex flex-col gap-1.5 p-2 hover:bg-gray-100/50 rounded-lg transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0"
+              aria-label={
+                isMobileMenuOpen
+                  ? "Cerrar menú de navegación"
+                  : "Abrir menú de navegación"
+              }
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="sidebar-menu"
+            >
+              <span
+                className={`block w-6 h-0.5 bg-[#323e48] transition-all duration-300 group-hover:bg-[#d50058] ${
+                  isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
+              />
+              <span
+                className={`block w-6 h-0.5 bg-[#323e48] transition-all duration-300 group-hover:bg-[#d50058] ${
+                  isMobileMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block w-6 h-0.5 bg-[#323e48] transition-all duration-300 group-hover:bg-[#d50058] ${
+                  isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              />
+            </button>
 
-            {/* Col derecha: Trabaja con nosotros (sm+) + Language Switcher */}
+            {/* Derecha: Trabaja con nosotros (sm+) + Language Switcher */}
             <div className="flex items-center gap-2 sm:gap-3">
               <LocalizedLink
                 href="vacantes"
