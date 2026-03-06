@@ -125,7 +125,7 @@ export default function ContactMap({ locale }: ContactMapProps) {
                     <p className="font-medium">
                       Edificio Federación Nacional de Cafeteros
                     </p>
-                    <p>Calle 73 # 8-13, Piso 11</p>
+                    <p>Calle 73 # 8-13</p>
                     <p>Bogotá, Colombia</p>
                   </div>
                 </div>

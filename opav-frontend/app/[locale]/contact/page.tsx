@@ -62,7 +62,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
                             Edificio Federación Nacional de Cafeteros
                           </p>
                           <p className="text-gray-600 text-sm leading-relaxed">
-                            Calle 73 # 8-13, Piso 11
+                            Calle 73 # 8-13
                           </p>
                           <p className="text-gray-600 text-sm leading-relaxed">
                             Bogotá, Colombia
@@ -139,9 +139,9 @@ export default async function ContactPage({ params }: ContactPageProps) {
                 </div>
 
                 {/* Map */}
-                {/* <div className="mt-8">
+                <div className="mt-8">
                   <ContactMapWrapper locale={locale} />
-                </div> */}
+                </div>
               </div>
 
               {/* Contact Form - 3 columns */}
