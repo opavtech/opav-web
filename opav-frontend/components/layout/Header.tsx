@@ -356,9 +356,10 @@ export default function Header({ locale }: HeaderProps) {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4"
           aria-label="Navegación principal"
         >
-          <div className="flex items-center justify-between">
-            {/* Izquierda: Burger + Logo */}
-            <div className="flex items-center gap-3">
+          {/* grid-cols-[auto_1fr_auto]: columnas laterales toman solo su contenido, centro ocupa el resto y centra el logo */}
+          <div className="grid items-center" style={{ gridTemplateColumns: "auto 1fr auto" }}>
+            {/* Col izquierda: Burger */}
+            <div className="flex items-center">
               <button
                 onClick={toggleMobileMenu}
                 className="flex flex-col gap-1.5 p-2 hover:bg-gray-100/50 rounded-lg transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0"
@@ -386,7 +387,10 @@ export default function Header({ locale }: HeaderProps) {
                   }`}
                 />
               </button>
+            </div>
 
+            {/* Col centro: Logo centrado */}
+            <div className="flex justify-center">
               <Link
                 href={`/${locale}`}
                 className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/30 focus-visible:ring-offset-0 rounded"
@@ -405,7 +409,7 @@ export default function Header({ locale }: HeaderProps) {
               </Link>
             </div>
 
-            {/* Derecha: Trabaja con nosotros (sm+) + Language Switcher */}
+            {/* Col derecha: Trabaja con nosotros (sm+) + Language Switcher */}
             <div className="flex items-center gap-2 sm:gap-3">
               <LocalizedLink
                 href="vacantes"
