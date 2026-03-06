@@ -66,61 +66,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  async rewrites() {
-    return [
-      // URLs en ESPAÑOL apuntan a carpetas en INGLÉS
-      {
-        source: "/es/compania",
-        destination: "/es/company",
-      },
-      {
-        source: "/es/compania/:path*",
-        destination: "/es/company/:path*",
-      },
-      {
-        source: "/es/servicios",
-        destination: "/es/services",
-      },
-      {
-        source: "/es/servicios/:path*",
-        destination: "/es/services/:path*",
-      },
-      {
-        source: "/es/contacto",
-        destination: "/es/contact",
-      },
-      {
-        source: "/es/contacto/:path*",
-        destination: "/es/contact/:path*",
-      },
-
-      // URLs en INGLÉS apuntan a carpetas en ESPAÑOL
-      {
-        source: "/en/success-cases",
-        destination: "/en/casos-exito",
-      },
-      {
-        source: "/en/success-cases/:path*",
-        destination: "/en/casos-exito/:path*",
-      },
-      {
-        source: "/en/certifications",
-        destination: "/en/certificaciones",
-      },
-      {
-        source: "/en/certifications/:path*",
-        destination: "/en/certificaciones/:path*",
-      },
-      {
-        source: "/en/jobs",
-        destination: "/en/vacantes",
-      },
-      {
-        source: "/en/jobs/:path*",
-        destination: "/en/vacantes/:path*",
-      },
-    ];
-  },
 };
 
 export default withBundleAnalyzer(withNextIntl(nextConfig));
