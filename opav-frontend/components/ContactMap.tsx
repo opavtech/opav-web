@@ -15,8 +15,8 @@ export default function ContactMap({ locale }: ContactMapProps) {
   // Coordenadas del Edificio de la Federación Nacional de Cafeteros
   // Calle 73 # 8-13, Bogotá
   const cafeterosCoords = {
-    lat: 4.6533,
-    lng: -74.0582,
+    lat: 4.6565199,
+    lng: -74.0557302,
   };
 
   useEffect(() => {
@@ -137,7 +137,7 @@ export default function ContactMap({ locale }: ContactMapProps) {
 
       {/* Botón para abrir en Google Maps */}
       <a
-        href="https://www.google.com/maps/place/Calle+73+%23+8-13,+Bogot%C3%A1/@4.6533,-74.0582,17z"
+        href="https://www.google.com/maps/place/Federaci%C3%B3n+Nacional+de+Cafeteros/@4.6565199,-74.0557302,17z"
         target="_blank"
         rel="noopener noreferrer"
         className="absolute bottom-4 right-4 bg-white hover:bg-gray-50 px-4 py-2 rounded-lg shadow-lg border border-gray-200 text-sm font-medium text-gray-700 hover:text-primary-600 transition-all z-[20] flex items-center gap-2"
