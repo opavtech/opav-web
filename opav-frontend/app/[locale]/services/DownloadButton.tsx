@@ -36,9 +36,9 @@ export default function DownloadButton({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 z-50 pointer-events-none"
+            className="fixed bottom-6 left-4 right-4 z-50 pointer-events-none sm:absolute sm:bottom-full sm:left-1/2 sm:-translate-x-1/2 sm:right-auto sm:mb-3"
           >
-            <div className="flex items-center gap-2.5 bg-gray-900 text-white text-sm font-medium px-4 py-2.5 rounded-xl shadow-xl whitespace-nowrap">
+            <div className="flex items-center gap-2.5 bg-gray-900 text-white text-sm font-medium px-4 py-3 rounded-xl shadow-xl">
               <svg
                 className="w-4 h-4 text-amber-400 shrink-0"
                 fill="none"
@@ -52,10 +52,10 @@ export default function DownloadButton({
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span>{unavailableMessage}</span>
+              <span className="leading-snug">{unavailableMessage}</span>
             </div>
-            {/* Arrow */}
-            <div className="flex justify-center">
+            {/* Arrow - solo visible en desktop */}
+            <div className="hidden sm:flex justify-center">
               <div className="w-2.5 h-2.5 bg-gray-900 rotate-45 -mt-1.5" />
             </div>
           </motion.div>
