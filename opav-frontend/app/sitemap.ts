@@ -4,24 +4,26 @@ import { MetadataRoute } from "next";
 
 const BASE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com"
-).replace(/\/+$/, "");
+)
+  .replace(/\/+$/, "")        // quitar trailing slashes
+  .replace(/\/(es|en)$/, ""); // quitar locale si viene en la URL base
 
 const STRAPI_URL =
   process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
 const LOCALES = ["es", "en"] as const;
 
-/** Nombres de ruta localizados */
+/** Nombres de ruta localizados — sincronizados con routing.ts pathnames */
 const STATIC_PAGES: Record<string, Record<string, string>> = {
-  compania: { es: "company", en: "company" },
-  servicios: { es: "services", en: "services" },
-  cobertura: { es: "cobertura", en: "cobertura" },
-  contacto: { es: "contact", en: "contact" },
-  certificaciones: { es: "certificaciones", en: "certificaciones" },
-  proveedores: { es: "proveedores", en: "proveedores" },
-  "casos-exito": { es: "casos-exito", en: "casos-exito" },
-  blog: { es: "blog", en: "blog" },
-  vacantes: { es: "vacantes", en: "vacantes" },
+  company:          { es: "compania",         en: "company" },
+  services:         { es: "servicios",        en: "services" },
+  cobertura:        { es: "cobertura",        en: "coverage" },
+  contact:          { es: "contacto",         en: "contact" },
+  certificaciones:  { es: "certificaciones",  en: "certifications" },
+  proveedores:      { es: "proveedores",      en: "providers" },
+  "casos-exito":    { es: "casos-exito",      en: "success-cases" },
+  blog:             { es: "blog",             en: "blog" },
+  vacantes:         { es: "vacantes",         en: "jobs" },
 };
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
