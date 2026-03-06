@@ -159,28 +159,36 @@
       "title": "Our Values",
       "quote": "These values define us as an organization and guide every decision we make",
       "value1": {
-        "title": "Professionalism",
-        "description": "We act with ethics and excellence in every project"
+        "title": "Honesty",
+        "description": "We act with transparency and integrity in every relationship and decision"
       },
       "value2": {
-        "title": "Commitment",
-        "description": "Total dedication to our clients and their success"
+        "title": "Love for Work",
+        "description": "We bring passion and dedication to every task we undertake"
       },
       "value3": {
-        "title": "Quality",
-        "description": "We exceed expectations in every service we provide"
+        "title": "Service",
+        "description": "We attend to our clients' needs with vocation and warmth"
       },
       "value4": {
-        "title": "Transparency",
-        "description": "Clear and honest communication at all times"
+        "title": "Excellence",
+        "description": "We exceed expectations with the highest quality standards"
       },
       "value5": {
-        "title": "Innovation",
-        "description": "We implement technological and efficient solutions"
+        "title": "Commitment",
+        "description": "Total dedication to our clients, team and results"
       },
       "value6": {
-        "title": "Sustainability",
-        "description": "Commitment to environmentally responsible practices"
+        "title": "Respect",
+        "description": "We value every person, their ideas and their dignity"
+      },
+      "value7": {
+        "title": "Innovation",
+        "description": "We seek creative and efficient solutions for every challenge"
+      },
+      "value8": {
+        "title": "Participation",
+        "description": "We foster teamwork and the contribution of everyone"
       }
     },
     "history": {

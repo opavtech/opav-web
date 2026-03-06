@@ -159,28 +159,36 @@
       "title": "Nuestros Valores",
       "quote": "Estos valores nos definen como organización y guían cada decisión que tomamos",
       "value1": {
-        "title": "Profesionalismo",
-        "description": "Actuamos con ética y excelencia en cada proyecto"
+        "title": "Honestidad",
+        "description": "Actuamos con transparencia e integridad en cada relación y decisión"
       },
       "value2": {
-        "title": "Compromiso",
-        "description": "Dedicación total con nuestros clientes y su éxito"
+        "title": "Amor al Trabajo",
+        "description": "Ponemos pasión y dedicación en cada tarea que emprendemos"
       },
       "value3": {
-        "title": "Calidad",
-        "description": "Superamos expectativas en cada servicio que brindamos"
+        "title": "Servicio",
+        "description": "Atendemos con vocación y calidez las necesidades de nuestros clientes"
       },
       "value4": {
-        "title": "Transparencia",
-        "description": "Comunicación clara y honesta en todo momento"
+        "title": "Excelencia",
+        "description": "Superamos expectativas con los más altos estándares de calidad"
       },
       "value5": {
-        "title": "Innovación",
-        "description": "Implementamos soluciones tecnológicas y eficientes"
+        "title": "Compromiso",
+        "description": "Dedicación total con nuestros clientes, equipo y resultados"
       },
       "value6": {
-        "title": "Sostenibilidad",
-        "description": "Compromiso con prácticas ambientalmente responsables"
+        "title": "Respeto",
+        "description": "Valoramos a cada persona, sus ideas y su dignidad"
+      },
+      "value7": {
+        "title": "Innovación",
+        "description": "Buscamos soluciones creativas y eficientes para cada desafío"
+      },
+      "value8": {
+        "title": "Participación",
+        "description": "Fomentamos el trabajo en equipo y la contribución de todos"
       }
     },
     "history": {
