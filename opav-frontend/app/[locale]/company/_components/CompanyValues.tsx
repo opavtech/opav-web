@@ -38,14 +38,14 @@ export default function CompanyValues() {
     if (!isMounted || isPaused) return;
 
     const interval = setInterval(() => {
-      setRotation((prev) => (prev + angleStep) % 360);
+      setRotation((prev) => prev - angleStep);
     }, 4000);
 
     return () => clearInterval(interval);
   }, [isMounted, isPaused, angleStep]);
 
   const goToIndex = (index: number) => {
-    const targetRotation = index * angleStep;
+    const targetRotation = -index * angleStep;
     setRotation(targetRotation);
     setIsPaused(true);
 
@@ -94,8 +94,8 @@ export default function CompanyValues() {
               rotateY: rotation,
             }}
             transition={{
-              duration: 0,
-              ease: "linear",
+              duration: 1.2,
+              ease: "easeInOut",
             }}
           >
             {VALUES_KEYS.map((key, index) => {
@@ -109,8 +109,8 @@ export default function CompanyValues() {
 
               // Determinar si esta card está al frente (cerca de z = radius)
               const currentAngle = (((rotation + angle) % 360) + 360) % 360;
-              const isFront = currentAngle < 30 || currentAngle > 330;
-              const isNearFront = currentAngle < 60 || currentAngle > 300;
+              const isFront = currentAngle < 20 || currentAngle > 340;
+              const isNearFront = currentAngle < 55 || currentAngle > 305;
 
               // Tamaños responsive
               const cardWidth = isMobile ? "w-[200px]" : "w-[280px]";
