@@ -2,9 +2,45 @@ import ContactForm from "@/components/forms/ContactForm";
 import { getTranslations } from "next-intl/server";
 import ContactHero from "./_components/ContactHero";
 import ContactMapWrapper from "./_components/ContactMapWrapper";
+import type { Metadata } from "next";
 
 interface ContactPageProps {
   params: Promise<{ locale: string }>;
+}
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
+
+export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale === "es";
+
+  return {
+    title: isEs
+      ? "Contacto | OPAV SAS - Administración de Propiedades"
+      : "Contact | OPAV SAS - Property Management",
+    description: isEs
+      ? "Contáctanos para soluciones en administración de propiedades y facilities management en Colombia. Edificio Federación Nacional de Cafeteros, Bogotá."
+      : "Contact us for property management and facilities management solutions in Colombia. Federación Nacional de Cafeteros Building, Bogotá.",
+    robots: { index: true, follow: true },
+    alternates: {
+      canonical: isEs ? `${baseUrl}/es/contacto` : `${baseUrl}/en/contact`,
+      languages: {
+        es: `${baseUrl}/es/contacto`,
+        en: `${baseUrl}/en/contact`,
+        "x-default": `${baseUrl}/es/contacto`,
+      },
+    },
+    openGraph: {
+      title: isEs ? "Contacto | OPAV SAS" : "Contact | OPAV SAS",
+      description: isEs
+        ? "Contáctanos para soluciones en administración de propiedades y facilities management en Colombia."
+        : "Contact us for property management and facilities management solutions in Colombia.",
+      url: isEs ? `${baseUrl}/es/contacto` : `${baseUrl}/en/contact`,
+      siteName: "OPAV SAS",
+      type: "website",
+      locale: isEs ? "es_CO" : "en_US",
+    },
+  };
 }
 
 export default async function ContactPage({ params }: ContactPageProps) {

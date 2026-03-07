@@ -9,7 +9,7 @@ interface VacantesPageProps {
   params: Promise<{ locale: string }>;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://opav.com.co";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
 // Revalidación cada hora (ISR)
 export const revalidate = 3600;
@@ -40,10 +40,11 @@ export async function generateMetadata({
       },
     },
     alternates: {
-      canonical: `${baseUrl}/${locale}/vacantes`,
+      canonical: locale === "es" ? `${baseUrl}/es/vacantes` : `${baseUrl}/en/jobs`,
       languages: {
         es: `${baseUrl}/es/vacantes`,
-        en: `${baseUrl}/en/vacantes`,
+        en: `${baseUrl}/en/jobs`,
+        "x-default": `${baseUrl}/es/vacantes`,
       },
     },
   };

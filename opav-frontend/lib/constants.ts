@@ -9,7 +9,7 @@ export const COMPANY_INFO = {
   },
   contact: {
     phone: '+57 320 703 6539',
-    email: 'info@opav.com.co',
+    email: 'ivan.espinosa@opavsas.com',
     whatsapp: '+57 320 703 6539',
   },
   social: {

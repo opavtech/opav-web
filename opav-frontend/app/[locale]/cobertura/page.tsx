@@ -6,7 +6,7 @@ interface CoberturaPageProps {
   params: Promise<{ locale: string }>;
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://opav.com.co";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
 type CoberturaCaseData = {
   ubicacion?: string;
@@ -77,10 +77,11 @@ export async function generateMetadata({
       ? `cobertura Colombia, proyectos Colombia, OPAV Colombia, B&S Colombia, construcción Colombia, ${citiesKeywords}, proyectos de construcción, ingeniería Colombia, mapa proyectos`
       : `Colombia coverage, Colombia projects, OPAV Colombia, B&S Colombia, construction Colombia, ${citiesKeywords}, construction projects, engineering Colombia, projects map`,
     alternates: {
-      canonical: `${siteUrl}/${locale}/cobertura`,
+      canonical: locale === "es" ? `${siteUrl}/es/cobertura` : `${siteUrl}/en/coverage`,
       languages: {
         es: `${siteUrl}/es/cobertura`,
-        en: `${siteUrl}/en/cobertura`,
+        en: `${siteUrl}/en/coverage`,
+        "x-default": `${siteUrl}/es/cobertura`,
       },
     },
     robots: {

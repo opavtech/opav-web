@@ -57,7 +57,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home.metadata" });
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
   const currentUrl = `${baseUrl}/${locale}`;
 
   return {
@@ -1110,12 +1110,12 @@ export default async function HomePage({ params }: HomePageProps) {
               "@graph": [
                 {
                   "@type": "Organization",
-                  "@id": `https://opav.com.co/#organization`,
+                  "@id": `https://www.opavsas.com/#organization`,
                   name: "OPAV SAS",
-                  url: "https://opav.com.co",
+                  url: "https://www.opavsas.com",
                   logo: {
                     "@type": "ImageObject",
-                    url: "https://opav.com.co/images/logos/opav-logo.png",
+                    url: "https://www.opavsas.com/images/logos/opav-logo.png",
                     width: 120,
                     height: 40,
                   },
@@ -1138,33 +1138,33 @@ export default async function HomePage({ params }: HomePageProps) {
                   contactPoint: {
                     "@type": "ContactPoint",
                     contactType: "customer service",
-                    email: "info@opav.com.co",
+                    email: "ivan.espinosa@opavsas.com",
                     availableLanguage: ["Spanish", "English"],
                   },
                 },
                 {
                   "@type": "WebSite",
-                  "@id": `https://opav.com.co/#website`,
-                  url: "https://opav.com.co",
+                  "@id": `https://www.opavsas.com/#website`,
+                  url: "https://www.opavsas.com",
                   name: "OPAV SAS",
                   publisher: {
-                    "@id": "https://opav.com.co/#organization",
+                    "@id": "https://www.opavsas.com/#organization",
                   },
                   inLanguage: locale === "es" ? "es-CO" : "en-US",
                 },
                 {
                   "@type": "WebPage",
-                  "@id": `https://opav.com.co/${locale}#webpage`,
-                  url: `https://opav.com.co/${locale}`,
+                  "@id": `https://www.opavsas.com/${locale}#webpage`,
+                  url: `https://www.opavsas.com/${locale}`,
                   name:
                     locale === "es"
                       ? "OPAV SAS - Administración de Propiedades y Facilities Management en Colombia"
                       : "OPAV SAS - Property Management & Facilities Management in Colombia",
                   isPartOf: {
-                    "@id": "https://opav.com.co/#website",
+                    "@id": "https://www.opavsas.com/#website",
                   },
                   about: {
-                    "@id": "https://opav.com.co/#organization",
+                    "@id": "https://www.opavsas.com/#organization",
                   },
                   description:
                     locale === "es"
@@ -1179,7 +1179,7 @@ export default async function HomePage({ params }: HomePageProps) {
                       ? "Administración de Propiedades"
                       : "Property Management",
                   provider: {
-                    "@id": "https://opav.com.co/#organization",
+                    "@id": "https://www.opavsas.com/#organization",
                   },
                   areaServed: {
                     "@type": "Country",
@@ -1242,7 +1242,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   "@type": "ListItem",
                   position: 1,
                   name: locale === "es" ? "Inicio" : "Home",
-                  item: `https://opav.com.co/${locale}`,
+                  item: `https://www.opavsas.com/${locale}`,
                 },
               ],
             }),
@@ -1321,12 +1321,12 @@ export default async function HomePage({ params }: HomePageProps) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "@id": "https://opav.com.co/#business",
+              "@id": "https://www.opavsas.com/#business",
               name: "OPAV SAS",
               alternateName: "OPAV - Administración de Propiedades",
               image: [
-                "https://opav.com.co/images/logos/opav-logo.png",
-                "https://opav.com.co/images/hero/hero-background.png",
+                "https://www.opavsas.com/images/logos/opav-logo.png",
+                "https://www.opavsas.com/images/hero/hero-background.png",
               ],
               description:
                 locale === "es"
@@ -1346,8 +1346,8 @@ export default async function HomePage({ params }: HomePageProps) {
                 latitude: 4.6097,
                 longitude: -74.0817,
               },
-              email: "info@opav.com.co",
-              url: "https://opav.com.co",
+              email: "ivan.espinosa@opavsas.com",
+              url: "https://www.opavsas.com",
               openingHoursSpecification: [
                 {
                   "@type": "OpeningHoursSpecification",

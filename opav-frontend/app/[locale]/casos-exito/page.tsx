@@ -15,7 +15,7 @@ export async function generateMetadata({
   params,
 }: SuccessCasesPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   return {
     title:
@@ -41,10 +41,11 @@ export async function generateMetadata({
       },
     },
     alternates: {
-      canonical: `${baseUrl}/${locale}/casos-exito`,
+      canonical: locale === "es" ? `${baseUrl}/es/casos-exito` : `${baseUrl}/en/success-cases`,
       languages: {
         es: `${baseUrl}/es/casos-exito`,
-        en: `${baseUrl}/en/casos-exito`,
+        en: `${baseUrl}/en/success-cases`,
+        "x-default": `${baseUrl}/es/casos-exito`,
       },
     },
     openGraph: {
@@ -98,7 +99,7 @@ export default async function SuccessCasesPage({
   const casosBS = casosExito.filter((caso: any) => caso.empresa === "B&S");
 
   // JSON-LD Structured Data for SEO
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   const structuredData = [
     // CollectionPage schema

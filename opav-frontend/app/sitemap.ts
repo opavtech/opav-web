@@ -8,8 +8,7 @@ const BASE_URL = (
   .replace(/\/+$/, "")        // quitar trailing slashes
   .replace(/\/(es|en)$/, ""); // quitar locale si viene en la URL base
 
-const STRAPI_URL =
-  process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 const LOCALES = ["es", "en"] as const;
 
@@ -107,6 +106,11 @@ interface StrapiResponse {
 async function buildDynamicRoutes(): Promise<MetadataRoute.Sitemap> {
   const routes: MetadataRoute.Sitemap = [];
 
+  if (!STRAPI_URL) {
+    console.warn("[sitemap] NEXT_PUBLIC_STRAPI_URL not set — skipping dynamic routes");
+    return routes;
+  }
+
   try {
     // Fetch todos los endpoints en paralelo
     const [casosES, casosEN, blogES, blogEN] = await Promise.all([
@@ -129,7 +133,7 @@ async function buildDynamicRoutes(): Promise<MetadataRoute.Sitemap> {
       casosES?.data,
       casosEN?.data,
       (item) => item.Slug,
-      "casos-exito",
+      { es: "casos-exito", en: "success-cases" },
       routes
     );
 
@@ -138,7 +142,7 @@ async function buildDynamicRoutes(): Promise<MetadataRoute.Sitemap> {
       blogES?.data,
       blogEN?.data,
       (item) => item.slug,
-      "blog",
+      { es: "blog", en: "blog" },
       routes
     );
   } catch (err) {
@@ -152,7 +156,7 @@ function buildLocalizedEntries(
   itemsES: StrapiItem[] | null | undefined,
   itemsEN: StrapiItem[] | null | undefined,
   getSlug: (item: StrapiItem) => string | undefined,
-  basePath: string,
+  basePaths: { es: string; en: string },
   routes: MetadataRoute.Sitemap
 ): void {
   const byDocId = new Map<string, { es?: StrapiItem; en?: StrapiItem }>();
@@ -173,14 +177,14 @@ function buildLocalizedEntries(
     const lastMod = updated ? new Date(updated) : new Date();
 
     if (esSlug) {
-      routes.push(entry(`${BASE_URL}/es/${basePath}/${esSlug}`, {
+      routes.push(entry(`${BASE_URL}/es/${basePaths.es}/${esSlug}`, {
         priority: 0.7,
         changeFrequency: "monthly",
         lastModified: lastMod,
       }));
     }
     if (enSlug) {
-      routes.push(entry(`${BASE_URL}/en/${basePath}/${enSlug}`, {
+      routes.push(entry(`${BASE_URL}/en/${basePaths.en}/${enSlug}`, {
         priority: 0.7,
         changeFrequency: "monthly",
         lastModified: lastMod,

@@ -16,7 +16,7 @@ export async function generateMetadata({
   params,
 }: CertificacionesPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   return {
     title:
@@ -42,10 +42,11 @@ export async function generateMetadata({
       },
     },
     alternates: {
-      canonical: `${baseUrl}/${locale}/certificaciones`,
+      canonical: locale === "es" ? `${baseUrl}/es/certificaciones` : `${baseUrl}/en/certifications`,
       languages: {
         es: `${baseUrl}/es/certificaciones`,
-        en: `${baseUrl}/en/certificaciones`,
+        en: `${baseUrl}/en/certifications`,
+        "x-default": `${baseUrl}/es/certificaciones`,
       },
     },
     openGraph: {
@@ -114,7 +115,7 @@ export default async function CertificacionesPage({
   ).length;
 
   // JSON-LD Structured Data for SEO
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   const structuredData = [
     // CollectionPage schema

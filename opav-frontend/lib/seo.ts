@@ -15,7 +15,7 @@ export function generateBlogPostJsonLd(
   locale: string,
   slug: string,
 ) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://opav.com.co";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
   const postUrl = `${siteUrl}/${locale}/blog/${slug}`;
 
   // Priorizar openGraphImage, sino imagenPrincipal
@@ -157,7 +157,7 @@ export function generateBlogPostMetadata(
   locale: string,
   slug: string,
 ): Metadata {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://opav.com.co";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
   const postUrl = `${siteUrl}/${locale}/blog/${slug}`;
 
   // Priorizar openGraphImage para redes sociales, sino imagenPrincipal
