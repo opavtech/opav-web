@@ -33,6 +33,36 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // ── Redirects desde URLs antiguas de WordPress ──────────────────────
+      {
+        source: "/la-compania",
+        destination: "/es/compania",
+        permanent: true,
+      },
+      {
+        source: "/clientes",
+        destination: "/es/casos-exito",
+        permanent: true,
+      },
+      {
+        source: "/modelos-de-gestion",
+        destination: "/es/compania",
+        permanent: true,
+      },
+      {
+        source: "/facility-managemnet", // typo original preservado
+        destination: "/es/compania",
+        permanent: true,
+      },
+      {
+        source: "/facility-management", // versión correcta por si acaso
+        destination: "/es/compania",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
