@@ -131,7 +131,7 @@ async function sendRFPEmail(data: any): Promise<void> {
           </table>
           ${data.attachmentUrl ? `<p style="margin-top:16px"><strong>${isEn ? "Attachment" : "Adjunto"}:</strong> <a href="${data.attachmentUrl}" style="color:${brandColor}">${data.attachmentUrl}</a></p>` : ""}
           <hr style="margin:24px 0;border:none;border-top:1px solid #e5e7eb"/>
-          <p style="color:#9ca3af;font-size:12px;margin:0">opav.com.co – ${isEn ? "RFP Form" : "Formulario de propuesta"} – ${brandLabel}</p>
+          <p style="color:#9ca3af;font-size:12px;margin:0">opavsas.com – ${isEn ? "RFP Form" : "Formulario de propuesta"} – ${brandLabel}</p>
         </div>
       </div>
     `,

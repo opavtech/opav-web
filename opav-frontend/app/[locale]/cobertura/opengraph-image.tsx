@@ -166,7 +166,7 @@ export default async function OpenGraphImage({
               : "Cities • Projects • Expertise"}
           </div>
           <div style={{ fontSize: 18, color: "#64748b" }}>
-            {isSpanish ? "opav.com.co" : "opav.com.co"}
+            {"opavsas.com"}
           </div>
         </div>
 

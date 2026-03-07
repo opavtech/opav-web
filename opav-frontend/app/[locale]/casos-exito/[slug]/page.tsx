@@ -34,7 +34,7 @@ export async function generateMetadata({
 }: CasoExitoPageProps): Promise<Metadata> {
   const { locale, slug: encodedSlug } = await params;
   const slug = decodeURIComponent(encodedSlug);
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   try {
     const response = await getCasoExito(slug, locale);
@@ -217,7 +217,7 @@ export default async function CasoExitoPage({ params }: CasoExitoPageProps) {
   const brandColor = isOPAV ? "#d50058" : "#0e7490";
 
   // JSON-LD Structured Data for SEO
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   const structuredData = [
     // Article schema

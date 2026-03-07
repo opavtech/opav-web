@@ -15,8 +15,29 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://opav.com.co",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com",
   ),
+  title: {
+    default: "OPAV SAS - Gerencia Inmobiliaria y Facilities Management",
+    template: "%s | OPAV SAS",
+  },
+  description:
+    "Empresa líder en gerencia inmobiliaria, facilities management y administración de activos en Colombia.",
+  openGraph: {
+    siteName: "OPAV SAS",
+    type: "website",
+    locale: "es_CO",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export function generateStaticParams() {
@@ -57,14 +78,12 @@ export default async function LocaleLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <link
-          rel="preconnect"
-          href={process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"}
-        />
-        <link
-          rel="dns-prefetch"
-          href={process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337"}
-        />
+        {process.env.NEXT_PUBLIC_STRAPI_URL && (
+          <>
+            <link rel="preconnect" href={process.env.NEXT_PUBLIC_STRAPI_URL} />
+            <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STRAPI_URL} />
+          </>
+        )}
       </head>
       <body className="flex flex-col min-h-screen antialiased overflow-x-hidden">
         <GoogleAnalytics />

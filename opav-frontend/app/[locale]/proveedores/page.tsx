@@ -8,7 +8,7 @@ interface ProveedoresPageProps {
   params: Promise<{ locale: string }>;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://opav.com.co";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
 export const revalidate = 3600;
 
@@ -38,10 +38,11 @@ export async function generateMetadata({
       },
     },
     alternates: {
-      canonical: `${baseUrl}/${locale}/proveedores`,
+      canonical: locale === "es" ? `${baseUrl}/es/proveedores` : `${baseUrl}/en/providers`,
       languages: {
         es: `${baseUrl}/es/proveedores`,
-        en: `${baseUrl}/en/proveedores`,
+        en: `${baseUrl}/en/providers`,
+        "x-default": `${baseUrl}/es/proveedores`,
       },
     },
   };

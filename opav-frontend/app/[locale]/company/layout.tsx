@@ -15,8 +15,8 @@ export async function generateMetadata({
 
   const t = await getTranslations({ locale, namespace: "company" });
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://opav.com.co";
-  const currentUrl = `${baseUrl}/${locale}/company`;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
+  const currentUrl = locale === "es" ? `${baseUrl}/es/compania` : `${baseUrl}/en/company`;
 
   return {
     title: t("seo.title"),
@@ -26,8 +26,9 @@ export async function generateMetadata({
     alternates: {
       canonical: currentUrl,
       languages: {
-        es: `${baseUrl}/es/company`,
+        es: `${baseUrl}/es/compania`,
         en: `${baseUrl}/en/company`,
+        "x-default": `${baseUrl}/es/compania`,
       },
     },
 
@@ -138,7 +139,7 @@ function generateJsonLd(locale: string, baseUrl: string) {
 
 export default async function CompanyLayout({ children, params }: LayoutProps) {
   const { locale } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   return (
     <>

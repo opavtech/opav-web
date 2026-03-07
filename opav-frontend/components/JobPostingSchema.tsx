@@ -56,7 +56,7 @@ export default function JobPostingSchema({
   // Determinar la organización (OPAV o B&S)
   const isOPAV = job.empresa?.toLowerCase().includes("opav");
   const organizationName = isOPAV ? "OPAV" : "B&S Facilities";
-  const organizationUrl = "https://opav.com.co";
+  const organizationUrl = "https://www.opavsas.com";
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || organizationUrl;
 
   const schema = {

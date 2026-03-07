@@ -20,7 +20,7 @@ export async function generateMetadata({
   params,
 }: ServicesPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   return {
     title:
@@ -46,10 +46,11 @@ export async function generateMetadata({
       },
     },
     alternates: {
-      canonical: `${baseUrl}/${locale}/services`,
+      canonical: locale === "es" ? `${baseUrl}/es/servicios` : `${baseUrl}/en/services`,
       languages: {
-        es: `${baseUrl}/es/services`,
+        es: `${baseUrl}/es/servicios`,
         en: `${baseUrl}/en/services`,
+        "x-default": `${baseUrl}/es/servicios`,
       },
     },
     openGraph: {
@@ -85,7 +86,7 @@ export async function generateMetadata({
 export default async function ServicesPage({ params }: ServicesPageProps) {
   const { locale } = await params;
   const t = await getTranslations("services");
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opav.com.co";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
   // Obtener servicios desde Strapi
   let serviciosOPAV: any[] = [];

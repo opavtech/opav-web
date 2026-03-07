@@ -14,7 +14,7 @@ interface VacanteDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://opav.com.co";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
 export async function generateMetadata({
   params,
@@ -69,10 +69,11 @@ export async function generateMetadata({
         },
       },
       alternates: {
-        canonical: `${baseUrl}/${locale}/vacantes/${slug}`,
+        canonical: locale === "es" ? `${baseUrl}/es/vacantes/${slug}` : `${baseUrl}/en/jobs/${slug}`,
         languages: {
           es: `${baseUrl}/es/vacantes/${slug}`,
-          en: `${baseUrl}/en/vacantes/${slug}`,
+          en: `${baseUrl}/en/jobs/${slug}`,
+          "x-default": `${baseUrl}/es/vacantes/${slug}`,
         },
       },
       twitter: {

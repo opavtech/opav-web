@@ -28,39 +28,19 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "opav.com.co",
+        hostname: "opavsas.com",
         pathname: "/uploads/**",
       },
     ],
   },
   async redirects() {
     return [
-      // ── Redirects desde URLs antiguas de WordPress ──────────────────────
-      {
-        source: "/la-compania",
-        destination: "/es/compania",
-        permanent: true,
-      },
-      {
-        source: "/clientes",
-        destination: "/es/casos-exito",
-        permanent: true,
-      },
-      {
-        source: "/modelos-de-gestion",
-        destination: "/es/compania",
-        permanent: true,
-      },
-      {
-        source: "/facility-managemnet", // typo original preservado
-        destination: "/es/compania",
-        permanent: true,
-      },
-      {
-        source: "/facility-management", // versión correcta por si acaso
-        destination: "/es/compania",
-        permanent: true,
-      },
+      { source: "/la-compania", destination: "/es/compania", permanent: true },
+      { source: "/clientes", destination: "/es/casos-exito", permanent: true },
+      { source: "/modelos-de-gestion", destination: "/es/compania", permanent: true },
+      { source: "/facility-managemnet", destination: "/es/compania", permanent: true },
+      { source: "/facility-management", destination: "/es/compania", permanent: true },
+      { source: "/gestion-de-instalaciones-corporativas", destination: "/es/servicios", permanent: true },
     ];
   },
   async headers() {
