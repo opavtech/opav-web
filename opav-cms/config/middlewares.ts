@@ -1,4 +1,4 @@
-export default [
+export default ({ env }) => [
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
@@ -6,7 +6,7 @@ export default [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+      origin: env.array('CORS_ORIGIN', ['http://localhost:3000']),
       credentials: true,
     },
   },
