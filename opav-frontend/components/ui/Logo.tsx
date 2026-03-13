@@ -14,7 +14,7 @@ export default function Logo({ locale = 'es', variant = 'full', className = '' }
     return (
       <Link href={`/${locale}`} className={`flex items-center ${className}`}>
         <Image
-          src="/images/logos/opav-logo.png"
+          src="/images/logos/opav-logo.svg"
           alt="OPAV"
           width={80}
           height={32}
@@ -30,7 +30,7 @@ export default function Logo({ locale = 'es', variant = 'full', className = '' }
     return (
       <Link href={`/${locale}`} className={`flex items-center ${className}`}>
         <Image
-          src="/images/logos/opav-logo.png"
+          src="/images/logos/opav-logo.svg"
           alt="OPAV"
           width={60}
           height={24}
@@ -45,7 +45,7 @@ export default function Logo({ locale = 'es', variant = 'full', className = '' }
   return (
     <Link href={`/${locale}`} className={`flex items-center ${className}`}>
       <Image
-        src="/images/logos/opav-logo.png"
+        src="/images/logos/opav-logo.svg"
         alt="OPAV"
         width={120}
         height={40}

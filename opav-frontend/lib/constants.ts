@@ -46,7 +46,7 @@ export const BRAND_COLORS = {
 // URLs de logos (actualizar cuando lleguen)
 export const LOGOS = {
   opav: {
-    main: '/images/logos/opav-logo.png',
+    main: '/images/logos/opav-logo.svg',
     white: '/images/logos/opav-logo-white.png',
     icon: '/images/logos/opav-icon.png',
   },

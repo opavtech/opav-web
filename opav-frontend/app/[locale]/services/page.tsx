@@ -131,7 +131,7 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
       "@id": `${baseUrl}/#organization`,
       name: "OPAV SAS",
       url: baseUrl,
-      logo: `${baseUrl}/images/logos/opav-logo.png`,
+      logo: `${baseUrl}/images/logos/opav-logo.svg`,
       description:
         locale === "es"
           ? "Empresa líder en administración de propiedades y facilities management en Colombia"
@@ -219,7 +219,7 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
             <div className="text-center mb-16">
               <div className="flex items-center justify-center mb-6">
                 <Image
-                  src="/images/logos/opav-logo.png"
+                  src="/images/logos/opav-logo.svg"
                   alt="OPAV - Administración de Propiedades"
                   width={240}
                   height={96}

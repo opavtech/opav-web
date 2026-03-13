@@ -9,13 +9,13 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/images/logos/opav-logo.png",
+      "src": "/images/logos/opav-logo.svg",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/images/logos/opav-logo.png",
+      "src": "/images/logos/opav-logo.svg",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

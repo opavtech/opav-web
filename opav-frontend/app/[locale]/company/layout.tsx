@@ -75,7 +75,7 @@ function generateJsonLd(locale: string, baseUrl: string) {
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}/images/logos/opav-logo.png`,
+          url: `${baseUrl}/images/logos/opav-logo.svg`,
           width: 200,
           height: 60,
         },
