@@ -11,6 +11,7 @@
 /* Smooth scroll para todos los anchor links */
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 /* Ajuste para scroll con offset (para headers fijos) */
@@ -50,12 +51,7 @@ html {
   --shadow-bs-light: 0 5px 20px rgba(0, 172, 200, 0.15);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Dark mode del sistema desactivado — el sitio es siempre light */
 
 /* Base Styles */
 body {
