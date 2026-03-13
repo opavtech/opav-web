@@ -100,7 +100,7 @@ export default async function ProveedoresPage({
     "@type": "Organization",
     name: "OPAV",
     url: baseUrl,
-    logo: `${baseUrl}/images/opav-logo.png`,
+    logo: `${baseUrl}/images/opav-logo.svg`,
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Supplier Relations",

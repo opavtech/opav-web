@@ -357,7 +357,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   <div>
                     <div className="mb-6">
                       <Image
-                        src="/images/logos/opav-logo.png"
+                        src="/images/logos/opav-logo.svg"
                         alt="OPAV SAS"
                         width={180}
                         height={60}
@@ -1115,7 +1115,7 @@ export default async function HomePage({ params }: HomePageProps) {
                   url: "https://www.opavsas.com",
                   logo: {
                     "@type": "ImageObject",
-                    url: "https://www.opavsas.com/images/logos/opav-logo.png",
+                    url: "https://www.opavsas.com/images/logos/opav-logo.svg",
                     width: 120,
                     height: 40,
                   },
@@ -1325,7 +1325,7 @@ export default async function HomePage({ params }: HomePageProps) {
               name: "OPAV SAS",
               alternateName: "OPAV - Administración de Propiedades",
               image: [
-                "https://www.opavsas.com/images/logos/opav-logo.png",
+                "https://www.opavsas.com/images/logos/opav-logo.svg",
                 "https://www.opavsas.com/images/hero/hero-background.png",
               ],
               description:

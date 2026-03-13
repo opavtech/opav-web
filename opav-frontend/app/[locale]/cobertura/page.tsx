@@ -159,7 +159,7 @@ function generateStructuredData(
         "@id": `${siteUrl}/#organization`,
         name: "OPAV & B&S",
         url: siteUrl,
-        logo: `${siteUrl}/images/logos/opav-logo.png`,
+        logo: `${siteUrl}/images/logos/opav-logo.svg`,
         areaServed: {
           "@type": "Country",
           name: "Colombia",

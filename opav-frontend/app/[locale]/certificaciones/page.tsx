@@ -138,7 +138,7 @@ export default async function CertificacionesPage({
         "@id": `${baseUrl}/#organization`,
         name: "OPAV SAS",
         url: baseUrl,
-        logo: `${baseUrl}/images/logos/opav-logo.png`,
+        logo: `${baseUrl}/images/logos/opav-logo.svg`,
         sameAs: [
           "https://www.linkedin.com/company/opav-sas",
           "https://twitter.com/OPAV_SAS",

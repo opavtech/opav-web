@@ -17,7 +17,7 @@ const BRAND_META = {
       "Solicita una propuesta personalizada de servicios de administración de propiedades y gerencia de edificios con OPAV SAS en Colombia.",
     descEn:
       "Request a personalized proposal for property management and building administration services with OPAV SAS in Colombia.",
-    logo: "/images/logos/opav-logo.png",
+    logo: "/images/logos/opav-logo.svg",
     logoAlt: "OPAV SAS",
     logoWidth: 180,
     logoHeight: 60,

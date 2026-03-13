@@ -247,7 +247,7 @@ export default async function CasoExitoPage({ params }: CasoExitoPageProps) {
         url: baseUrl,
         logo: {
           "@type": "ImageObject",
-          url: `${baseUrl}/images/logos/opav-logo.png`,
+          url: `${baseUrl}/images/logos/opav-logo.svg`,
         },
       },
       mainEntityOfPage: {

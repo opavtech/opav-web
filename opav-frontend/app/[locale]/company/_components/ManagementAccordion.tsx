@@ -110,7 +110,7 @@ export default function ManagementAccordion() {
           <div className="inline-flex items-center justify-center mb-4">
             <span className="w-8 h-px bg-[#d50058]"></span>
             <Image
-              src="/images/logos/opav-logo.png"
+              src="/images/logos/opav-logo.svg"
               alt="OPAV"
               width={80}
               height={24}

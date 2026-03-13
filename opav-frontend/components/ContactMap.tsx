@@ -63,7 +63,7 @@ export default function ContactMap({ locale }: ContactMapProps) {
           ">
             <!-- Logo de OPAV -->
             <img 
-              src="/images/logos/opav-logo.png" 
+              src="/images/logos/opav-logo.svg" 
               alt="OPAV" 
               style="
                 width: 36px;

@@ -364,7 +364,7 @@ export default function Header({ locale }: HeaderProps) {
               aria-label="OPAV - Ir a página de inicio"
             >
               <Image
-                src="/images/logos/opav-logo.png"
+                src="/images/logos/opav-logo.svg"
                 alt="OPAV - Soluciones integrales en administración de propiedades y facilities management"
                 width={120}
                 height={40}

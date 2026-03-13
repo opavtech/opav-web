@@ -203,7 +203,7 @@ export default function HeroSection({ post, locale }: HeroSectionProps) {
             >
               <div className="relative w-12 h-12">
                 <Image
-                  src="/images/logos/opav-logo.png"
+                  src="/images/logos/opav-logo.svg"
                   alt="OPAV"
                   fill
                   className="object-contain"
