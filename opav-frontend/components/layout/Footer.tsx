@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -333,9 +334,15 @@ export default function Footer({ locale }: FooterProps) {
             {/* OPAV Info & Social */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 tracking-tight">
-                  OPAV SAS
-                </h3>
+                <div className="mb-4 sm:mb-6">
+                  <Image
+                    src="/images/logos/logoinv.svg"
+                    alt="OPAV SAS"
+                    width={200}
+                    height={60}
+                    className="h-12 sm:h-14 lg:h-16 w-auto"
+                  />
+                </div>
 
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {t("footerDesc")}
