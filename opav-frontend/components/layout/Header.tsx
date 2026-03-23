@@ -377,7 +377,7 @@ export default function Header({ locale }: HeaderProps) {
           </div>
 
           {/* Burger (izq) y acciones (der) — flex normal, sin logo aquí */}
-          <div className="flex items-center justify-between px-2 sm:px-3">
+          <div className="flex items-center justify-between px-4 sm:px-6">
             {/* Izquierda: Burger */}
             <button
               onClick={toggleMobileMenu}
