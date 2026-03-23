@@ -201,7 +201,7 @@ export async function getCasosExitoConUbicacion(locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      fields: ["nombre", "Slug", "ubicacion", "descripcion", "empresa"],
+      populate: "*",
       "pagination[pageSize]": 100,
     },
   }, REVALIDATE.static);
@@ -212,12 +212,7 @@ export async function getCasosExitoDestacados(locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      fields: ["nombre", "empresa", "ubicacion", "descripcion", "Slug"],
-      populate: {
-        imagenPrincipal: {
-          fields: ["url", "alternativeText"],
-        },
-      },
+      populate: "*",
       "filters[destacado][$eq]": true,
       "pagination[limit]": 6,
       sort: "createdAt:desc",
@@ -230,35 +225,7 @@ export async function getCasoExito(slug: string, locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: {
-        imagenPrincipal: {
-          fields: ["url", "formats", "alternativeText"],
-        },
-        galeria: {
-          on: {
-            "galeria.galeria-opav": {
-              populate: {
-                imagenesSecundarias: {
-                  fields: ["url", "formats", "alternativeText", "caption"],
-                },
-              },
-            },
-            "galeria.comparacion-antes-despues": {
-              populate: {
-                imagenAntes: {
-                  fields: ["url", "formats", "alternativeText"],
-                },
-                imagenDespues: {
-                  fields: ["url", "formats", "alternativeText"],
-                },
-              },
-            },
-          },
-        },
-        localizations: {
-          fields: ["locale", "Slug"],
-        },
-      },
+      populate: "*",
       "filters[Slug][$eq]": slug,
     },
   }, REVALIDATE.detail);
@@ -269,12 +236,7 @@ export async function getCasoExitoWithLocalizations(slug: string, locale: string
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      fields: ["documentId", "Slug"],
-      populate: {
-        localizations: {
-          fields: ["locale", "Slug"],
-        },
-      },
+      populate: "localizations",
       "filters[Slug][$eq]": slug,
     },
   }, REVALIDATE.detail);
