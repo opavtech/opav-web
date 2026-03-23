@@ -263,11 +263,11 @@ export default function Header({ locale }: HeaderProps) {
           </nav>
 
           {/* Footer del menú */}
-          <div className="p-6 border-t border-white/10 space-y-4">
+          <div className="p-4 border-t border-white/10 space-y-2">
             <LocalizedLink
               href="vacantes"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[#d50058] hover:bg-[#b30048] text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105"
+              className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-[#d50058] hover:bg-[#b30048] text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-105"
             >
               <svg
                 className="w-5 h-5"
@@ -287,7 +287,7 @@ export default function Header({ locale }: HeaderProps) {
 
             {/* Redes Sociales */}
             <div
-              className="flex items-center justify-center gap-4 py-2"
+              className="flex items-center justify-center gap-4 py-1"
               role="complementary"
               aria-label="Redes sociales"
             >
@@ -331,12 +331,12 @@ export default function Header({ locale }: HeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block text-center text-gray-400 text-sm hover:text-white transition-all py-2"
+              className="block text-center text-gray-400 text-sm hover:text-white transition-all py-1"
             >
               {t("privacy")}
             </a>
 
-            <div className="text-center text-gray-400 text-sm pt-2">
+            <div className="text-center text-gray-400 text-sm pt-1">
               © {new Date().getFullYear()} OPAV SAS
             </div>
           </div>

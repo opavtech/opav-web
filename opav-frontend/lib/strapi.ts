@@ -180,20 +180,9 @@ export async function getCasosExito(locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: {
-        imagenPrincipal: {
-          fields: ["url", "formats"],
-        },
-        galeria: {
-          fields: ["url", "formats"],
-        },
-        localizations: {
-          fields: ["locale", "Slug"],
-        },
-      },
+      populate: "*",
     },
   }, REVALIDATE.listing);
-
   return result || { data: [] };
 }
 
