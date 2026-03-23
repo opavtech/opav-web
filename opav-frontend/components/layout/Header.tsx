@@ -264,11 +264,6 @@ export default function Header({ locale }: HeaderProps) {
 
           {/* Footer del menú */}
           <div className="p-6 border-t border-white/10 space-y-4">
-            {/* Language Switcher */}
-            <div className="flex justify-center">
-              <LanguageSwitcher currentLocale={locale} />
-            </div>
-
             <LocalizedLink
               href="vacantes"
               onClick={() => setIsMobileMenuOpen(false)}
