@@ -24,9 +24,12 @@ export const metadata: Metadata = {
   description:
     "Empresa líder en gerencia inmobiliaria, facilities management y administración de activos en Colombia.",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/images/logos/opav-logo.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    shortcut: ["/favicon.ico"],
   },
   openGraph: {
     siteName: "OPAV SAS",
@@ -68,9 +71,10 @@ export default async function LocaleLayout({
     <html lang={locale} className={fontVariables} data-scroll-behavior="smooth">
       <head>
         {/* PWA and Favicon */}
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/images/logos/opav-logo.svg" />
         <meta name="theme-color" content="#d50058" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { STRAPI_URL, STRAPI_API_URL } from "./config";
+import { STRAPI_API_URL } from "./config";
 
 // Cache matrix por tipo de contenido
 const REVALIDATE = {
@@ -54,7 +54,7 @@ export async function fetchFromStrapi<T = any>(
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     const res = await fetch(url, {
       ...fetchOptions,
@@ -70,21 +70,24 @@ export async function fetchFromStrapi<T = any>(
 
     clearTimeout(timeoutId);
 
-    if (res.status === 404) return null;
+    if (res.status === 404) {
+      console.warn(`[Strapi] 404 on ${url}`);
+      return null;
+    }
 
     if (res.status === 403) {
-      console.error(`[Strapi] 403 Forbidden on ${path} — check Strapi permissions`);
+      console.error(`[Strapi] 403 on ${url} — check permissions`);
       return null;
     }
 
     if (!res.ok) {
-      console.error(`[Strapi] ${res.status} on ${path}`);
+      console.error(`[Strapi] ${res.status} on ${url}`);
       return null;
     }
 
     return (await res.json()) as T;
   } catch (error) {
-    console.error(`[Strapi] Network error on ${path}`, error);
+    console.error(`[Strapi] Network/timeout error on ${url}`, error);
     return null;
   }
 }
@@ -92,31 +95,22 @@ export async function fetchFromStrapi<T = any>(
 // Alias para compatibilidad con código existente
 export const fetchAPI = fetchFromStrapi;
 
-// Helper para obtener URL completa de imágenes con optimización
+// Helper para obtener URL completa de imágenes (Cloudinary — siempre URLs absolutas)
 export function getStrapiMedia(
   media: any,
   format?: "thumbnail" | "small" | "medium" | "large",
 ): string | null {
   if (!media) return null;
 
-  if (typeof media === "string") {
-    if (media.startsWith("http")) return media;
-    return `${STRAPI_URL}${media}`;
-  }
+  if (typeof media === "string") return media;
 
-  let url = null;
+  const url =
+    (format && media?.formats?.[format]?.url) ||
+    (format && media?.attributes?.formats?.[format]?.url) ||
+    media?.url ||
+    media?.attributes?.url;
 
-  if (format && media?.formats?.[format]?.url) {
-    url = media.formats[format].url;
-  } else if (format && media?.attributes?.formats?.[format]?.url) {
-    url = media.attributes.formats[format].url;
-  } else {
-    url = media?.url || media?.attributes?.url;
-  }
-
-  if (!url) return null;
-  if (url.startsWith("http")) return url;
-  return `${STRAPI_URL}${url}`;
+  return url || null;
 }
 
 // ============================================

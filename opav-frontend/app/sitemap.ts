@@ -54,7 +54,7 @@ async function safeFetch<T = unknown>(
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
 
-    const res = await fetch(url, { signal: controller.signal });
+    const res = await fetch(url, { signal: controller.signal, cache: "no-store" });
     clearTimeout(timer);
 
     if (!res.ok) {
