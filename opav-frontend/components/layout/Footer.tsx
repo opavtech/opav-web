@@ -493,22 +493,6 @@ export default function Footer({ locale }: FooterProps) {
                   </svg>
                   <span>Tel: +57 320 703 6539</span>
                 </li>
-                <li className="flex items-start text-gray-400">
-                  <svg
-                    className="w-5 h-5 mr-3 mt-0.5 text-[#d50058] flex-shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <span>ivan.espinosa@opavsas.com</span>
-                </li>
               </ul>
             </div>
           </div>
