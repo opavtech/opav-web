@@ -353,10 +353,10 @@ export default function Header({ locale }: HeaderProps) {
         }`}
       >
         <nav
-          className="max-w-7xl mx-auto py-3 sm:py-4 relative"
+          className="w-full py-3 sm:py-4 relative"
           aria-label="Navegación principal"
         >
-          {/* Logo centrado absolutamente respecto al nav — independiente de los laterales */}
+          {/* Logo centrado absolutamente respecto al header completo — independiente de los laterales */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <Link
               href={`/${locale}`}

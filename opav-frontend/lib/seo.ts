@@ -7,6 +7,14 @@
 import { BlogPost } from "@/types/blog";
 import type { Metadata } from "next";
 
+function resolveMediaUrl(url?: string | null, fallback?: string) {
+  if (!url) return fallback || null;
+  if (url.startsWith("http")) return url;
+  const strapiUrl =
+    process.env.NEXT_PUBLIC_STRAPI_URL || "https://cms.opavsas.com";
+  return `${strapiUrl}${url}`;
+}
+
 /**
  * Generate comprehensive JSON-LD structured data for blog posts
  */
@@ -20,9 +28,9 @@ export function generateBlogPostJsonLd(
 
   // Priorizar openGraphImage, sino imagenPrincipal
   const ogImage = post.openGraphImage || post.imagenPrincipal;
-  const imageUrl = ogImage?.url
-    ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${ogImage.url}`
-    : `${siteUrl}/images/og-vacantes.jpg`; // Fallback image
+  const imageUrl =
+    resolveMediaUrl(ogImage?.url, `${siteUrl}/images/og-vacantes.jpg`) ??
+    `${siteUrl}/images/og-vacantes.jpg`;
 
   // Type narrowing para acceder a propiedades opcionales
   const imageAlt =
@@ -60,9 +68,7 @@ export function generateBlogPostJsonLd(
               name: post.author.name,
               jobTitle: post.author.role,
               description: post.author.bio,
-              image: post.author.avatar?.url
-                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${post.author.avatar.url}`
-                : undefined,
+              image: resolveMediaUrl(post.author.avatar?.url) ?? undefined,
               sameAs: [
                 post.author.social_linkedin,
                 post.author.social_x,
@@ -162,9 +168,9 @@ export function generateBlogPostMetadata(
 
   // Priorizar openGraphImage para redes sociales, sino imagenPrincipal
   const ogImage = post.openGraphImage || post.imagenPrincipal;
-  const imageUrl = ogImage?.url
-    ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${ogImage.url}`
-    : `${siteUrl}/images/og-vacantes.jpg`;
+  const imageUrl =
+    resolveMediaUrl(ogImage?.url, `${siteUrl}/images/og-vacantes.jpg`) ??
+    `${siteUrl}/images/og-vacantes.jpg`;
 
   // Type narrowing
   const imageAlt =

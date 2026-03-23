@@ -86,7 +86,7 @@ export async function generateMetadata({
   return {
     title: isEs ? meta.titleEs : meta.titleEn,
     description: isEs ? meta.descEs : meta.descEn,
-    robots: { index: false, follow: false },
+    robots: { index: true, follow: true },
     alternates: {
       canonical: `${baseUrl}/${locale}/rfp/${brand}`,
     },
