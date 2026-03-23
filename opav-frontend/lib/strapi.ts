@@ -230,26 +230,30 @@ export async function getCasoExito(slug: string, locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      fields: [
-        "nombre",
-        "titulo",
-        "empresa",
-        "ubicacion",
-        "descripcion",
-        "metaDescription",
-        "keywords",
-        "cliente",
-        "Slug",
-        "publishedAt",
-        "updatedAt",
-        "createdAt",
-      ],
       populate: {
         imagenPrincipal: {
           fields: ["url", "formats", "alternativeText"],
         },
         galeria: {
-          populate: "*",
+          on: {
+            "galeria.galeria-opav": {
+              populate: {
+                imagenesSecundarias: {
+                  fields: ["url", "formats", "alternativeText", "caption"],
+                },
+              },
+            },
+            "galeria.comparacion-antes-despues": {
+              populate: {
+                imagenAntes: {
+                  fields: ["url", "formats", "alternativeText"],
+                },
+                imagenDespues: {
+                  fields: ["url", "formats", "alternativeText"],
+                },
+              },
+            },
+          },
         },
         localizations: {
           fields: ["locale", "Slug"],
