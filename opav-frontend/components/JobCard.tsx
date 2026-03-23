@@ -58,7 +58,7 @@ function JobCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-md overflow-hidden border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+      className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-md overflow-hidden border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col"
       aria-label={`${translations.viewDetails}: ${job.titulo}`}
     >
       {/* Header con badges flotantes */}
@@ -105,9 +105,9 @@ function JobCard({
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex-1">
         {/* Título destacado */}
-        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight line-clamp-2">
           {job.titulo}
         </h3>
 
@@ -286,7 +286,7 @@ function JobCard({
       </div>
 
       {/* Footer con botones de acción más prominentes */}
-      <div className="px-6 py-5 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200 flex items-center gap-3">
+      <div className="px-6 py-5 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200 flex items-center gap-3 mt-auto">
         <Link
           href={`/${locale}/vacantes/${job.slug}`}
           className="flex-1 inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-5 py-3.5 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-200 border-2 border-gray-300 hover:border-gray-400 group"
