@@ -9,7 +9,8 @@ function requireEnv(key: string, fallback: string): string {
   return value;
 }
 
-export const SITE_URL = requireEnv("NEXT_PUBLIC_SITE_URL", "http://localhost:3000");
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.opavsas.com";
 
 export const STRAPI_URL = requireEnv("NEXT_PUBLIC_STRAPI_URL", "http://localhost:1337");
 
