@@ -127,9 +127,24 @@ export async function getServicios(locale: string = "es") {
   const result = await fetchFromStrapi("/servicios", {
     params: {
       locale,
-      populate: "*",
+      fields: [
+        "nombre",
+        "descripcion",
+        "categoria",
+        "subServicios",
+        "beneficios",
+        "destacado",
+        "orden",
+      ],
+      populate: {
+        localizations: {
+          fields: ["locale", "nombre"],
+        },
+      },
+      sort: ["orden:asc"],
     },
   }, REVALIDATE.static);
+
   return result || { data: [] };
 }
 
@@ -165,9 +180,20 @@ export async function getCasosExito(locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "*",
+      populate: {
+        imagenPrincipal: {
+          fields: ["url", "formats"],
+        },
+        galeria: {
+          fields: ["url", "formats"],
+        },
+        localizations: {
+          fields: ["locale", "Slug"],
+        },
+      },
     },
   }, REVALIDATE.listing);
+
   return result || { data: [] };
 }
 
@@ -175,7 +201,7 @@ export async function getCasosExitoConUbicacion(locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "*",
+      fields: ["nombre", "Slug", "ubicacion", "descripcion", "empresa"],
       "pagination[pageSize]": 100,
     },
   }, REVALIDATE.static);
@@ -186,7 +212,12 @@ export async function getCasosExitoDestacados(locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "*",
+      fields: ["nombre", "empresa", "ubicacion", "descripcion", "Slug"],
+      populate: {
+        imagenPrincipal: {
+          fields: ["url", "alternativeText"],
+        },
+      },
       "filters[destacado][$eq]": true,
       "pagination[limit]": 6,
       sort: "createdAt:desc",
@@ -199,7 +230,31 @@ export async function getCasoExito(slug: string, locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "*",
+      fields: [
+        "nombre",
+        "titulo",
+        "empresa",
+        "ubicacion",
+        "descripcion",
+        "metaDescription",
+        "keywords",
+        "cliente",
+        "Slug",
+        "publishedAt",
+        "updatedAt",
+        "createdAt",
+      ],
+      populate: {
+        imagenPrincipal: {
+          fields: ["url", "formats", "alternativeText"],
+        },
+        galeria: {
+          populate: "*",
+        },
+        localizations: {
+          fields: ["locale", "Slug"],
+        },
+      },
       "filters[Slug][$eq]": slug,
     },
   }, REVALIDATE.detail);
@@ -210,7 +265,12 @@ export async function getCasoExitoWithLocalizations(slug: string, locale: string
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "localizations",
+      fields: ["documentId", "Slug"],
+      populate: {
+        localizations: {
+          fields: ["locale", "Slug"],
+        },
+      },
       "filters[Slug][$eq]": slug,
     },
   }, REVALIDATE.detail);
