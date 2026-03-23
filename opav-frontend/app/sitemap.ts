@@ -115,10 +115,10 @@ async function buildDynamicRoutes(): Promise<MetadataRoute.Sitemap> {
     // Fetch todos los endpoints en paralelo
     const [casosES, casosEN, blogES, blogEN] = await Promise.all([
       safeFetch<StrapiResponse>(
-        `${STRAPI_URL}/api/casos-de-exito?locale=es&pagination[limit]=100&fields[0]=Slug&fields[1]=updatedAt&fields[2]=documentId`
+        `${STRAPI_URL}/api/casos-exito?locale=es&pagination[limit]=100&fields[0]=Slug&fields[1]=updatedAt&fields[2]=documentId`
       ),
       safeFetch<StrapiResponse>(
-        `${STRAPI_URL}/api/casos-de-exito?locale=en&pagination[limit]=100&fields[0]=Slug&fields[1]=updatedAt&fields[2]=documentId`
+        `${STRAPI_URL}/api/casos-exito?locale=en&pagination[limit]=100&fields[0]=Slug&fields[1]=updatedAt&fields[2]=documentId`
       ),
       safeFetch<StrapiResponse>(
         `${STRAPI_URL}/api/blog-posts?locale=es&pagination[limit]=100&fields[0]=slug&fields[1]=updatedAt&fields[2]=fechaPublicacion&fields[3]=documentId`
