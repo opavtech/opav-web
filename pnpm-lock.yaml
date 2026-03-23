@@ -50,6 +50,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.7(@types/react@18.3.28)
+      cloudinary:
+        specifier: ^2.9.0
+        version: 2.9.0
       typescript:
         specifier: ^5
         version: 5.9.3
