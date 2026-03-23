@@ -175,16 +175,7 @@ export async function getCasosExitoConUbicacion(locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      "populate[imagenPrincipal][fields][0]": "url",
-      "populate[imagenPrincipal][fields][1]": "formats",
-      "populate[imagenPrincipal][fields][2]": "alternativeText",
-      "fields[0]": "titulo",
-      "fields[1]": "Slug",
-      "fields[2]": "cliente",
-      "fields[3]": "ciudad",
-      "fields[4]": "pais",
-      "fields[5]": "latitud",
-      "fields[6]": "longitud",
+      populate: "*",
       "pagination[pageSize]": 100,
     },
   }, REVALIDATE.static);
