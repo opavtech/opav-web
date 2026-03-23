@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const STRAPI_URL =
-  process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
-const STRAPI_API_URL =
-  process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337/api";
+import { STRAPI_URL, STRAPI_API_URL } from "./config";
 
-interface FetchOptions extends RequestInit {
-  params?: Record<string, any>;
-}
+// Cache matrix por tipo de contenido
+const REVALIDATE = {
+  navigation: 300,   // 5 min — home blocks, nav
+  listing: 300,      // 5 min — blog listing, casos, servicios
+  detail: 600,       // 10 min — blog detail, caso detail
+  static: 3600,      // 1 hora — certificaciones, páginas corporativas
+} as const;
 
 // Helper para convertir objetos anidados a query params de Strapi
 function buildStrapiQuery(params: Record<string, any>): string {
@@ -16,18 +17,14 @@ function buildStrapiQuery(params: Record<string, any>): string {
     Object.entries(obj).forEach(([key, value]) => {
       const fullKey = prefix ? `${prefix}[${key}]` : key;
 
-      if (value === null || value === undefined) {
-        return;
-      }
+      if (value === null || value === undefined) return;
 
       if (Array.isArray(value)) {
         value.forEach((item, index) => {
           if (typeof item === "object" && item !== null) {
             buildNestedQuery(item, `${fullKey}[${index}]`);
           } else {
-            queryParts.push(
-              `${fullKey}[${index}]=${encodeURIComponent(String(item))}`,
-            );
+            queryParts.push(`${fullKey}[${index}]=${encodeURIComponent(String(item))}`);
           }
         });
       } else if (typeof value === "object" && value !== null) {
@@ -42,48 +39,58 @@ function buildStrapiQuery(params: Record<string, any>): string {
   return queryParts.join("&");
 }
 
-export async function fetchAPI(path: string, options: FetchOptions = {}) {
-  const { params, ...fetchOptions } = options;
+interface FetchOptions extends RequestInit {
+  params?: Record<string, any>;
+}
 
-  // Construir query params con soporte para objetos anidados
+export async function fetchFromStrapi<T = any>(
+  path: string,
+  options: FetchOptions = {},
+  revalidate: number = REVALIDATE.listing,
+): Promise<T | null> {
+  const { params, ...fetchOptions } = options;
   const queryString = params ? buildStrapiQuery(params) : "";
   const url = `${STRAPI_API_URL}${path}${queryString ? `?${queryString}` : ""}`;
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
-    const response = await fetch(url, {
+    const res = await fetch(url, {
       ...fetchOptions,
       signal: controller.signal,
       headers: {
         "Content-Type": "application/json",
         ...fetchOptions.headers,
       },
-      // Revalidar cada 60 segundos en producción, sin caché en desarrollo
       next: {
-        revalidate: process.env.NODE_ENV === "development" ? 0 : 60,
+        revalidate: process.env.NODE_ENV === "development" ? 0 : revalidate,
       },
     });
 
     clearTimeout(timeoutId);
 
-    if (!response.ok) {
-      console.warn(`[Strapi] Error fetching ${path}: ${response.statusText}`);
+    if (res.status === 404) return null;
+
+    if (res.status === 403) {
+      console.error(`[Strapi] 403 Forbidden on ${path} — check Strapi permissions`);
       return null;
     }
 
-    return response.json();
-  } catch (error) {
-    // Durante build, CMS puede no estar disponible - retornar null en lugar de throw
-    if (process.env.NODE_ENV === "production" || process.env.NEXT_PHASE === "phase-production-build") {
-      console.warn(`[Strapi] CMS not available during build for ${path}, returning null`);
+    if (!res.ok) {
+      console.error(`[Strapi] ${res.status} on ${path}`);
       return null;
     }
-    console.error(`[Strapi] Error fetching ${path}:`, error);
+
+    return (await res.json()) as T;
+  } catch (error) {
+    console.error(`[Strapi] Network error on ${path}`, error);
     return null;
   }
 }
+
+// Alias para compatibilidad con código existente
+export const fetchAPI = fetchFromStrapi;
 
 // Helper para obtener URL completa de imágenes con optimización
 export function getStrapiMedia(
@@ -92,54 +99,54 @@ export function getStrapiMedia(
 ): string | null {
   if (!media) return null;
 
-  // Si es un string directo (URL)
   if (typeof media === "string") {
     if (media.startsWith("http")) return media;
     return `${STRAPI_URL}${media}`;
   }
 
-  // Si es un objeto de Strapi v4
   let url = null;
 
-  // Intentar usar formato optimizado si está disponible
   if (format && media?.formats?.[format]?.url) {
     url = media.formats[format].url;
   } else if (format && media?.attributes?.formats?.[format]?.url) {
     url = media.attributes.formats[format].url;
   } else {
-    // Fallback a URL original
     url = media?.url || media?.attributes?.url;
   }
 
   if (!url) return null;
-
   if (url.startsWith("http")) return url;
   return `${STRAPI_URL}${url}`;
 }
 
-// Funciones específicas
-export async function getInmuebles(locale: string = "es") {
-  const result = await fetchAPI("/inmuebles", {
-    params: {
-      locale,
-      populate: "*",
-    },
-  });
-  return result || { data: [] };
-}
+// ============================================
+// SERVICIOS
+// ============================================
 
 export async function getServicios(locale: string = "es") {
-  const result = await fetchAPI("/servicios", {
+  const result = await fetchFromStrapi("/servicios", {
     params: {
       locale,
-      populate: "*",
+      "populate[icono][fields][0]": "url",
+      "populate[icono][fields][1]": "alternativeText",
+      "populate[imagen][fields][0]": "url",
+      "populate[imagen][fields][1]": "formats",
+      "populate[imagen][fields][2]": "alternativeText",
+      "fields[0]": "titulo",
+      "fields[1]": "descripcion",
+      "fields[2]": "slug",
+      "fields[3]": "destacado",
     },
-  });
+  }, REVALIDATE.static);
   return result || { data: [] };
 }
 
+// ============================================
+// CERTIFICACIONES
+// ============================================
+
 export async function getCertificaciones(locale: string = "es") {
-  const result = await fetchAPI("/certificaciones", {
+  const result = await fetchFromStrapi("/certificaciones", {
     params: {
       locale,
       "populate[logo][fields][0]": "url",
@@ -154,130 +161,120 @@ export async function getCertificaciones(locale: string = "es") {
       "fields[6]": "destacado",
       "fields[7]": "queAporta",
     },
-    next: { revalidate: 3600 }, // Cache por 1 hora
-  });
+  }, REVALIDATE.static);
   return result || { data: [] };
 }
+
+// ============================================
+// CASOS DE ÉXITO
+// ============================================
 
 export async function getCasosExito(locale: string = "es") {
-  const result = await fetchAPI("/casos-exito", {
+  const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "*",
+      "populate[imagenPrincipal][fields][0]": "url",
+      "populate[imagenPrincipal][fields][1]": "formats",
+      "populate[imagenPrincipal][fields][2]": "alternativeText",
+      "fields[0]": "titulo",
+      "fields[1]": "Slug",
+      "fields[2]": "descripcionCorta",
+      "fields[3]": "cliente",
+      "fields[4]": "destacado",
+      "fields[5]": "ciudad",
+      "fields[6]": "pais",
     },
-    next: { revalidate: 1800 }, // Cache por 30 minutos
-  });
+  }, REVALIDATE.listing);
   return result || { data: [] };
 }
 
-// Obtener todos los casos de éxito con ubicación para el mapa
 export async function getCasosExitoConUbicacion(locale: string = "es") {
-  const result = await fetchAPI("/casos-exito", {
+  const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "imagenPrincipal",
+      "populate[imagenPrincipal][fields][0]": "url",
+      "populate[imagenPrincipal][fields][1]": "formats",
+      "populate[imagenPrincipal][fields][2]": "alternativeText",
+      "fields[0]": "titulo",
+      "fields[1]": "Slug",
+      "fields[2]": "cliente",
+      "fields[3]": "ciudad",
+      "fields[4]": "pais",
+      "fields[5]": "latitud",
+      "fields[6]": "longitud",
       "pagination[pageSize]": 100,
     },
-    next: { revalidate: 3600 }, // Cache por 1 hora
-  });
+  }, REVALIDATE.static);
   return result || { data: [] };
 }
 
 export async function getCasosExitoDestacados(locale: string = "es") {
-  const result = await fetchAPI("/casos-exito", {
+  const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "*",
+      "populate[imagenPrincipal][fields][0]": "url",
+      "populate[imagenPrincipal][fields][1]": "formats",
+      "populate[imagenPrincipal][fields][2]": "alternativeText",
+      "fields[0]": "titulo",
+      "fields[1]": "Slug",
+      "fields[2]": "descripcionCorta",
+      "fields[3]": "cliente",
+      "fields[4]": "ciudad",
       "filters[destacado][$eq]": true,
       "pagination[limit]": 6,
       sort: "createdAt:desc",
     },
-  });
+  }, REVALIDATE.listing);
   return result || { data: [] };
 }
 
 export async function getCasoExito(slug: string, locale: string = "es") {
-  const result = await fetchAPI("/casos-exito", {
+  const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "*",
+      "populate[imagenPrincipal][fields][0]": "url",
+      "populate[imagenPrincipal][fields][1]": "formats",
+      "populate[imagenPrincipal][fields][2]": "alternativeText",
+      "populate[galeria][fields][0]": "url",
+      "populate[galeria][fields][1]": "formats",
+      "populate[galeria][fields][2]": "alternativeText",
+      populate: ["localizations"],
       "filters[Slug][$eq]": slug,
     },
-  });
+  }, REVALIDATE.detail);
   return result || { data: [] };
 }
 
-// Obtener caso con sus localizaciones para cambio de idioma
-export async function getCasoExitoWithLocalizations(
-  slug: string,
-  locale: string = "es",
-) {
-  const result = await fetchAPI("/casos-exito", {
+export async function getCasoExitoWithLocalizations(slug: string, locale: string = "es") {
+  const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
       populate: "localizations",
       "filters[Slug][$eq]": slug,
     },
-  });
+  }, REVALIDATE.detail);
   return result || { data: [] };
 }
 
-// Obtener caso por documentId (fallback)
-export async function getCasoExitoByDocumentId(
-  documentId: string,
-  locale: string = "es",
-) {
-  const result = await fetchAPI("/casos-exito", {
+export async function getCasoExitoByDocumentId(documentId: string, locale: string = "es") {
+  const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      populate: "*",
+      "populate[imagenPrincipal][fields][0]": "url",
+      "populate[imagenPrincipal][fields][1]": "formats",
+      "populate[imagenPrincipal][fields][2]": "alternativeText",
       "filters[documentId][$eq]": documentId,
     },
-  });
+  }, REVALIDATE.detail);
   return result || { data: [] };
 }
 
-// Obtener vacante con sus localizaciones para cambio de idioma
-export async function getVacanteWithLocalizations(
-  slug: string,
-  locale: string = "es",
-) {
-  const result = await fetchAPI("/vacantes", {
-    params: {
-      locale,
-      populate: "localizations",
-      "filters[slug][$eq]": slug,
-    },
-  });
-  return result || { data: [] };
-}
+// ============================================
+// VACANTES
+// ============================================
 
-// Obtener vacante por documentId (fallback)
-export async function getVacanteByDocumentId(
-  documentId: string,
-  locale: string = "es",
-) {
-  const result = await fetchAPI("/vacantes", {
-    params: {
-      locale,
-      populate: "*",
-      "filters[documentId][$eq]": documentId,
-    },
-  });
-  return result || { data: [] };
-}
-
-export async function createFormLead(data: any) {
-  const result = await fetchAPI("/form-leads", {
-    method: "POST",
-    body: JSON.stringify({ data }),
-  });
-  return result || { data: null };
-}
-
-// Funciones para Vacantes
 export async function getVacantes(locale: string = "es") {
-  const result = await fetchAPI("/vacantes", {
+  const result = await fetchFromStrapi("/vacantes", {
     params: {
       locale,
       populate: "*",
@@ -286,12 +283,12 @@ export async function getVacantes(locale: string = "es") {
       "filters[publishedAt][$notNull]": true,
       sort: "createdAt:desc",
     },
-  });
+  }, REVALIDATE.listing);
   return result || { data: [] };
 }
 
 export async function getVacante(slug: string, locale: string = "es") {
-  const result = await fetchAPI("/vacantes", {
+  const result = await fetchFromStrapi("/vacantes", {
     params: {
       locale,
       populate: "*",
@@ -299,7 +296,29 @@ export async function getVacante(slug: string, locale: string = "es") {
       "filters[activa][$eq]": true,
       "filters[destacado][$eq]": true,
     },
-  });
+  }, REVALIDATE.detail);
+  return result || { data: [] };
+}
+
+export async function getVacanteWithLocalizations(slug: string, locale: string = "es") {
+  const result = await fetchFromStrapi("/vacantes", {
+    params: {
+      locale,
+      populate: "localizations",
+      "filters[slug][$eq]": slug,
+    },
+  }, REVALIDATE.detail);
+  return result || { data: [] };
+}
+
+export async function getVacanteByDocumentId(documentId: string, locale: string = "es") {
+  const result = await fetchFromStrapi("/vacantes", {
+    params: {
+      locale,
+      populate: "*",
+      "filters[documentId][$eq]": documentId,
+    },
+  }, REVALIDATE.detail);
   return result || { data: [] };
 }
 
@@ -313,19 +332,24 @@ export async function getCiudadesVacantes(locale: string = "es") {
 export async function getAreasVacantes(locale: string = "es") {
   const response = await getVacantes(locale);
   if (!response?.data) return [];
-  const areas = [
-    ...new Set(response.data.map((v: any) => v.area).filter(Boolean)),
-  ];
+  const areas = [...new Set(response.data.map((v: any) => v.area).filter(Boolean))];
   return areas.sort();
 }
 
+export async function createFormLead(data: any) {
+  const result = await fetchFromStrapi("/form-leads", {
+    method: "POST",
+    body: JSON.stringify({ data }),
+  });
+  return result || { data: null };
+}
+
 // ============================================
-// FUNCIONES DEL BLOG
+// BLOG
 // ============================================
 
-// Obtener posts destacados (featured) para el home
 export async function getBlogPostsDestacados(locale: string = "es") {
-  const result = await fetchAPI("/blog-posts", {
+  const result = await fetchFromStrapi("/blog-posts", {
     params: {
       locale,
       "filters[isFeatured][$eq]": true,
@@ -334,26 +358,20 @@ export async function getBlogPostsDestacados(locale: string = "es") {
       "pagination[limit]": 6,
       sort: "fechaPublicacion:desc",
     },
-  });
+  }, REVALIDATE.navigation);
   return result || { data: [] };
 }
 
-// Obtener todos los posts con paginación
 export async function getBlogPosts(
   locale: string = "es",
   page: number = 1,
   pageSize: number = 12,
   categorySlug?: string,
 ) {
-  const filters: any = {
-    "filters[publishedAt][$notNull]": true,
-  };
+  const filters: any = { "filters[publishedAt][$notNull]": true };
+  if (categorySlug) filters["filters[category][slug][$eq]"] = categorySlug;
 
-  if (categorySlug) {
-    filters["filters[category][slug][$eq]"] = categorySlug;
-  }
-
-  const result = await fetchAPI("/blog-posts", {
+  const result = await fetchFromStrapi("/blog-posts", {
     params: {
       locale,
       ...filters,
@@ -362,13 +380,12 @@ export async function getBlogPosts(
       "pagination[pageSize]": pageSize,
       sort: "fechaPublicacion:desc",
     },
-  });
+  }, REVALIDATE.listing);
   return result || { data: [] };
 }
 
-// Obtener un post por slug
 export async function getBlogPostBySlug(slug: string, locale: string = "es") {
-  const response = await fetchAPI("/blog-posts", {
+  const response = await fetchFromStrapi("/blog-posts", {
     params: {
       locale,
       "filters[slug][$eq]": slug,
@@ -383,19 +400,17 @@ export async function getBlogPostBySlug(slug: string, locale: string = "es") {
         "openGraphImage",
       ],
     },
-  });
-
+  }, REVALIDATE.detail);
   return response?.data?.[0] || null;
 }
 
-// Obtener posts relacionados (misma categoría, excluir el actual)
 export async function getRelatedBlogPosts(
   categoryId: number,
   currentPostId: number,
   locale: string = "es",
   limit: number = 3,
 ) {
-  const result = await fetchAPI("/blog-posts", {
+  const result = await fetchFromStrapi("/blog-posts", {
     params: {
       locale,
       "filters[category][id][$eq]": categoryId,
@@ -405,39 +420,31 @@ export async function getRelatedBlogPosts(
       "pagination[limit]": limit,
       sort: "fechaPublicacion:desc",
     },
-  });
+  }, REVALIDATE.listing);
   return result || { data: [] };
 }
 
-// Obtener todas las categorías
 export async function getBlogCategories(locale: string = "es") {
-  const result = await fetchAPI("/blog-categories", {
-    params: {
-      locale,
-      sort: "name:asc",
-    },
-  });
+  const result = await fetchFromStrapi("/blog-categories", {
+    params: { locale, sort: "name:asc" },
+  }, REVALIDATE.static);
   return result || { data: [] };
 }
 
-// Obtener todas las tags
 export async function getBlogTags() {
-  const result = await fetchAPI("/blog-tags", {
-    params: {
-      sort: "name:asc",
-    },
-  });
+  const result = await fetchFromStrapi("/blog-tags", {
+    params: { sort: "name:asc" },
+  }, REVALIDATE.static);
   return result || { data: [] };
 }
 
-// Obtener posts por tag
 export async function getBlogPostsByTag(
   tagSlug: string,
   locale: string = "es",
   page: number = 1,
   pageSize: number = 12,
 ) {
-  const result = await fetchAPI("/blog-posts", {
+  const result = await fetchFromStrapi("/blog-posts", {
     params: {
       locale,
       "filters[tags][slug][$eq]": tagSlug,
@@ -447,18 +454,17 @@ export async function getBlogPostsByTag(
       "pagination[pageSize]": pageSize,
       sort: "fechaPublicacion:desc",
     },
-  });
+  }, REVALIDATE.listing);
   return result || { data: [] };
 }
 
-// Obtener posts por autor
 export async function getBlogPostsByAuthor(
   authorId: number,
   locale: string = "es",
   page: number = 1,
   pageSize: number = 12,
 ) {
-  const result = await fetchAPI("/blog-posts", {
+  const result = await fetchFromStrapi("/blog-posts", {
     params: {
       locale,
       "filters[author][id][$eq]": authorId,
@@ -468,29 +474,24 @@ export async function getBlogPostsByAuthor(
       "pagination[pageSize]": pageSize,
       sort: "fechaPublicacion:desc",
     },
-  });
+  }, REVALIDATE.listing);
   return result || { data: [] };
 }
 
-// Obtener configuración del blog
 export async function getBlogSettings(locale: string = "es") {
-  const result = await fetchAPI("/blog-setting", {
-    params: {
-      locale,
-      populate: "defaultSeoImage",
-    },
-  });
+  const result = await fetchFromStrapi("/blog-setting", {
+    params: { locale, populate: "defaultSeoImage" },
+  }, REVALIDATE.static);
   return result || { data: null };
 }
 
-// Búsqueda de posts
 export async function searchBlogPosts(
   query: string,
   locale: string = "es",
   page: number = 1,
   pageSize: number = 12,
 ) {
-  const result = await fetchAPI("/blog-posts", {
+  const result = await fetchFromStrapi("/blog-posts", {
     params: {
       locale,
       "filters[$or][0][titulo][$containsi]": query,
@@ -501,6 +502,6 @@ export async function searchBlogPosts(
       "pagination[pageSize]": pageSize,
       sort: "fechaPublicacion:desc",
     },
-  });
+  }, REVALIDATE.listing);
   return result || { data: [] };
 }

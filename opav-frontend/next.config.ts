@@ -26,16 +26,15 @@ const nextConfig: NextConfig = {
         port: "1337",
         pathname: "/uploads/**",
       },
-      {
-        protocol: "https",
-        hostname: "opavsas.com",
-        pathname: "/uploads/**",
-      },
-      {
-        protocol: "https",
-        hostname: "opav-web-production.up.railway.app",
-        pathname: "/uploads/**",
-      },
+      ...(process.env.NEXT_PUBLIC_STRAPI_URL
+        ? [
+            {
+              protocol: "https" as const,
+              hostname: new URL(process.env.NEXT_PUBLIC_STRAPI_URL).hostname,
+              pathname: "/uploads/**",
+            },
+          ]
+        : []),
     ],
   },
   async redirects() {

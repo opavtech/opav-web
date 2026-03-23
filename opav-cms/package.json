@@ -18,6 +18,7 @@
     "@hubspot/api-client": "^13.4.0",
     "@strapi/plugin-cloud": "5.39.0",
     "@strapi/plugin-users-permissions": "5.39.0",
+    "@strapi/provider-upload-cloudinary": "^5.40.0",
     "@strapi/strapi": "5.39.0",
     "pg": "8.8.0",
     "react": "^18.0.0",
