@@ -83,7 +83,7 @@ export default function Header({ locale }: HeaderProps) {
           {/* Header del menú con logo - FONDO BLANCO */}
           <div className="bg-white p-6 border-b border-gray-200">
             <div className="flex items-center justify-between">
-              <Logo locale={locale} variant="sidebar" />
+              <Logo locale={locale} variant="full" />
               <button
                 onClick={toggleMobileMenu}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-all text-[#323e48]"
@@ -108,7 +108,7 @@ export default function Header({ locale }: HeaderProps) {
 
           {/* Links del menú */}
           <nav
-            className="flex-1 overflow-y-auto py-6 px-4"
+            className="flex-1 overflow-y-auto py-6 px-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20"
             aria-label="Navegación del sitio"
           >
             <div className="space-y-2">
@@ -116,7 +116,7 @@ export default function Header({ locale }: HeaderProps) {
                 href="company"
                 onClick={() => setIsMobileMenuOpen(false)}
                 aria-current={isActive("/compan") ? "page" : undefined}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/60 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
                   isActive("/compan")
                     ? "bg-[#d50058] text-white shadow-lg shadow-[#d50058]/30"
                     : "text-gray-300 hover:bg-white/5 hover:text-white"
@@ -142,7 +142,7 @@ export default function Header({ locale }: HeaderProps) {
                 href="services"
                 onClick={() => setIsMobileMenuOpen(false)}
                 aria-current={isActive("/servic") ? "page" : undefined}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/60 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
                   isActive("/servic")
                     ? "bg-[#d50058] text-white shadow-lg shadow-[#d50058]/30"
                     : "text-gray-300 hover:bg-white/5 hover:text-white"
@@ -172,7 +172,7 @@ export default function Header({ locale }: HeaderProps) {
                     ? "page"
                     : undefined
                 }
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/60 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
                   isActive("/cobertura") || isActive("/coverage")
                     ? "bg-[#d50058] text-white shadow-lg shadow-[#d50058]/30"
                     : "text-gray-300 hover:bg-white/5 hover:text-white"
@@ -208,7 +208,7 @@ export default function Header({ locale }: HeaderProps) {
                     ? "page"
                     : undefined
                 }
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/60 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
                   isActive("/casos-exito") || isActive("/success-cases")
                     ? "bg-[#d50058] text-white shadow-lg shadow-[#d50058]/30"
                     : "text-gray-300 hover:bg-white/5 hover:text-white"
@@ -238,7 +238,7 @@ export default function Header({ locale }: HeaderProps) {
                     ? "page"
                     : undefined
                 }
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d50058]/60 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
                   isActive("/proveedores") || isActive("/providers")
                     ? "bg-[#d50058] text-white shadow-lg shadow-[#d50058]/30"
                     : "text-gray-300 hover:bg-white/5 hover:text-white"
@@ -264,6 +264,11 @@ export default function Header({ locale }: HeaderProps) {
 
           {/* Footer del menú */}
           <div className="p-6 border-t border-white/10 space-y-4">
+            {/* Language Switcher */}
+            <div className="flex justify-center">
+              <LanguageSwitcher currentLocale={locale} />
+            </div>
+
             <LocalizedLink
               href="vacantes"
               onClick={() => setIsMobileMenuOpen(false)}
@@ -331,12 +336,12 @@ export default function Header({ locale }: HeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block text-center text-gray-400 text-xs hover:text-white transition-all py-2"
+              className="block text-center text-gray-400 text-sm hover:text-white transition-all py-2"
             >
               {t("privacy")}
             </a>
 
-            <div className="text-center text-gray-400 text-xs pt-2">
+            <div className="text-center text-gray-400 text-sm pt-2">
               © {new Date().getFullYear()} OPAV SAS
             </div>
           </div>
@@ -346,7 +351,7 @@ export default function Header({ locale }: HeaderProps) {
       {/* Header principal */}
       <header
         role="banner"
-        className={`sticky top-0 z-30 transition-all duration-300 ${
+        className={`sticky top-0 z-30 transition-all duration-300 px-4 sm:px-6 ${
           isScrolled
             ? "backdrop-blur-xl bg-white/80 shadow-lg"
             : "bg-white shadow-md"
@@ -377,7 +382,7 @@ export default function Header({ locale }: HeaderProps) {
           </div>
 
           {/* Burger (izq) y acciones (der) — flex normal, sin logo aquí */}
-          <div className="flex items-center justify-between px-4 sm:px-6">
+          <div className="flex items-center justify-between">
             {/* Izquierda: Burger */}
             <button
               onClick={toggleMobileMenu}
