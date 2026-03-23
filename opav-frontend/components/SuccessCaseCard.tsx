@@ -55,10 +55,11 @@ export default function SuccessCaseCard({
         ease: [0.25, 0.1, 0.25, 1],
       }}
       whileHover={{ y: -6 }}
+    className="h-full"
     >
-      <Link href={`/${locale}/casos-exito/${encodeURIComponent(caso.Slug)}`}>
+      <Link href={`/${locale}/casos-exito/${encodeURIComponent(caso.Slug)}`} className="h-full">
         <div
-          className="case-card group relative bg-white rounded-2xl overflow-hidden transition-all duration-300"
+          className="case-card group relative bg-white rounded-2xl overflow-hidden transition-all duration-300 flex flex-col h-full"
           style={{
             boxShadow: "0 4px 14px rgba(0,0,0,0.08)",
           }}
@@ -100,7 +101,7 @@ export default function SuccessCaseCard({
           </div>
 
           {/* Content Section */}
-          <div className="p-6 space-y-4">
+          <div className="p-6 space-y-4 flex-1 flex flex-col">
             {/* Badge Corporativo */}
             <span
               className="inline-block px-3 py-1 text-xs font-semibold rounded-full backdrop-blur-sm"

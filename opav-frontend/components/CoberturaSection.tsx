@@ -104,17 +104,26 @@ export default function CoberturaSection({
             : undefined,
       }));
 
+    // Normalize city names: trim whitespace and use lowercase key, but display the first seen casing
+    const cityKeyMap: Record<string, string> = {}; // normalizedKey -> displayName
     const grouped: GroupedCases = {};
     casosConUbicacion.forEach((caso) => {
-      const city = caso.ubicacion;
-      if (!grouped[city]) {
-        grouped[city] = { opav: [], bys: [] };
+      const rawCity = caso.ubicacion?.trim() ?? "";
+      const normalizedKey = rawCity.toLowerCase();
+      if (!cityKeyMap[normalizedKey]) {
+        cityKeyMap[normalizedKey] = rawCity;
+      }
+      const cityKey = cityKeyMap[normalizedKey];
+      // Normalize the caso's ubicacion to the canonical display name
+      caso.ubicacion = cityKey;
+      if (!grouped[cityKey]) {
+        grouped[cityKey] = { opav: [], bys: [] };
       }
 
       if (caso.empresa === "OPAV") {
-        grouped[city].opav.push(caso);
+        grouped[cityKey].opav.push(caso);
       } else {
-        grouped[city].bys.push(caso);
+        grouped[cityKey].bys.push(caso);
       }
     });
 
@@ -133,7 +142,7 @@ export default function CoberturaSection({
     );
   }, [casosConUbicacion, searchQuery]);
 
-  // Reagrupar casos filtrados
+  // Reagrupar casos filtrados (ubicacion already normalized by casosConUbicacion memo)
   const filteredGroupedCases = useMemo(() => {
     const grouped: GroupedCases = {};
     filteredCases.forEach((caso) => {
@@ -141,7 +150,6 @@ export default function CoberturaSection({
       if (!grouped[city]) {
         grouped[city] = { opav: [], bys: [] };
       }
-
       if (caso.empresa === "OPAV") {
         grouped[city].opav.push(caso);
       } else {
@@ -182,6 +190,7 @@ export default function CoberturaSection({
       locale === "es"
         ? "Haz clic en un punto del mapa para ver los proyectos"
         : "Click on a map point to view projects",
+    project: locale === "es" ? "proyecto" : "project",
     projects: locale === "es" ? "proyectos" : "projects",
     viewCase: locale === "es" ? "Ver caso" : "View case",
     statsCities: locale === "es" ? "Ciudades" : "Cities",

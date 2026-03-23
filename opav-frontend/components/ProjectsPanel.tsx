@@ -17,6 +17,7 @@ interface ProjectsPanelProps {
     filterAll: string;
     noCitySelected: string;
     selectCity: string;
+    project: string;
     projects: string;
     viewCase: string;
     totalArea: string;
@@ -166,7 +167,7 @@ export default function ProjectsPanel({
                           {city}
                         </div>
                         <div className="text-[10px] md:text-xs text-gray-600 font-['Inter']">
-                          {count} {count === 1 ? "proyecto" : "proyectos"}
+                          {count} {count === 1 ? translations.project : translations.projects}
                         </div>
                       </div>
                     );
