@@ -347,27 +347,6 @@ export default function CasosExitoGrid({
           </div>
         )}
 
-        {/* Load More Button */}
-        {filteredCases.length > 0 && (
-          <div className="mt-12 flex flex-col items-center space-y-8 lg:flex-row lg:justify-center lg:space-x-8 lg:space-y-0">
-            <button className="inline-flex cursor-pointer justify-center items-center gap-2 transition-all duration-300 focus:outline-none focus-visible:ring focus-visible:ring-[#d50058]/50 disabled:pointer-events-none disabled:opacity-30 bg-[#d50058] text-white focus:ring-4 active:bg-[#a0003d] hover:bg-[#ff1a6c] hover:shadow-lg hover:shadow-[#d50058]/25 w-60 p-4 rounded-full font-semibold min-h-[56px] font-['Inter'] group">
-              <span className="font-medium">{translations.loadMore}</span>
-              <svg
-                className="w-4 h-4 transition-transform group-hover:translate-y-0.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

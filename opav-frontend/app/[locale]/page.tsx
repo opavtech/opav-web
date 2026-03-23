@@ -240,7 +240,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 {/* CTA - visible sin scroll en mobile */}
                 <div>
                   <Link
-                    href={`/${locale}/rfp`}
+                    href={`/${locale}/rfp/opav`}
                     className="inline-block bg-[#d50058]/90 backdrop-blur-md text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold border border-[#d50058]/30 hover:bg-[#d50058] hover:border-[#d50058]/50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                     aria-label="Solicitar propuesta de servicios OPAV"
                   >
