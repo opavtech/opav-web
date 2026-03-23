@@ -73,7 +73,7 @@ export default function CorporateTestimonials({
   return (
     <div className="relative w-full max-w-4xl mx-auto">
       {/* Testimonial Cards */}
-      <div className="relative overflow-hidden min-h-[350px] flex items-center justify-center">
+      <div className="relative w-full flex items-center justify-center">
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={currentIndex}
@@ -88,11 +88,11 @@ export default function CorporateTestimonials({
               scale: { duration: 1.2 },
               z: { duration: 1.2 },
             }}
-            className="absolute w-full px-4"
+            className="w-full px-2 sm:px-4"
           >
             {/* Glassmorphism Card with subtle magenta accent */}
             <div
-              className="relative bg-white/80 backdrop-blur-md rounded-2xl p-10 md:p-14 transition-all duration-300"
+              className="relative bg-white/80 backdrop-blur-md rounded-2xl p-6 sm:p-10 md:p-14 transition-all duration-300"
               style={{
                 background:
                   "linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(249,250,251,0.6) 100%)",
@@ -101,30 +101,30 @@ export default function CorporateTestimonials({
               }}
             >
               {/* Initial Circle */}
-              <div className="flex justify-center mb-8">
-                <div className="w-16 h-16 rounded-full border-4 border-gray-300 flex items-center justify-center bg-white">
-                  <span className="text-xl font-bold text-gray-700 font-['Inter']">
+              <div className="flex justify-center mb-6">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border-4 border-gray-300 flex items-center justify-center bg-white">
+                  <span className="text-lg md:text-xl font-bold text-gray-700 font-['Inter']">
                     {getInitials(testimonials[currentIndex].name)}
                   </span>
                 </div>
               </div>
 
               {/* Quote */}
-              <blockquote className="relative mb-8">
-                <div className="absolute -top-4 -left-2 text-6xl text-gray-300 font-serif leading-none">
+              <blockquote className="relative mb-6">
+                <div className="text-4xl md:text-6xl text-gray-300 font-serif leading-none text-left mb-1">
                   &ldquo;
                 </div>
-                <p className="text-xl md:text-2xl text-gray-800 leading-relaxed text-center font-['Inter'] font-light relative z-10 px-4">
+                <p className="text-base sm:text-lg md:text-2xl text-gray-800 leading-relaxed text-center font-['Inter'] font-light">
                   {testimonials[currentIndex].quote}
                 </p>
-                <div className="absolute -bottom-8 -right-2 text-6xl text-gray-300 font-serif leading-none">
+                <div className="text-4xl md:text-6xl text-gray-300 font-serif leading-none text-right mt-1">
                   &rdquo;
                 </div>
               </blockquote>
 
               {/* Author Info */}
-              <div className="text-center mt-10">
-                <p className="text-lg font-semibold text-gray-900 font-['Inter']">
+              <div className="text-center mt-6">
+                <p className="text-base md:text-lg font-semibold text-gray-900 font-['Inter']">
                   {testimonials[currentIndex].name}
                 </p>
                 <p className="text-sm text-gray-600 font-['Inter'] mt-1">
