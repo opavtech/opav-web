@@ -65,8 +65,8 @@ exports/
 license.txt
 
 # Uploads (only in opav-cms)
-opav-cms/public/uploads/*
-!opav-cms/public/uploads/.gitkeep
+# opav-cms/public/uploads/*
+# !opav-cms/public/uploads/.gitkeep
 
 
 ############################

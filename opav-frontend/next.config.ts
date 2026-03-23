@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
         hostname: "opavsas.com",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "opav-web-production.up.railway.app",
+        pathname: "/uploads/**",
+      },
     ],
   },
   async redirects() {
