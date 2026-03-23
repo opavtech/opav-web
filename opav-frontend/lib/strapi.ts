@@ -127,15 +127,7 @@ export async function getServicios(locale: string = "es") {
   const result = await fetchFromStrapi("/servicios", {
     params: {
       locale,
-      "populate[icono][fields][0]": "url",
-      "populate[icono][fields][1]": "alternativeText",
-      "populate[imagen][fields][0]": "url",
-      "populate[imagen][fields][1]": "formats",
-      "populate[imagen][fields][2]": "alternativeText",
-      "fields[0]": "titulo",
-      "fields[1]": "descripcion",
-      "fields[2]": "slug",
-      "fields[3]": "destacado",
+      populate: "*",
     },
   }, REVALIDATE.static);
   return result || { data: [] };
@@ -203,14 +195,7 @@ export async function getCasosExitoDestacados(locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      "populate[imagenPrincipal][fields][0]": "url",
-      "populate[imagenPrincipal][fields][1]": "formats",
-      "populate[imagenPrincipal][fields][2]": "alternativeText",
-      "fields[0]": "titulo",
-      "fields[1]": "Slug",
-      "fields[2]": "descripcionCorta",
-      "fields[3]": "cliente",
-      "fields[4]": "ciudad",
+      populate: "*",
       "filters[destacado][$eq]": true,
       "pagination[limit]": 6,
       sort: "createdAt:desc",
@@ -223,13 +208,7 @@ export async function getCasoExito(slug: string, locale: string = "es") {
   const result = await fetchFromStrapi("/casos-exito", {
     params: {
       locale,
-      "populate[imagenPrincipal][fields][0]": "url",
-      "populate[imagenPrincipal][fields][1]": "formats",
-      "populate[imagenPrincipal][fields][2]": "alternativeText",
-      "populate[galeria][fields][0]": "url",
-      "populate[galeria][fields][1]": "formats",
-      "populate[galeria][fields][2]": "alternativeText",
-      populate: ["localizations"],
+      populate: "*",
       "filters[Slug][$eq]": slug,
     },
   }, REVALIDATE.detail);
