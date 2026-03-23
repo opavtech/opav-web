@@ -254,9 +254,7 @@ function generateStructuredData(
 export default async function CoberturaPage({ params }: CoberturaPageProps) {
   const { locale } = await params;
 
-  // Siempre obtener casos de éxito en español para garantizar todos los proyectos
-  // ya que algunos pueden no tener traducción al inglés
-  const response = await getCasosExitoConUbicacion("es");
+  const response = await getCasosExitoConUbicacion(locale);
   const rawCases: unknown[] = response.data || [];
   const cases = rawCases.map(normalizeCoberturaCase);
 
