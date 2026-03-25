@@ -10,9 +10,7 @@ import type { Metadata } from "next";
 function resolveMediaUrl(url?: string | null, fallback?: string) {
   if (!url) return fallback || null;
   if (url.startsWith("http")) return url;
-  const strapiUrl =
-    process.env.NEXT_PUBLIC_STRAPI_URL || "https://cms.opavsas.com";
-  return `${strapiUrl}${url}`;
+  return `${process.env.NEXT_PUBLIC_STRAPI_URL}${url}`;
 }
 
 /**
