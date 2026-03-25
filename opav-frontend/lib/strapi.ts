@@ -244,6 +244,7 @@ export async function getCasoExitoByDocumentId(documentId: string, locale: strin
 // ============================================
 
 export async function getVacantes(locale: string = "es") {
+  const hoy = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
   const result = await fetchFromStrapi("/vacantes", {
     params: {
       locale,
@@ -251,6 +252,8 @@ export async function getVacantes(locale: string = "es") {
       "filters[activa][$eq]": true,
       "filters[destacado][$eq]": true,
       "filters[publishedAt][$notNull]": true,
+      "filters[$or][0][fechaCierre][$gte]": hoy,
+      "filters[$or][1][fechaCierre][$null]": true,
       sort: "createdAt:desc",
     },
   }, REVALIDATE.listing);

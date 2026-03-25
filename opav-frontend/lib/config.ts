@@ -11,8 +11,8 @@ export const SITE_URL = requiredEnv(
 );
 
 export const STRAPI_URL = requiredEnv(
-  "NEXT_PUBLIC_STRAPI_URL",
+  "STRAPI_URL",
   "https://cms.opavsas.com"
 );
 export const STRAPI_API_URL =
-  process.env.NEXT_PUBLIC_STRAPI_API_URL?.trim() ?? `${STRAPI_URL}/api`;
+  process.env.STRAPI_API_URL_OVERRIDE?.trim() ?? `${STRAPI_URL}/api`;

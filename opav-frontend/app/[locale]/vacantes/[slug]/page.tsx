@@ -111,19 +111,15 @@ export default async function VacanteDetailPage({
     notFound();
   }
 
+  // Verificar si la vacante está vencida
+  const estaVencida = vacante.fechaCierre
+    ? new Date(vacante.fechaCierre) < new Date(new Date().toDateString())
+    : false;
+
   // Determinar el color según la empresa
   const isOPAV = vacante.empresa?.toLowerCase().includes("opav");
   const brandColor = isOPAV ? "#d50058" : "#5b6770";
   const brandName = isOPAV ? "OPAV" : "B&S Facilities";
-
-  // Formatear fechas
-  const closingDate = vacante.fechaCierre
-    ? new Date(vacante.fechaCierre).toLocaleDateString(locale, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : null;
 
   // Breadcrumb Schema
   const breadcrumbSchema = {
@@ -252,12 +248,30 @@ export default async function VacanteDetailPage({
 
               {/* Formulario de aplicación */}
               <div id="apply" className="scroll-mt-20">
-                <JobApplicationForm
-                  vacanteId={vacante.id}
-                  positionTitle={vacante.titulo}
-                  locale={locale}
-                  translations={formTranslations}
-                />
+                {estaVencida ? (
+                  <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 text-center">
+                    <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-700 mb-2">
+                      {locale === "es" ? "Esta vacante ya no está disponible" : "This position is no longer available"}
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      {locale === "es"
+                        ? "El período de postulación ha cerrado. Revisa nuestras otras oportunidades."
+                        : "The application period has closed. Check our other opportunities."}
+                    </p>
+                  </div>
+                ) : (
+                  <JobApplicationForm
+                    vacanteId={vacante.id}
+                    positionTitle={vacante.titulo}
+                    locale={locale}
+                    translations={formTranslations}
+                  />
+                )}
               </div>
             </div>
 

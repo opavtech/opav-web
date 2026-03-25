@@ -210,90 +210,114 @@ export default function OSMColombiaMap({
         <MapController selectedCity={selectedCity} />
 
         {/* Marcadores de ciudades */}
-        {Object.keys(groupedCases).map((city) => {
+        {Object.keys(groupedCases).flatMap((city) => {
           const coords = colombiaCities[city as CityName];
-          if (!coords) return null;
+          if (!coords) return [];
 
           const cityData = groupedCases[city];
           const hasOPAV = cityData.opav.length > 0;
           const hasBYS = cityData.bys.length > 0;
-          const count = getCityCount(city);
-          const projects = getCityProjects(city);
-
-          // Filtrar según empresa seleccionada
-          if (selectedCompany === "OPAV" && !hasOPAV) return null;
-          if (selectedCompany === "B&S" && !hasBYS) return null;
-          if (count === 0) return null;
-
-          const color = getCityColor(city);
           const isSelected = selectedCity === city;
 
-          return (
+          // Filtrar según empresa seleccionada
+          if (selectedCompany === "OPAV" && !hasOPAV) return [];
+          if (selectedCompany === "B&S" && !hasBYS) return [];
+
+          const renderPopup = (projects: CasoExitoLocation[], label: string) => (
+            <Popup className="custom-popup" maxWidth={300}>
+              <div className="p-2">
+                <h3 className="font-bold text-lg mb-3 text-slate-900">
+                  {city} — {label}
+                </h3>
+                <div className="space-y-2 max-h-60 overflow-y-auto">
+                  {projects.slice(0, 3).map((project) => (
+                    <Link
+                      key={project.id}
+                      href={`/${locale}/casos-exito/${project.slug}`}
+                      className="block group"
+                    >
+                      <div className="flex gap-2 items-start p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                        {project.imagenPrincipal && (
+                          <div className="relative w-16 h-16 flex-shrink-0 rounded overflow-hidden">
+                            <Image
+                              src={
+                                getStrapiMedia(
+                                  project.imagenPrincipal,
+                                  "thumbnail",
+                                ) || "/placeholder.jpg"
+                              }
+                              alt={project.nombre}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <div className="font-semibold text-sm text-slate-900 group-hover:text-[#E91E63] transition-colors line-clamp-2">
+                            {project.nombre}
+                          </div>
+                          <div
+                            className={`text-xs mt-1 font-medium ${
+                              project.empresa === "OPAV"
+                                ? "text-[#E91E63]"
+                                : "text-[#00BCD4]"
+                            }`}
+                          >
+                            {project.empresa}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                  {projects.length > 3 && (
+                    <div className="text-xs text-slate-600 text-center pt-2 border-t">
+                      +{projects.length - 3} proyectos más
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Popup>
+          );
+
+          // Si hay ambas empresas en modo "all", mostrar dos marcadores separados
+          if (selectedCompany === "all" && hasOPAV && hasBYS) {
+            const offset = 0.015;
+            return [
+              <Marker
+                key={`${city}-opav`}
+                position={[coords.lat, coords.lng - offset]}
+                icon={createCustomIcon("#E91E63", cityData.opav.length, isSelected)}
+                eventHandlers={{ click: () => onCitySelect(isSelected ? null : city) }}
+              >
+                {renderPopup(cityData.opav, "OPAV")}
+              </Marker>,
+              <Marker
+                key={`${city}-bys`}
+                position={[coords.lat, coords.lng + offset]}
+                icon={createCustomIcon("#00BCD4", cityData.bys.length, isSelected)}
+                eventHandlers={{ click: () => onCitySelect(isSelected ? null : city) }}
+              >
+                {renderPopup(cityData.bys, "B&S")}
+              </Marker>,
+            ];
+          }
+
+          // Marcador único (filtro por empresa o ciudad con solo una empresa)
+          const projects = getCityProjects(city);
+          const count = getCityCount(city);
+          const color = getCityColor(city);
+          const label = selectedCompany === "B&S" ? "B&S" : "OPAV";
+
+          return [
             <Marker
               key={city}
               position={[coords.lat, coords.lng]}
               icon={createCustomIcon(color, count, isSelected)}
-              eventHandlers={{
-                click: () => {
-                  onCitySelect(isSelected ? null : city);
-                },
-              }}
+              eventHandlers={{ click: () => onCitySelect(isSelected ? null : city) }}
             >
-              <Popup className="custom-popup" maxWidth={300}>
-                <div className="p-2">
-                  <h3 className="font-bold text-lg mb-3 text-slate-900">
-                    {city}
-                  </h3>
-                  <div className="space-y-2 max-h-60 overflow-y-auto">
-                    {projects.slice(0, 3).map((project) => (
-                      <Link
-                        key={project.id}
-                        href={`/${locale}/casos-exito/${project.slug}`}
-                        className="block group"
-                      >
-                        <div className="flex gap-2 items-start p-2 hover:bg-slate-100 rounded-lg transition-colors">
-                          {project.imagenPrincipal && (
-                            <div className="relative w-16 h-16 flex-shrink-0 rounded overflow-hidden">
-                              <Image
-                                src={
-                                  getStrapiMedia(
-                                    project.imagenPrincipal,
-                                    "thumbnail",
-                                  ) || "/placeholder.jpg"
-                                }
-                                alt={project.nombre}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          )}
-                          <div className="flex-1 min-w-0">
-                            <div className="font-semibold text-sm text-slate-900 group-hover:text-[#E91E63] transition-colors line-clamp-2">
-                              {project.nombre}
-                            </div>
-                            <div
-                              className={`text-xs mt-1 font-medium ${
-                                project.empresa === "OPAV"
-                                  ? "text-[#E91E63]"
-                                  : "text-[#00BCD4]"
-                              }`}
-                            >
-                              {project.empresa}
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                    {projects.length > 3 && (
-                      <div className="text-xs text-slate-600 text-center pt-2 border-t">
-                        +{projects.length - 3} proyectos más
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Popup>
-            </Marker>
-          );
+              {renderPopup(projects, label)}
+            </Marker>,
+          ];
         })}
       </MapContainer>
 
