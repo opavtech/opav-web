@@ -21,7 +21,6 @@ const STATIC_PAGES: Record<string, Record<string, string>> = {
   certificaciones:  { es: "certificaciones",  en: "certifications" },
   proveedores:      { es: "proveedores",      en: "providers" },
   "casos-exito":    { es: "casos-exito",      en: "success-cases" },
-  blog:             { es: "blog",             en: "blog" },
   vacantes:         { es: "vacantes",         en: "jobs" },
   // RFP — misma ruta en ambos idiomas
   "rfp/opav":       { es: "rfp/opav",         en: "rfp/opav" },
