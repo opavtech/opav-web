@@ -240,7 +240,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 {/* CTA - visible sin scroll en mobile */}
                 <div>
                   <Link
-                    href={`/${locale}/rfp/opav`}
+                    href={getLocalizedPath("contact", locale as "es" | "en")}
                     className="inline-block bg-[#d50058]/90 backdrop-blur-md text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold border border-[#d50058]/30 hover:bg-[#d50058] hover:border-[#d50058]/50 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                     aria-label="Solicitar propuesta de servicios OPAV"
                   >
@@ -412,10 +412,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Link
-                        href={getLocalizedPath(
-                          "contact",
-                          locale as "es" | "en",
-                        )}
+                        href={`/${locale}/rfp/opav`}
                         className="inline-flex items-center justify-center px-8 py-4 rounded-lg font-bold hover:scale-105 transition-all duration-300 font-['Inter'] text-center"
                         style={{
                           backgroundColor: "#d50058",
@@ -540,10 +537,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Link
-                        href={getLocalizedPath(
-                          "contact",
-                          locale as "es" | "en",
-                        )}
+                        href={`/${locale}/rfp/bs`}
                         className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-900 hover:scale-105 hover:shadow-lg transition-all duration-300 font-['Inter'] text-center"
                       >
                         {t("company.requestQuote")}
