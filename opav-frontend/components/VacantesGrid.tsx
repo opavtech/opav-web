@@ -67,7 +67,16 @@ export default function VacantesGrid({
   }, [vacantes]);
 
   const filteredVacantes = useMemo(() => {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
     return vacantes.filter((job) => {
+      // Excluir vencidas (segunda línea de defensa, por si ISR sirve datos viejos)
+      if (job.fechaCierre) {
+        const cierre = new Date(job.fechaCierre);
+        cierre.setHours(0, 0, 0, 0);
+        if (cierre < hoy) return false;
+      }
       if (debouncedSearchQuery.trim()) {
         const searchLower = debouncedSearchQuery.toLowerCase();
         const matchesTitle = job.titulo?.toLowerCase().includes(searchLower);

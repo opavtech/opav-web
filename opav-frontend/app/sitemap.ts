@@ -8,7 +8,7 @@ const BASE_URL = (
   .replace(/\/+$/, "")        // quitar trailing slashes
   .replace(/\/(es|en)$/, ""); // quitar locale si viene en la URL base
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+const STRAPI_URL = process.env.STRAPI_URL;
 
 const LOCALES = ["es", "en"] as const;
 

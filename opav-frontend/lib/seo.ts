@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 function resolveMediaUrl(url?: string | null, fallback?: string) {
   if (!url) return fallback || null;
   if (url.startsWith("http")) return url;
-  return `${process.env.NEXT_PUBLIC_STRAPI_URL}${url}`;
+  return `${process.env.STRAPI_URL}${url}`;
 }
 
 /**

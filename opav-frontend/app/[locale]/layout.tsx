@@ -88,10 +88,10 @@ export default async function LocaleLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        {process.env.NEXT_PUBLIC_STRAPI_URL && (
+        {process.env.STRAPI_URL && (
           <>
-            <link rel="preconnect" href={process.env.NEXT_PUBLIC_STRAPI_URL} />
-            <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_STRAPI_URL} />
+            <link rel="preconnect" href={process.env.STRAPI_URL} />
+            <link rel="dns-prefetch" href={process.env.STRAPI_URL} />
           </>
         )}
       </head>

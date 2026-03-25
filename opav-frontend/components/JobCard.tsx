@@ -52,6 +52,14 @@ function JobCard({
       })
     : null;
 
+  const diasRestantes = job.fechaCierre
+    ? Math.ceil(
+        (new Date(job.fechaCierre).setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0)) /
+          (1000 * 60 * 60 * 24)
+      )
+    : null;
+  const cierraPronto = diasRestantes !== null && diasRestantes <= 7;
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -82,6 +90,19 @@ function JobCard({
             </svg>
             {brandName}
           </span>
+
+          {cierraPronto && (
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold bg-amber-400 text-amber-900 shadow-lg">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+              </svg>
+              {diasRestantes === 0
+                ? (locale === "es" ? "Cierra hoy" : "Closes today")
+                : locale === "es"
+                ? `Cierra en ${diasRestantes}d`
+                : `Closes in ${diasRestantes}d`}
+            </span>
+          )}
 
           {job.tipoContrato && (
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold bg-white/20 backdrop-blur-md text-white border border-white/30">
