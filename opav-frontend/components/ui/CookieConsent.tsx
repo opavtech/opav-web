@@ -9,13 +9,14 @@ interface CookiePreferences {
   marketing: boolean;
 }
 
-interface CookieConsentProps {
-  locale: string;
-}
-
-export default function CookieConsent({ locale }: CookieConsentProps) {
+export default function CookieConsent() {
   const t = useTranslations('cookies');
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const [activeTab, setActiveTab] = useState<'categories' | 'services'>('categories');
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
 
@@ -76,7 +77,7 @@ export default function CookieConsent({ locale }: CookieConsentProps) {
     }));
   };
 
-  if (!isOpen) return null;
+  if (!mounted || !isOpen) return null;
 
   return (
     <>
