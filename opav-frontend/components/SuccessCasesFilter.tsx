@@ -63,6 +63,7 @@ export default function SuccessCasesFilter({
             style={{
               width: "calc(50% - 2px)",
               left: 2,
+              backgroundColor: activeFilter === "OPAV" ? "#d50058" : "#00acc8",
             }}
           />
 
