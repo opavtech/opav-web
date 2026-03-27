@@ -124,7 +124,7 @@ export default function ProjectsPanel({
             aria-pressed={selectedCompany === "OPAV"}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all font-['Inter'] transform-gpu duration-200 ease-out hover:scale-[1.02] active:scale-[0.98] ${
               selectedCompany === "OPAV"
-                ? "bg-primary-600 text-white shadow-sm"
+                ? "bg-[#d50058] text-white shadow-sm"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
