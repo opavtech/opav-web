@@ -131,6 +131,17 @@
     "isFeatured": {
       "type": "boolean",
       "default": false
+    },
+    "parrafoIntroductorio": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "puntosClaves": {
+      "type": "json"
     }
   }
 }
