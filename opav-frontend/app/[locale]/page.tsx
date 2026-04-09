@@ -443,7 +443,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
                   <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden">
                     <Image
-                      src="/images/company/opav-showcase.jpg"
+                      src="https://res.cloudinary.com/deyzoekgz/image/upload/v1775768747/43773f03-99d3-443b-ba8b-bca6e58534b8_nym9sw.jpg"
                       alt="OPAV - Administración de Propiedades"
                       fill
                       loading="lazy"
