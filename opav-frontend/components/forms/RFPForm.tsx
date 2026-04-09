@@ -18,7 +18,6 @@ interface FormData {
   email: string;
   city: string;
   projectDescription: string;
-  estimatedBudget: string;
   hasCurrentOperator: "" | "yes" | "no";
   attachment: File | null;
   privacyConsent: boolean;
@@ -26,23 +25,6 @@ interface FormData {
   website: string;
 }
 
-const BUDGET_OPTIONS_ES = [
-  "Menos de $10M COP/mes",
-  "$10M - $30M COP/mes",
-  "$30M - $60M COP/mes",
-  "$60M - $100M COP/mes",
-  "Más de $100M COP/mes",
-  "Por definir",
-];
-
-const BUDGET_OPTIONS_EN = [
-  "Less than $10M COP/month",
-  "$10M - $30M COP/month",
-  "$30M - $60M COP/month",
-  "$60M - $100M COP/month",
-  "More than $100M COP/month",
-  "To be defined",
-];
 
 const BRAND_CONFIG = {
   opav: {
@@ -80,7 +62,6 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
     email: "",
     city: "",
     projectDescription: "",
-    estimatedBudget: "",
     hasCurrentOperator: "",
     attachment: null,
     privacyConsent: false,
@@ -113,8 +94,6 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
     projectDescriptionPlaceholder: isEs
       ? "Cuéntenos sobre su proyecto: tipo de inmueble, área aproximada, servicios que requiere..."
       : "Tell us about your project: property type, approximate area, services required...",
-    estimatedBudget: isEs ? "Presupuesto estimado" : "Estimated budget",
-    estimatedBudgetPlaceholder: isEs ? "Seleccione un rango" : "Select a range",
     hasCurrentOperator: isEs ? "¿Cuenta con operador actual?" : "Do you have a current operator?",
     yes: isEs ? "Sí" : "Yes",
     no: isEs ? "No" : "No",
@@ -142,7 +121,6 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
       ? "Hubo un error al enviar la solicitud. Por favor intente nuevamente."
       : "There was an error submitting the request. Please try again.",
     optional: isEs ? "Opcional" : "Optional",
-    budgetOptions: isEs ? BUDGET_OPTIONS_ES : BUDGET_OPTIONS_EN,
   };
 
   const validateForm = (): boolean => {
@@ -232,7 +210,6 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
         email: formData.email,
         city: formData.city,
         projectDescription: formData.projectDescription,
-        estimatedBudget: formData.estimatedBudget || null,
         hasCurrentOperator: formData.hasCurrentOperator || null,
         attachmentUrl,
         brand,
@@ -266,7 +243,6 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
         email: "",
         city: "",
         projectDescription: "",
-        estimatedBudget: "",
         hasCurrentOperator: "",
         attachment: null,
         privacyConsent: false,
@@ -412,8 +388,8 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
           </div>
         </div>
 
-        {/* Fila 3: Ciudad + Presupuesto */}
-        <div className="grid md:grid-cols-2 gap-5">
+        {/* Fila 3: Ciudad */}
+        <div>
           <div>
             <label htmlFor="rfp-city" className="block text-sm font-semibold text-gray-700 mb-1.5">
               {t.city} <span className="text-red-500">*</span>
@@ -427,23 +403,6 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
               placeholder={t.cityPlaceholder}
             />
             {errors.city && <p className="mt-1 text-sm text-red-600">{errors.city}</p>}
-          </div>
-          <div>
-            <label htmlFor="rfp-budget" className="block text-sm font-semibold text-gray-700 mb-1.5">
-              {t.estimatedBudget}{" "}
-              <span className="text-gray-400 font-normal">({t.optional})</span>
-            </label>
-            <select
-              id="rfp-budget"
-              value={formData.estimatedBudget}
-              onChange={(e) => setFormData((prev) => ({ ...prev, estimatedBudget: e.target.value }))}
-              className={`w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 ${cfg.ring} focus:border-transparent transition bg-white text-gray-700`}
-            >
-              <option value="">{t.estimatedBudgetPlaceholder}</option>
-              {t.budgetOptions.map((opt) => (
-                <option key={opt} value={opt}>{opt}</option>
-              ))}
-            </select>
           </div>
         </div>
 

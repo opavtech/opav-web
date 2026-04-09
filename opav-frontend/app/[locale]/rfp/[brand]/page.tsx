@@ -30,12 +30,12 @@ const BRAND_META = {
     taglineEn: "Property Management",
     featuresEs: [
       "Gerencia de edificios corporativos",
-      "Administración de conjuntos y centros comerciales",
+      "Administración de edificios corporativos, centros comerciales y parques industriales",
       "Asesoría y gestión inmobiliaria",
     ],
     featuresEn: [
       "Corporate building management",
-      "Residential complex and mall administration",
+      "Corporate building, shopping mall and industrial park administration",
       "Real estate consulting and management",
     ],
   },
