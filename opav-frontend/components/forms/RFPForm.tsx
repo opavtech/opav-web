@@ -336,7 +336,7 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
               value={formData.fullName}
               onChange={(e) => setFormData((prev) => ({ ...prev, fullName: e.target.value }))}
               className={inputClass("fullName")}
-              placeholder={t.fullNamePlaceholder}
+              placeholder=""
             />
             {errors.fullName && <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>}
           </div>
@@ -350,7 +350,7 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
               value={formData.company}
               onChange={(e) => setFormData((prev) => ({ ...prev, company: e.target.value }))}
               className={inputClass("company")}
-              placeholder={t.companyPlaceholder}
+              placeholder=""
             />
             {errors.company && <p className="mt-1 text-sm text-red-600">{errors.company}</p>}
           </div>
@@ -368,7 +368,7 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
               value={formData.phone}
               onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
               className={inputClass("phone")}
-              placeholder={t.phonePlaceholder}
+              placeholder=""
             />
             {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
           </div>
@@ -382,7 +382,7 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
               value={formData.email}
               onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
               className={inputClass("email")}
-              placeholder={t.emailPlaceholder}
+              placeholder=""
             />
             {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
           </div>
@@ -400,7 +400,7 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
               value={formData.city}
               onChange={(e) => setFormData((prev) => ({ ...prev, city: e.target.value }))}
               className={inputClass("city")}
-              placeholder={t.cityPlaceholder}
+              placeholder=""
             />
             {errors.city && <p className="mt-1 text-sm text-red-600">{errors.city}</p>}
           </div>
@@ -449,7 +449,7 @@ export default function RFPForm({ locale, brand }: RFPFormProps) {
             onChange={(e) => setFormData((prev) => ({ ...prev, projectDescription: e.target.value }))}
             rows={5}
             className={`${inputClass("projectDescription")} resize-none`}
-            placeholder={t.projectDescriptionPlaceholder}
+            placeholder=""
           />
           {errors.projectDescription && (
             <p className="mt-1 text-sm text-red-600">{errors.projectDescription}</p>
