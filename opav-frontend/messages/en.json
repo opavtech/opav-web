@@ -27,28 +27,28 @@
   "home": {
     "metadata": {
       "title": "OPAV SAS | Property Management & Facilities Management Colombia",
-      "description": "Colombia's leading property management and facilities management company. 8 years of experience, ISO 9001:2015 certification in progress, +210,000 m² managed. Specialized OPAV & B&S Facilities solutions for corporate buildings, shopping malls, and real estate complexes.",
-      "keywords": "property management Colombia, property management Bogotá, facilities management Colombia, corporate building administration, commercial real estate management, shopping mall management, preventive building maintenance, ISO 9001 property management, outsourcing facilities Colombia, operational property services, OPAV, B&S Facilities, building management Medellín, property services Barranquilla",
+      "description": "Colombia's leading property management and facilities management company. 8 years of experience, ISO 9001-2015 certification in progress, +210,450 m² managed. Specialized OPAV & B&S Facilities solutions for corporate buildings, shopping malls, and real estate complexes.",
+      "keywords": "property management Colombia, property management Bogotá, facilities management Colombia, corporate building administration, commercial real estate management, shopping mall management, preventive building maintenance, ISO 9001-2015 property management, outsourcing facilities Colombia, operational property services, OPAV, B&S Facilities, building management Medellín, property services Barranquilla",
       "ogTitle": "OPAV SAS | Professional Property Management in Colombia",
-      "ogDescription": "Comprehensive property management and facilities management for corporate buildings and shopping malls. 8 years experience | ISO 9001:2015 in progress | +210,000 m² managed.",
+      "ogDescription": "Comprehensive property management and facilities management for corporate buildings and shopping malls. 8 years experience | ISO 9001-2015 in progress | +210,450 m² managed.",
       "twitterTitle": "OPAV SAS | Property & Facilities Management Colombia",
-      "twitterDescription": "Colombia's leading property management company. 8 years experience | ISO 9001:2015 in progress | +210,000 m² managed | Corporate & Commercial"
+      "twitterDescription": "Colombia's leading property management company. 8 years experience | ISO 9001-2015 in progress | +210,450 m² managed | Corporate & Commercial"
     },
     "hero": {
-      "title": "Comprehensive Property Management",
-      "subtitle": "Professional solutions in administration and facilities management with 8 years of experience",
+      "title": "Comprehensive Management in Corporate Real Estate Administration",
+      "subtitle": "Professional solutions in corporate real estate administration and facilities management, with over 8 years of experience",
       "cta": "Request Proposal",
       "metric1": "Years of Experience",
       "metric2": "Successful Projects",
       "metric3": "m² Managed",
-      "isoTitle": "ISO 9001 Certification",
+      "isoTitle": "ISO 9001-2015 Certification",
       "isoBadge": "In Progress 2026",
-      "isoDescription": "Certification in progress for 2026. We guarantee the highest quality standards in all our services and processes",
+      "isoDescription": "In the process of obtaining the certification for the year 2026, guaranteeing high quality standards in our services and processes.",
       "isoLink": "View Certificate →"
     },
     "company": {
       "title": "Our Companies",
-      "intro": "Two specialized brands working in synergy to offer comprehensive solutions in property management and facilities management",
+      "intro": "Two specialized brands, working in an integrated manner to offer solutions in corporate condominium administration services and facilities management",
       "learnMore": "Learn More",
       "knowMore": "Learn More",
       "requestConsultation": "Request Consultation",
@@ -61,16 +61,16 @@
         "badge3": "Real Estate Advisory"
       },
       "bs": {
-        "subtitle1": "Facilities Management Specialists",
-        "subtitle2": "Maintenance and general services of excellence",
+        "subtitle1": "Facilities management specialists",
+        "subtitle2": "Management, maintenance, integral security, infrastructure general services",
         "badge1": "Preventive Maintenance",
         "badge2": "General Services",
         "badge3": "Vendor Management"
       }
     },
     "certification": {
-      "title": "ISO 9001:2015 Certification",
-      "description": "We are in the process of obtaining ISO 9001 certification for 2026, which will guarantee that all our processes meet the highest international standards of quality, continuous improvement and customer satisfaction.",
+      "title": "ISO 9001-2015 Certification",
+      "description": "We are in the process of obtaining ISO 9001-2015 certification for the year 2026, which will guarantee that all our processes meet the highest international standards of quality, continuous improvement and customer satisfaction.",
       "viewDetails": "View Certification Details",
       "benefit1": "International quality standards",
       "benefit2": "Continuous process improvement",
@@ -137,15 +137,15 @@
   "company": {
     "seo": {
       "title": "About OPAV & B&S – Corporate Property and Facilities Management",
-      "description": "Learn about OPAV and B&S Facilities. 8 years of experience in corporate property management and facilities management in Colombia. ISO 9001:2015 certification in progress.",
-      "keywords": "OPAV, B&S Facilities, property management, facilities management, ISO 9001, corporate management, Colombia",
+      "description": "Learn about OPAV and B&S Facilities. 8 years of experience in corporate property management and facilities management in Colombia. ISO 9001-2015 certification in progress.",
+      "keywords": "OPAV, B&S Facilities, property management, facilities management, ISO 9001-2015, corporate management, Colombia",
       "ogTitle": "About OPAV & B&S – Corporate Property Management",
-      "ogDescription": "Leaders in corporate property management and facilities management in Colombia. ISO 9001 certified."
+      "ogDescription": "Leaders in corporate property management and facilities management in Colombia. ISO 9001-2015 certified."
     },
     "hero": {
       "badge": "Comprehensive Corporate Solutions",
       "title": "Who We Are",
-      "subtitle": "Over 10 years optimizing the administration, operation, and maintenance of corporate, commercial, and industrial assets."
+      "subtitle": "Over 8 years optimizing the administration, operation, and maintenance of corporate, commercial, and industrial assets."
     },
     "mission": {
       "title": "Mission",
@@ -206,13 +206,13 @@
         },
         {
           "year": "2026",
-          "title": "ISO 9001 Certification",
-          "description": "Obtaining ISO 9001 certification, consolidating our commitment to quality"
+          "title": "ISO 9001-2015 Certification",
+          "description": "Obtaining ISO 9001-2015 certification, consolidating our commitment to quality"
         },
         {
           "year": "2026",
           "title": "Market Leader",
-          "description": "Consolidated as a benchmark in the sector with over 172 thousand sqm under management"
+          "description": "Consolidated as a benchmark in the sector with over 210,450 m² under management"
         }
       ]
     },
@@ -262,7 +262,7 @@
           "Do it in micro, to turn it into macro"
         ]
       },
-      "isoBadge": "ISO 9001:2015 Certified"
+      "isoBadge": "ISO 9001-2015 Certified"
     },
     "bsManagement": {
       "title": "Integrated Services",
@@ -392,7 +392,7 @@
         "description": "Over 8 years successfully managing corporate properties in Colombia"
       },
       "reason2": {
-        "title": "ISO 9001 Certification",
+        "title": "ISO 9001-2015 Certification",
         "description": "Certified processes that guarantee the highest quality in our services"
       },
       "reason3": {

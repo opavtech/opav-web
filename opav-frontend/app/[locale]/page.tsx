@@ -741,7 +741,7 @@ export default async function HomePage({ params }: HomePageProps) {
                           <Image
                             src={logoUrl}
                             alt={
-                              certificacion?.nombre || "Certificación ISO 9001"
+                              certificacion?.nombre || "Certificación ISO 9001-2015"
                             }
                             fill
                             loading="lazy"
@@ -781,7 +781,7 @@ export default async function HomePage({ params }: HomePageProps) {
                             </svg>
                           </div>
                           <h3 className="text-3xl font-bold text-gray-800 mb-3 font-['Inter']">
-                            ISO 9001:2015
+                            ISO 9001-2015
                           </h3>
                           <p className="text-lg text-gray-600 font-semibold font-['Inter']">
                             {t("certification.qualityLabel")}
@@ -799,105 +799,7 @@ export default async function HomePage({ params }: HomePageProps) {
           </div>
         </section>
 
-        {/* 4. Corporate Testimonials Section - European Premium Style */}
-        <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
-          {/* Soft Linear Corporate Strata Background */}
-          <div className="absolute inset-0 z-0">
-            {/* Base layer - Pure white */}
-            <div className="absolute inset-0 bg-white"></div>
-
-            {/* Subtle diagonal gradient overlay - Very soft corporate tones */}
-            <div
-              className="absolute inset-0 opacity-60"
-              style={{
-                background:
-                  "linear-gradient(165deg, #F9FAFB 0%, #F9FAFB 45%, #F3F5F7 55%, #F3F5F7 100%)",
-              }}
-            ></div>
-
-            {/* Subtle abstract pattern - ultra minimal */}
-            <div className="absolute inset-0 opacity-[0.015]">
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, #9CA3AF 30px, #9CA3AF 31px)`,
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Section Header - Corporate & Serious */}
-            <AnimatedSection>
-              <div className="text-center mb-10 sm:mb-14 lg:mb-20">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-['Inter'] tracking-tight">
-                  {t("testimonials.title")}
-                </h2>
-                <p className="text-base sm:text-lg text-gray-600 font-['Inter'] font-light">
-                  {t("testimonials.subtitle")}
-                </p>
-              </div>
-            </AnimatedSection>
-
-            {/* Corporate Testimonials Carousel */}
-            <AnimatedSection delay={0.2}>
-              <CorporateTestimonials
-                testimonials={[
-                  {
-                    name: t("testimonials.employees.0.name"),
-                    position: t("testimonials.employees.0.position"),
-                    quote: t("testimonials.employees.0.quote"),
-                  },
-                  {
-                    name: t("testimonials.employees.1.name"),
-                    position: t("testimonials.employees.1.position"),
-                    quote: t("testimonials.employees.1.quote"),
-                  },
-                  {
-                    name: t("testimonials.employees.2.name"),
-                    position: t("testimonials.employees.2.position"),
-                    quote: t("testimonials.employees.2.quote"),
-                  },
-                ]}
-              />
-            </AnimatedSection>
-
-            {/* Institutional Phrase - Divider */}
-            <AnimatedSection delay={0.4}>
-              <div className="text-center mt-20 mb-16">
-                <p className="text-2xl md:text-3xl font-light text-gray-800 font-['Inter'] italic">
-                  &quot;{t("testimonials.institutionalPhrase")}&quot;
-                </p>
-              </div>
-            </AnimatedSection>
-
-            {/* Premium CTA Button with Shimmer Effect */}
-            <AnimatedSection delay={0.5}>
-              <div className="text-center">
-                <ShimmerButton
-                  href={getLocalizedPath("jobs", locale as "es" | "en")}
-                >
-                  <span className="relative z-10">{t("testimonials.cta")}</span>
-                  <svg
-                    className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
-                </ShimmerButton>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-
-        {/* 5. Success Section - European Corporate Style with Premium Background */}
+        {/* 4. Success Section - European Corporate Style with Premium Background */}
         <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
           {/* 4-Layer Premium Background System */}
           {/* Layer 1: Base white */}
@@ -1021,6 +923,104 @@ export default async function HomePage({ params }: HomePageProps) {
                 </div>
               )}
             </div>
+          </div>
+        </section>
+
+        {/* 5. Corporate Testimonials Section - European Premium Style */}
+        <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
+          {/* Soft Linear Corporate Strata Background */}
+          <div className="absolute inset-0 z-0">
+            {/* Base layer - Pure white */}
+            <div className="absolute inset-0 bg-white"></div>
+
+            {/* Subtle diagonal gradient overlay - Very soft corporate tones */}
+            <div
+              className="absolute inset-0 opacity-60"
+              style={{
+                background:
+                  "linear-gradient(165deg, #F9FAFB 0%, #F9FAFB 45%, #F3F5F7 55%, #F3F5F7 100%)",
+              }}
+            ></div>
+
+            {/* Subtle abstract pattern - ultra minimal */}
+            <div className="absolute inset-0 opacity-[0.015]">
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 30px, #9CA3AF 30px, #9CA3AF 31px)`,
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Section Header - Corporate & Serious */}
+            <AnimatedSection>
+              <div className="text-center mb-10 sm:mb-14 lg:mb-20">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 font-['Inter'] tracking-tight">
+                  {t("testimonials.title")}
+                </h2>
+                <p className="text-base sm:text-lg text-gray-600 font-['Inter'] font-light">
+                  {t("testimonials.subtitle")}
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* Corporate Testimonials Carousel */}
+            <AnimatedSection delay={0.2}>
+              <CorporateTestimonials
+                testimonials={[
+                  {
+                    name: t("testimonials.employees.0.name"),
+                    position: t("testimonials.employees.0.position"),
+                    quote: t("testimonials.employees.0.quote"),
+                  },
+                  {
+                    name: t("testimonials.employees.1.name"),
+                    position: t("testimonials.employees.1.position"),
+                    quote: t("testimonials.employees.1.quote"),
+                  },
+                  {
+                    name: t("testimonials.employees.2.name"),
+                    position: t("testimonials.employees.2.position"),
+                    quote: t("testimonials.employees.2.quote"),
+                  },
+                ]}
+              />
+            </AnimatedSection>
+
+            {/* Institutional Phrase - Divider */}
+            <AnimatedSection delay={0.4}>
+              <div className="text-center mt-20 mb-16">
+                <p className="text-2xl md:text-3xl font-light text-gray-800 font-['Inter'] italic">
+                  &quot;{t("testimonials.institutionalPhrase")}&quot;
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* Premium CTA Button with Shimmer Effect */}
+            <AnimatedSection delay={0.5}>
+              <div className="text-center">
+                <ShimmerButton
+                  href={getLocalizedPath("jobs", locale as "es" | "en")}
+                >
+                  <span className="relative z-10">{t("testimonials.cta")}</span>
+                  <svg
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </ShimmerButton>
+              </div>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -1162,8 +1162,8 @@ export default async function HomePage({ params }: HomePageProps) {
                   },
                   description:
                     locale === "es"
-                      ? "Líder en administración de propiedades corporativas y facilities management en Colombia. Más de 15 años de experiencia, certificación ISO 9001."
-                      : "Leading property management and facilities management company in Colombia. 15+ years of experience, ISO 9001 certified.",
+                      ? "Líder en administración de propiedades corporativas y facilities management en Colombia. Más de 8 años de experiencia, certificación ISO 9001-2015."
+                      : "Leading property management and facilities management company in Colombia. 8+ years of experience, ISO 9001-2015 certified.",
                   inLanguage: locale === "es" ? "es-CO" : "en-US",
                 },
                 {
@@ -1258,7 +1258,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         name: "¿Qué servicios ofrece OPAV en administración de propiedades?",
                         acceptedAnswer: {
                           "@type": "Answer",
-                          text: "OPAV ofrece administración integral de propiedades corporativas, gestión de arrendamientos, asesoría inmobiliaria, facilities management, mantenimiento preventivo y correctivo, y gestión de proveedores. Contamos con certificación ISO 9001:2015.",
+                          text: "OPAV ofrece administración integral de propiedades corporativas, gestión de arrendamientos, asesoría inmobiliaria, facilities management, mantenimiento preventivo y correctivo, y gestión de proveedores. Contamos con certificación ISO 9001-2015.",
                         },
                       },
                       {
@@ -1266,7 +1266,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         name: "¿En qué ciudades de Colombia opera OPAV?",
                         acceptedAnswer: {
                           "@type": "Answer",
-                          text: "OPAV opera principalmente en Bogotá y las principales ciudades de Colombia. Administramos más de 100,000 m² de propiedades corporativas en todo el país.",
+                          text: "OPAV opera principalmente en Bogotá y las principales ciudades de Colombia. Administramos más de 210.450 m² de propiedades corporativas en todo el país.",
                         },
                       },
                       {
@@ -1274,7 +1274,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         name: "¿Qué diferencia a OPAV de otras empresas de administración?",
                         acceptedAnswer: {
                           "@type": "Answer",
-                          text: "OPAV cuenta con más de 15 años de experiencia, certificación ISO 9001:2015, y un enfoque integral que combina administración de propiedades (OPAV) con facilities management (B&S Facilities) para ofrecer soluciones completas.",
+                          text: "OPAV cuenta con más de 8 años de experiencia, certificación ISO 9001-2015, y un enfoque integral que combina administración de propiedades (OPAV) con facilities management (B&S Facilities) para ofrecer soluciones completas.",
                         },
                       },
                     ]
@@ -1284,7 +1284,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         name: "What property management services does OPAV offer?",
                         acceptedAnswer: {
                           "@type": "Answer",
-                          text: "OPAV offers comprehensive corporate property management, lease management, real estate consulting, facilities management, preventive and corrective maintenance, and vendor management. We are ISO 9001:2015 certified.",
+                          text: "OPAV offers comprehensive corporate property management, lease management, real estate consulting, facilities management, preventive and corrective maintenance, and vendor management. We are ISO 9001-2015 certified.",
                         },
                       },
                       {
@@ -1292,7 +1292,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         name: "In which cities in Colombia does OPAV operate?",
                         acceptedAnswer: {
                           "@type": "Answer",
-                          text: "OPAV operates primarily in Bogotá and major cities throughout Colombia. We manage over 100,000 m² of corporate properties nationwide.",
+                          text: "OPAV operates primarily in Bogotá and major cities throughout Colombia. We manage over 210,450 m² of corporate properties nationwide.",
                         },
                       },
                       {
@@ -1300,7 +1300,7 @@ export default async function HomePage({ params }: HomePageProps) {
                         name: "What sets OPAV apart from other property management companies?",
                         acceptedAnswer: {
                           "@type": "Answer",
-                          text: "OPAV has over 15 years of experience, ISO 9001:2015 certification, and a comprehensive approach combining property management (OPAV) with facilities management (B&S Facilities) to deliver complete solutions.",
+                          text: "OPAV has over 8 years of experience, ISO 9001-2015 certification, and a comprehensive approach combining property management (OPAV) with facilities management (B&S Facilities) to deliver complete solutions.",
                         },
                       },
                     ],
@@ -1324,8 +1324,8 @@ export default async function HomePage({ params }: HomePageProps) {
               ],
               description:
                 locale === "es"
-                  ? "Empresa líder en administración de propiedades corporativas y facilities management en Colombia. Más de 15 años de experiencia y certificación ISO 9001:2015."
-                  : "Leading company in corporate property management and facilities management in Colombia. Over 15 years of experience and ISO 9001:2015 certification.",
+                  ? "Empresa líder en administración de propiedades corporativas y facilities management en Colombia. Más de 8 años de experiencia y certificación ISO 9001-2015."
+                  : "Leading company in corporate property management and facilities management in Colombia. Over 8 years of experience and ISO 9001-2015 certification.",
               priceRange: "$$",
               address: {
                 "@type": "PostalAddress",

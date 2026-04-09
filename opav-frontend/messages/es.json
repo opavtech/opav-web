@@ -26,28 +26,28 @@
   "home": {
     "metadata": {
       "title": "OPAV SAS | Administración de Propiedades y Facilities Management Colombia",
-      "description": "Empresa líder en administración de propiedades corporativas y facilities management en Bogotá, Colombia. 8 años de experiencia, certificación ISO 9001:2015 en proceso, +210.000 m² administrados. Soluciones integrales para edificios corporativos.",
-      "keywords": "administración de propiedades Colombia, facilities management Bogotá, administración de edificios corporativos, mantenimiento de edificios, gestión de propiedades, administración inmobiliaria Bogotá, property management Colombia, ISO 9001 certificado, OPAV, B&S Facilities, administración propiedad horizontal, gestión de activos inmobiliarios",
+      "description": "Empresa líder en administración de propiedades corporativas y facilities management en Bogotá, Colombia. 8 años de experiencia, certificación ISO 9001-2015 en proceso, +210.450 m² administrados. Soluciones integrales para edificios corporativos.",
+      "keywords": "administración de propiedades Colombia, facilities management Bogotá, administración de edificios corporativos, mantenimiento de edificios, gestión de propiedades, administración inmobiliaria Bogotá, property management Colombia, ISO 9001-2015 certificado, OPAV, B&S Facilities, administración propiedad horizontal, gestión de activos inmobiliarios",
       "ogTitle": "OPAV SAS | Gestión Profesional de Propiedades en Colombia",
-      "ogDescription": "Soluciones integrales en administración de propiedades y facilities management. 8 años de experiencia | Certificación ISO 9001:2015 en proceso | +210.000 m² administrados en Colombia.",
+      "ogDescription": "Soluciones integrales en administración de propiedades y facilities management. 8 años de experiencia | Certificación ISO 9001-2015 en proceso | +210.450 m² administrados en Colombia.",
       "twitterTitle": "OPAV SAS | Administración de Propiedades Colombia",
-      "twitterDescription": "Líder en gestión de propiedades corporativas en Colombia. 8 años | ISO 9001:2015 en proceso | +210k m² administrados | Bogotá y ciudades principales"
+      "twitterDescription": "Líder en gestión de propiedades corporativas en Colombia. 8 años | ISO 9001-2015 en proceso | +210k m² administrados | Bogotá y ciudades principales"
     },
     "hero": {
-      "title": "Gestión Integral de Propiedades",
-      "subtitle": "Soluciones profesionales en administración y facilities management con más de 8 años de experiencia",
+      "title": "Gestión Integral en la Administración de Inmuebles Corporativos",
+      "subtitle": "Soluciones profesionales en la administración de inmuebles corporativos y en la gestión de facilities management, con más de 8 años de experiencia",
       "cta": "Solicitar Propuesta",
       "metric1": "Años de Experiencia",
       "metric2": "Proyectos Exitosos",
       "metric3": "m² Administrados",
-      "isoTitle": "Certificación ISO 9001",
+      "isoTitle": "Certificación ISO 9001-2015",
       "isoBadge": "En Proceso 2026",
-      "isoDescription": "En proceso de certificación para el 2026. Garantizamos los más altos estándares de calidad en todos nuestros servicios y procesos",
+      "isoDescription": "En proceso de la certificación para el año 2026, garantizando altos estándares de calidad, en nuestros servicios y procesos.",
       "isoLink": "Ver Certificado →"
     },
     "company": {
       "title": "Nuestras Empresas",
-      "intro": "Dos marcas especializadas que trabajan de forma integrada para ofrecer soluciones corporativas en administración de propiedades y facilities management.",
+      "intro": "Dos marcas especializadas, que trabajan de forma integrada para ofrecer soluciones en servicios de la administración de copropiedades corporativas y en facilities management",
       "learnMore": "Ver detalles",
       "knowMore": "Conocer más",
       "requestConsultation": "Solicitar asesoría",
@@ -60,16 +60,16 @@
         "badge3": "Asesoría Inmobiliaria"
       },
       "bs": {
-        "subtitle1": "Especialistas en Facilities Management",
-        "subtitle2": "Mantenimiento y servicios generales de excelencia",
+        "subtitle1": "Especialistas en facilities management",
+        "subtitle2": "Gestión, mantenimiento, seguridad integral, servicios generales de infraestructura",
         "badge1": "Mantenimiento Preventivo",
         "badge2": "Servicios Generales",
         "badge3": "Gestión de Proveedores"
       }
     },
     "certification": {
-      "title": "Certificación ISO 9001:2015",
-      "description": "Estamos en proceso de certificación ISO 9001 para el 2026, lo que garantizará que todos nuestros procesos cumplen con los más altos estándares internacionales de calidad, mejora continua y satisfacción del cliente.",
+      "title": "Certificación ISO 9001-2015",
+      "description": "Estamos en proceso de certificación ISO 9001-2015 para el año 2026, lo que garantizará que todos nuestros procesos cumplen con los más altos estándares internacionales de calidad, mejora continua y satisfacción del cliente.",
       "viewDetails": "Ver Detalles de Certificación",
       "benefit1": "Estándares internacionales de calidad",
       "benefit2": "Mejora continua de procesos",
@@ -136,15 +136,15 @@
   "company": {
     "seo": {
       "title": "Sobre OPAV & B&S – Gestión Corporativa de Propiedades y Facilities Management",
-      "description": "Conozca OPAV y B&S Facilities. 8 años de experiencia en administración de propiedades corporativas y facilities management en Colombia. Certificación ISO 9001:2015 en proceso.",
-      "keywords": "OPAV, B&S Facilities, administración de propiedades, facilities management, ISO 9001, gestión corporativa, Colombia",
+      "description": "Conozca OPAV y B&S Facilities. 8 años de experiencia en administración de propiedades corporativas y facilities management en Colombia. Certificación ISO 9001-2015 en proceso.",
+      "keywords": "OPAV, B&S Facilities, administración de propiedades, facilities management, ISO 9001-2015, gestión corporativa, Colombia",
       "ogTitle": "Sobre OPAV & B&S – Gestión Corporativa de Propiedades",
-      "ogDescription": "Líderes en administración de propiedades corporativas y facilities management en Colombia. Certificación ISO 9001."
+      "ogDescription": "Líderes en administración de propiedades corporativas y facilities management en Colombia. Certificación ISO 9001-2015."
     },
     "hero": {
       "badge": "Soluciones Corporativas Integrales",
       "title": "Quiénes Somos",
-      "subtitle": "Más de 10 años optimizando la administración, operación y mantenimiento de activos corporativos, comerciales e industriales."
+      "subtitle": "Más de 8 años optimizando la administración, operación y mantenimiento de activos corporativos, comerciales e industriales."
     },
     "mission": {
       "title": "Misión",
@@ -205,13 +205,13 @@
         },
         {
           "year": "2026",
-          "title": "Certificación ISO 9001",
-          "description": "Obtención de la certificación ISO 9001, consolidando nuestro compromiso con la calidad"
+          "title": "Certificación ISO 9001-2015",
+          "description": "Obtención de la certificación ISO 9001-2015, consolidando nuestro compromiso con la calidad"
         },
         {
           "year": "2026",
           "title": "Líder del Mercado",
-          "description": "Consolidados como referente en el sector con más de 172 mil m² bajo administración"
+          "description": "Consolidados como referente en el sector con más de 210.450 m² bajo administración"
         }
       ]
     },
@@ -265,7 +265,7 @@
           "Hacerlo en micro, para convertirlo en macro"
         ]
       },
-      "isoBadge": "Certificado ISO 9001:2015"
+      "isoBadge": "Certificado ISO 9001-2015"
     },
     "bsManagement": {
       "title": "Servicios Integrales",
@@ -395,7 +395,7 @@
         "description": "Más de 8 años gestionando exitosamente propiedades corporativas en Colombia"
       },
       "reason2": {
-        "title": "Certificación ISO 9001",
+        "title": "Certificación ISO 9001-2015",
         "description": "Procesos certificados que garantizan la más alta calidad en nuestros servicios"
       },
       "reason3": {
