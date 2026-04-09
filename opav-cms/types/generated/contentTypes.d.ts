@@ -590,7 +590,14 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    parrafoIntroductorio: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
+    puntosClaves: Schema.Attribute.JSON;
     resumen: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
