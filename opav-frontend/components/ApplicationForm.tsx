@@ -131,7 +131,7 @@ export default function ApplicationForm({ vacante, locale, brandColor }: Applica
             onChange={handleInputChange}
             required
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
-            placeholder="Juan Pérez"
+            placeholder=""
           />
         </div>
 
@@ -148,7 +148,7 @@ export default function ApplicationForm({ vacante, locale, brandColor }: Applica
             onChange={handleInputChange}
             required
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
-            placeholder="juan@ejemplo.com"
+            placeholder=""
           />
         </div>
 
@@ -165,7 +165,7 @@ export default function ApplicationForm({ vacante, locale, brandColor }: Applica
             onChange={handleInputChange}
             required
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition"
-            placeholder="+57 300 123 4567"
+            placeholder=""
           />
         </div>
 
@@ -211,7 +211,7 @@ export default function ApplicationForm({ vacante, locale, brandColor }: Applica
             onChange={handleInputChange}
             rows={6}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition resize-none"
-            placeholder={t("coverLetterPlaceholder")}
+            placeholder=""
           />
         </div>
 

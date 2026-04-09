@@ -279,7 +279,8 @@ export default async function HomePage({ params }: HomePageProps) {
                   <div className="text-center">
                     <AnimatedCounter
                       end={210.45}
-                      suffix="K"
+                      suffix=""
+                      decimals={3}
                       className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 drop-shadow-md"
                       ariaLabel="210.450 metros cuadrados administrados"
                     />

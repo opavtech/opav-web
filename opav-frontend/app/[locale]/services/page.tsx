@@ -543,6 +543,46 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
         </div>
       </section>
 
+      {/* Métrica Banner */}
+      <section className="py-10 md:py-12 bg-white border-y border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-6 px-6 py-5 rounded-2xl bg-gray-50 border border-gray-200">
+              {/* Logo */}
+              <div className="shrink-0 w-28 sm:w-32 flex items-center justify-center">
+                <Image
+                  src="https://res.cloudinary.com/deyzoekgz/image/upload/v1775768819/FNC_sr5tqb.jpg"
+                  alt="Métrica"
+                  width={128}
+                  height={48}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+
+              {/* Divider */}
+              <div className="hidden sm:block w-px h-12 bg-gray-200 shrink-0" />
+
+              {/* Text */}
+              <div className="flex-1 text-center sm:text-left">
+                <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
+                  <span className="text-base font-semibold text-gray-800 font-['Inter']">
+                    Métrica
+                  </span>
+                  <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    Open Source
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500 font-['Inter'] leading-relaxed">
+                  {locale === "es"
+                    ? "Aplicativo de código abierto para la gestión integral de facilities management, utilizado internamente por B&S Facilities."
+                    : "Open-source application for comprehensive facilities management, used internally by B&S Facilities."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section
         className="relative py-20 md:py-24 text-white overflow-hidden"
