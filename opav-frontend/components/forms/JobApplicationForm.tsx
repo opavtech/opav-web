@@ -363,7 +363,7 @@ export default function JobApplicationForm({
               setFormData({ ...formData, fullName: e.target.value });
               setErrors({ ...errors, fullName: "" });
             }}
-            placeholder={translations.fullNamePlaceholder}
+            placeholder=""
             className={`w-full px-4 py-3 rounded-lg border ${
               errors.fullName ? "border-red-500" : "border-gray-300"
             } focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
@@ -390,7 +390,7 @@ export default function JobApplicationForm({
                 setFormData({ ...formData, email: e.target.value });
                 setErrors({ ...errors, email: "" });
               }}
-              placeholder={translations.emailPlaceholder}
+              placeholder=""
               className={`w-full px-4 py-3 rounded-lg border ${
                 errors.email ? "border-red-500" : "border-gray-300"
               } focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
@@ -415,7 +415,7 @@ export default function JobApplicationForm({
                 setFormData({ ...formData, phone: e.target.value });
                 setErrors({ ...errors, phone: "" });
               }}
-              placeholder={translations.phonePlaceholder}
+              placeholder=""
               className={`w-full px-4 py-3 rounded-lg border ${
                 errors.phone ? "border-red-500" : "border-gray-300"
               } focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
@@ -523,7 +523,7 @@ export default function JobApplicationForm({
                 setFormData({ ...formData, coverLetter: e.target.value });
                 setErrors({ ...errors, coverLetter: "" });
               }}
-              placeholder={translations.coverLetterPlaceholder}
+              placeholder=""
               rows={6}
               className={`w-full px-4 py-3 rounded-lg border ${
                 errors.coverLetter ? "border-red-500" : "border-gray-300"
@@ -594,7 +594,7 @@ export default function JobApplicationForm({
               setFormData({ ...formData, positionOfInterest: e.target.value });
               setErrors({ ...errors, positionOfInterest: "" });
             }}
-            placeholder={translations.positionPlaceholder}
+            placeholder=""
             className={`w-full px-4 py-3 rounded-lg border ${
               errors.positionOfInterest ? "border-red-500" : "border-gray-300"
             } focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
@@ -625,7 +625,7 @@ export default function JobApplicationForm({
             onChange={(e) =>
               setFormData({ ...formData, salaryExpectation: e.target.value })
             }
-            placeholder={translations.salaryPlaceholder}
+            placeholder=""
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition"
           />
         </div>

@@ -336,7 +336,7 @@ export default function ContactForm({
               setFormData((prev) => ({ ...prev, fullName: e.target.value }))
             }
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition"
-            placeholder={translations.fullNamePlaceholder}
+            placeholder=""
             required
           />
           {errors.fullName && (
@@ -361,7 +361,7 @@ export default function ContactForm({
               setFormData((prev) => ({ ...prev, email: e.target.value }))
             }
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition"
-            placeholder={translations.emailPlaceholder}
+            placeholder=""
             required
           />
           {errors.email && (
@@ -386,7 +386,7 @@ export default function ContactForm({
               setFormData((prev) => ({ ...prev, phone: e.target.value }))
             }
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition"
-            placeholder={translations.phonePlaceholder}
+            placeholder=""
             required
           />
           {errors.phone && (
@@ -411,7 +411,7 @@ export default function ContactForm({
               setFormData((prev) => ({ ...prev, company: e.target.value }))
             }
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition"
-            placeholder={translations.companyPlaceholder}
+            placeholder=""
           />
         </div>
 
@@ -432,7 +432,7 @@ export default function ContactForm({
             }
             rows={6}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition resize-none"
-            placeholder={translations.messagePlaceholder}
+            placeholder=""
             required
           />
           {errors.message && (

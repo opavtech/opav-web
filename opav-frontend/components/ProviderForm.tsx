@@ -307,7 +307,7 @@ export default function ProviderForm({ locale }: ProviderFormProps) {
             onChange={handleInputChange}
             required
             maxLength={150}
-            placeholder={t("companyNamePlaceholder")}
+            placeholder=""
             className={`w-full px-4 py-3 rounded-lg border ${errors.companyName ? "border-red-500" : "border-gray-300"} focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
           />
           {errors.companyName && (
@@ -332,7 +332,7 @@ export default function ProviderForm({ locale }: ProviderFormProps) {
               onChange={handleInputChange}
               required
               maxLength={50}
-              placeholder={t("nitPlaceholder")}
+              placeholder=""
               className={`w-full px-4 py-3 rounded-lg border ${errors.nit ? "border-red-500" : "border-gray-300"} focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
             />
             {errors.nit && (
@@ -355,7 +355,7 @@ export default function ProviderForm({ locale }: ProviderFormProps) {
               onChange={handleInputChange}
               required
               maxLength={100}
-              placeholder={t("legalRepresentativePlaceholder")}
+              placeholder=""
               className={`w-full px-4 py-3 rounded-lg border ${errors.legalRepresentative ? "border-red-500" : "border-gray-300"} focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
             />
             {errors.legalRepresentative && (
@@ -383,7 +383,7 @@ export default function ProviderForm({ locale }: ProviderFormProps) {
               onChange={handleInputChange}
               required
               maxLength={100}
-              placeholder={t("emailPlaceholder")}
+              placeholder=""
               className={`w-full px-4 py-3 rounded-lg border ${errors.email ? "border-red-500" : "border-gray-300"} focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
             />
             {errors.email && (
@@ -406,7 +406,7 @@ export default function ProviderForm({ locale }: ProviderFormProps) {
               onChange={handleInputChange}
               required
               maxLength={20}
-              placeholder={t("phonePlaceholder")}
+              placeholder=""
               className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? "border-red-500" : "border-gray-300"} focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
             />
             {errors.phone && (
@@ -431,7 +431,7 @@ export default function ProviderForm({ locale }: ProviderFormProps) {
             onChange={handleInputChange}
             required
             maxLength={250}
-            placeholder={t("addressPlaceholder")}
+            placeholder=""
             className={`w-full px-4 py-3 rounded-lg border ${errors.address ? "border-red-500" : "border-gray-300"} focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
           />
           {errors.address && (
@@ -482,7 +482,7 @@ export default function ProviderForm({ locale }: ProviderFormProps) {
             onChange={handleInputChange}
             required
             maxLength={100}
-            placeholder={t("operationalContactNamePlaceholder")}
+            placeholder=""
             className={`w-full px-4 py-3 rounded-lg border ${errors.operationalContactName ? "border-red-500" : "border-gray-300"} focus:ring-2 focus:ring-[#d50058] focus:border-transparent transition`}
           />
           {errors.operationalContactName && (
