@@ -574,8 +574,8 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
                 </div>
                 <p className="text-sm text-gray-500 font-['Inter'] leading-relaxed">
                   {locale === "es"
-                    ? "Aplicativo de código abierto para la gestión integral de facilities management, utilizado internamente por B&S Facilities."
-                    : "Open-source application for comprehensive facilities management, used internally by B&S Facilities."}
+                    ? "Aplicativo de código abierto para la gestión integral de facilities management, utilizado internamente por OPAV."
+                    : "Open-source application for comprehensive facilities management, used internally by OPAV."}
                 </p>
               </div>
             </div>
