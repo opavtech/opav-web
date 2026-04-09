@@ -376,9 +376,14 @@ export default function CoberturaSection({
                 aria-pressed={selectedCompany === "OPAV"}
                 className={`px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
                   selectedCompany === "OPAV"
-                    ? "bg-[#d50058] text-white shadow-md"
+                    ? "shadow-md"
                     : "bg-white text-gray-700 border border-gray-200 hover:border-[#d50058]/30"
                 }`}
+                style={
+                  selectedCompany === "OPAV"
+                    ? { backgroundColor: "#d50058", color: "#ffffff" }
+                    : undefined
+                }
               >
                 OPAV
               </button>
@@ -387,9 +392,14 @@ export default function CoberturaSection({
                 aria-pressed={selectedCompany === "B&S"}
                 className={`px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
                   selectedCompany === "B&S"
-                    ? "bg-[#00acc8] text-white shadow-md"
+                    ? "shadow-md"
                     : "bg-white text-gray-700 border border-gray-200 hover:border-[#00acc8]/30"
                 }`}
+                style={
+                  selectedCompany === "B&S"
+                    ? { backgroundColor: "#00acc8", color: "#ffffff" }
+                    : undefined
+                }
               >
                 B&S
               </button>
