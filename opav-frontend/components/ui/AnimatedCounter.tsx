@@ -6,6 +6,7 @@ interface AnimatedCounterProps {
   end: number;
   duration?: number;
   suffix?: string;
+  decimals?: number;
   className?: string;
   ariaLabel?: string;
 }
@@ -14,11 +15,13 @@ export default function AnimatedCounter({
   end,
   duration = 2000,
   suffix = "",
+  decimals,
   className = "",
   ariaLabel,
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
   const counterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,15 +66,20 @@ export default function AnimatedCounter({
         requestAnimationFrame(updateCounter);
       } else {
         setCount(end);
+        setIsComplete(true);
       }
     };
 
     requestAnimationFrame(updateCounter);
   };
 
+  const display = isComplete && decimals !== undefined
+    ? count.toFixed(decimals)
+    : Math.floor(count);
+
   return (
     <div ref={counterRef} className={className} aria-label={ariaLabel}>
-      {count}
+      {display}
       {suffix}
     </div>
   );
