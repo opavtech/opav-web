@@ -3,7 +3,6 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { getStrapiMedia } from "@/lib/strapi";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -179,13 +178,19 @@ export default function CasosExitoGrid({
         </div>
       </div>
 
-      {/* Cases Grid - Goldbeck Style */}
+      {/* Cases Grid - Goldbeck Style sin fotos, con logo de marca de fondo */}
       <div className="w-full mt-8">
         <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
           {filteredCases.map((caso, index) => {
             const isOPAV = caso.empresa === "OPAV";
             const brandColor = isOPAV ? "#d50058" : "#0e7490";
             const brandColorLight = isOPAV ? "#ff1a8c" : "#06b6d4";
+            // Para OPAV usamos la versión invertida (blanca) del logo.
+            // Para B&S aplicamos filtro CSS para blanquear el PNG.
+            const logoSrc = isOPAV
+              ? "/images/logos/logoinv.svg"
+              : "/images/logos/bs-facilities-logo-hor.png";
+            const logoAlt = isOPAV ? "OPAV SAS" : "B&S Facilities";
 
             return (
               <li key={caso.id}>
@@ -203,34 +208,47 @@ export default function CasosExitoGrid({
                     } as React.CSSProperties
                   }
                 >
-                  {/* Background Image - Full Card */}
-                  {caso.imagenPrincipal &&
-                    (() => {
-                      const imageUrl = getStrapiMedia(
-                        caso.imagenPrincipal,
-                        "large"
-                      );
-                      if (!imageUrl) return null;
+                  {/* Background Base - Dark brand-tinted gradient (reemplaza la foto) */}
+                  <div
+                    className="absolute inset-0 z-0"
+                    style={{
+                      background: isOPAV
+                        ? "linear-gradient(135deg, #1a0010 0%, #2d0018 50%, #3d001f 100%)"
+                        : "linear-gradient(135deg, #001a20 0%, #00323d 50%, #00424f 100%)",
+                    }}
+                  />
 
-                      return (
-                        <Image
-                          src={imageUrl}
-                          alt={`${caso.nombre} - ${caso.empresa} en ${caso.ubicacion}`}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-500 ease-out group-hover/card:scale-105"
-                          priority={index < 3}
-                          quality={85}
-                        />
-                      );
-                    })()}
+                  {/* Logo centrado de fondo — se clarifica al hacer hover cuando el overlay se aclara */}
+                  <div className="absolute inset-0 z-[1] flex items-center justify-center p-10 pointer-events-none">
+                    <Image
+                      src={logoSrc}
+                      alt={logoAlt}
+                      width={320}
+                      height={120}
+                      className={`w-[55%] h-auto max-h-[45%] object-contain opacity-35 transition-all duration-500 ease-out group-hover/card:opacity-90 group-hover/card:scale-105 ${
+                        !isOPAV ? "" : ""
+                      }`}
+                      style={
+                        !isOPAV
+                          ? {
+                              filter:
+                                "brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,0.4))",
+                            }
+                          : {
+                              filter:
+                                "drop-shadow(0 2px 8px rgba(0,0,0,0.4))",
+                            }
+                      }
+                      priority={index < 3}
+                    />
+                  </div>
 
-                  {/* Dark Overlay - Stays visible, fades slightly on hover */}
-                  <div className="absolute inset-0 z-[1] bg-black/70 transition-opacity duration-500 group-hover/card:opacity-40" />
+                  {/* Dark Overlay - Stays visible, fades slightly on hover (preserva el efecto original) */}
+                  <div className="absolute inset-0 z-[2] bg-black/70 transition-opacity duration-500 group-hover/card:opacity-40" />
 
                   {/* Brand-tinted Background - Slides diagonally from bottom-right to top-left */}
                   <div
-                    className="absolute left-0 top-[-2px] z-[2] block h-[calc(100%+4px)] w-[calc(100%+200px)] translate-x-full transition-transform duration-500 ease-out group-hover/card:translate-x-[-200px] group-focus/card:translate-x-[-200px] pointer-events-none"
+                    className="absolute left-0 top-[-2px] z-[3] block h-[calc(100%+4px)] w-[calc(100%+200px)] translate-x-full transition-transform duration-500 ease-out group-hover/card:translate-x-[-200px] group-focus/card:translate-x-[-200px] pointer-events-none"
                     style={{
                       backgroundColor: isOPAV ? "#fff5f8" : "#f0fdfa",
                       clipPath: "polygon(150px 0, 100% 0, 100% 100%, 0 100%)",
@@ -239,7 +257,7 @@ export default function CasosExitoGrid({
 
                   {/* Diagonal Stripe Accent - Follows the background, adds brand color edge */}
                   <div
-                    className="absolute left-0 top-[-2px] z-[3] block h-[calc(100%+4px)] w-[calc(100%+200px)] translate-x-full transition-transform duration-500 ease-out delay-[50ms] group-hover/card:translate-x-[-200px] group-focus/card:translate-x-[-200px] pointer-events-none"
+                    className="absolute left-0 top-[-2px] z-[4] block h-[calc(100%+4px)] w-[calc(100%+200px)] translate-x-full transition-transform duration-500 ease-out delay-[50ms] group-hover/card:translate-x-[-200px] group-focus/card:translate-x-[-200px] pointer-events-none"
                     style={{
                       background: `linear-gradient(to right, ${brandColorLight}, transparent 80px)`,
                       clipPath: "polygon(150px 0, 100% 0, 100% 100%, 0 100%)",
@@ -248,7 +266,7 @@ export default function CasosExitoGrid({
                   />
 
                   {/* Content - Text transitions from white to black */}
-                  <div className="absolute inset-0 z-[4] flex flex-col justify-between p-6">
+                  <div className="absolute inset-0 z-[5] flex flex-col justify-between p-6">
                     {/* Top Row - Category & Date */}
                     <div className="flex items-start justify-between">
                       {/* Category Badge */}
@@ -328,7 +346,7 @@ export default function CasosExitoGrid({
                   </div>
 
                   {/* Subtle border */}
-                  <div className="absolute inset-0 rounded-xl pointer-events-none z-[5] transition-all duration-300 ring-1 ring-inset ring-white/10 group-hover/card:ring-gray-200" />
+                  <div className="absolute inset-0 rounded-xl pointer-events-none z-[6] transition-all duration-300 ring-1 ring-inset ring-white/10 group-hover/card:ring-gray-200" />
                 </Link>
               </li>
             );
