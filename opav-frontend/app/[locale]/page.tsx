@@ -14,6 +14,8 @@ import {
 } from "@/lib/strapi";
 import { getLocalizedPath } from "@/lib/routes";
 import type { Metadata } from "next";
+import { SuccessBrandFilterProvider } from "@/components/SuccessBrandFilterContext";
+import DynamicBrandLayer from "@/components/DynamicBrandLayer";
 
 // Dynamic imports for below-the-fold components
 const CorporateTestimonials = dynamic(
@@ -442,13 +444,13 @@ export default async function HomePage({ params }: HomePageProps) {
                     </div>
                   </div>
 
-                  <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden">
+                  <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] lg:aspect-[4/5] rounded-2xl overflow-hidden bg-[#F7F9FC]">
                     <Image
                       src="https://res.cloudinary.com/deyzoekgz/image/upload/v1775768747/43773f03-99d3-443b-ba8b-bca6e58534b8_nym9sw.jpg"
                       alt="OPAV - Administración de Propiedades"
                       fill
                       loading="lazy"
-                      className="object-cover object-top"
+                      className="object-contain object-top"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                     />
                   </div>
@@ -801,6 +803,7 @@ export default async function HomePage({ params }: HomePageProps) {
         </section>
 
         {/* 4. Success Section - European Corporate Style with Premium Background */}
+        <SuccessBrandFilterProvider>
         <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
           {/* 4-Layer Premium Background System */}
           {/* Layer 1: Base white */}
@@ -824,14 +827,9 @@ export default async function HomePage({ params }: HomePageProps) {
             }}
           ></div>
 
-          {/* Layer 4: Magenta glow at bottom (corporate accent) */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent 0%, rgba(213, 0, 88, 0.04) 80%, rgba(213, 0, 88, 0.07) 100%)",
-            }}
-          ></div>
+          {/* Layer 4: Brand glow at bottom — magenta (OPAV) ⇄ cian (B&S),
+              sincronizado con el filtro activo vía SuccessBrandFilterContext. */}
+          <DynamicBrandLayer />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Header - Centered European Minimal */}
@@ -926,6 +924,7 @@ export default async function HomePage({ params }: HomePageProps) {
             </div>
           </div>
         </section>
+        </SuccessBrandFilterProvider>
 
         {/* 5. Corporate Testimonials Section - European Premium Style */}
         <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">

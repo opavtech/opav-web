@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SuccessCaseCard from "./SuccessCaseCard";
+import { useSuccessBrandFilter } from "./SuccessBrandFilterContext";
 
 interface SuccessCase {
   id: number;
@@ -36,7 +37,14 @@ export default function SuccessCasesFilter({
   locale,
   translations,
 }: SuccessCasesFilterProps) {
-  const [activeFilter, setActiveFilter] = useState<FilterType>("OPAV");
+  // Si el componente está dentro de un SuccessBrandFilterProvider (como
+  // ocurre en la sección del Home para sincronizar el fondo magenta/cian),
+  // usamos el estado compartido. Si no, caemos al estado interno — así el
+  // componente sigue siendo self-contained en otros contextos.
+  const brandCtx = useSuccessBrandFilter();
+  const [internalFilter, setInternalFilter] = useState<FilterType>("OPAV");
+  const activeFilter: FilterType = brandCtx?.activeFilter ?? internalFilter;
+  const setActiveFilter = brandCtx?.setActiveFilter ?? setInternalFilter;
 
   const filteredCases = cases
     .filter((caso) => caso.empresa === activeFilter)
