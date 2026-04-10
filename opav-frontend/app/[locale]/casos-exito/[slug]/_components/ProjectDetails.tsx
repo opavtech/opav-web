@@ -42,7 +42,9 @@ export default function ProjectDetails({
 
   const details = [
     { label: translations.company, value: empresa, show: true },
-    { label: translations.client, value: nombre, show: true },
+    // Oculto por ahora: el campo "cliente" actualmente duplica el nombre del proyecto.
+    // Se reactivará cuando exista un campo dedicado en el CMS para la empresa cliente.
+    { label: translations.client, value: nombre, show: false },
     { label: translations.location, value: ubicacion, show: true },
   ];
 
