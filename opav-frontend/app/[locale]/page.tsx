@@ -14,8 +14,7 @@ import {
 } from "@/lib/strapi";
 import { getLocalizedPath } from "@/lib/routes";
 import type { Metadata } from "next";
-import { SuccessBrandFilterProvider } from "@/components/SuccessBrandFilterContext";
-import DynamicBrandLayer from "@/components/DynamicBrandLayer";
+import SuccessSectionClient from "@/components/SuccessSectionClient";
 
 // Dynamic imports for below-the-fold components
 const CorporateTestimonials = dynamic(
@@ -27,12 +26,6 @@ const CorporateTestimonials = dynamic(
     ssr: true,
   },
 );
-
-// NOTE: importado directamente (no via `dynamic`) para asegurar que
-// el filtro y `DynamicBrandLayer` compartan el mismo árbol de React
-// y por lo tanto el contexto `SuccessBrandFilterContext` que sincroniza
-// el fondo magenta ⇄ cian con la marca activa.
-import SuccessCasesFilter from "@/components/SuccessCasesFilter";
 
 const InsightsCarousel = dynamic(
   () => import("@/components/InsightsCarousel"),
@@ -799,128 +792,40 @@ export default async function HomePage({ params }: HomePageProps) {
         </section>
 
         {/* 4. Success Section - European Corporate Style with Premium Background */}
-        <SuccessBrandFilterProvider>
         <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
-          {/* 4-Layer Premium Background System */}
-          {/* Layer 1: Base white */}
-          <div className="absolute inset-0 bg-white"></div>
-
-          {/* Layer 2: Subtle gradient white → light gray */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(165deg, #ffffff 0%, #f9fafb 100%)",
+          {/* SuccessSectionClient contiene Provider + DynamicBrandLayer + filtro
+              en un único árbol de React de cliente, garantizando la propagación
+              del contexto SuccessBrandFilterContext (magenta OPAV ⇄ cian B&S). */}
+          <SuccessSectionClient
+            cases={casosDestacados.map((caso: any) => ({
+              id: caso.id,
+              nombre: caso.nombre || caso.titulo || "Sin título",
+              empresa: caso.empresa,
+              ubicacion: caso.ubicacion || caso.ciudad || "Sin ubicación",
+              descripcion: extractRichText(caso.descripcion),
+              Slug: caso.Slug,
+              imagenPrincipal: caso.imagenPrincipal
+                ? {
+                    url: getStrapiMedia(caso.imagenPrincipal.url) || "",
+                    alternativeText: caso.imagenPrincipal.alternativeText,
+                  }
+                : undefined,
+            }))}
+            locale={locale}
+            ctaHref={getLocalizedPath("successCases", locale as "es" | "en")}
+            translations={{
+              title: t("success.title"),
+              subtitle: t("success.subtitle"),
+              filterOpav: t("success.filterOpav"),
+              opavDescription: t("success.opavDescription"),
+              filterBs: t("success.filterBs"),
+              bsDescription: t("success.bsDescription"),
+              filterAll: t("success.filterAll"),
+              viewAll: t("success.viewAll"),
+              noResults: t("success.noResults"),
             }}
-          ></div>
-
-          {/* Layer 3: Ultra-subtle geometric pattern (European style) */}
-          <div
-            className="absolute inset-0 opacity-[0.05]"
-            style={{
-              backgroundImage: "url(/patterns/geometric-noise.png)",
-              backgroundSize: "64px 64px",
-              backgroundRepeat: "repeat",
-            }}
-          ></div>
-
-          {/* Layer 4: Brand glow at bottom — magenta (OPAV) ⇄ cian (B&S),
-              sincronizado con el filtro activo vía SuccessBrandFilterContext. */}
-          <DynamicBrandLayer />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Header - Centered European Minimal */}
-            <AnimatedSection>
-              <div className="text-center mb-10 sm:mb-14 lg:mb-20 max-w-3xl mx-auto">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 font-['Inter'] tracking-tight">
-                  {t("success.title")}
-                </h2>
-                <p className="text-base sm:text-lg text-gray-600 font-['Inter'] font-light">
-                  {t("success.subtitle")}
-                </p>
-              </div>
-            </AnimatedSection>
-
-            {/* Cases Grid */}
-            <div className="max-w-7xl mx-auto">
-              {casosDestacados.length > 0 ? (
-                <>
-                  <SuccessCasesFilter
-                    cases={casosDestacados.map((caso: any) => {
-                      return {
-                        id: caso.id,
-                        nombre: caso.nombre || caso.titulo || "Sin título",
-                        empresa: caso.empresa,
-                        ubicacion:
-                          caso.ubicacion || caso.ciudad || "Sin ubicación",
-                        descripcion: extractRichText(caso.descripcion),
-                        Slug: caso.Slug,
-                        imagenPrincipal: caso.imagenPrincipal
-                          ? {
-                              url:
-                                getStrapiMedia(caso.imagenPrincipal.url) || "",
-                              alternativeText:
-                                caso.imagenPrincipal.alternativeText,
-                            }
-                          : undefined,
-                      };
-                    })}
-                    locale={locale}
-                    translations={{
-                      opavTitle: t("success.filterOpav"),
-                      opavDescription: t("success.opavDescription"),
-                      bsTitle: t("success.filterBs"),
-                      bsDescription: t("success.bsDescription"),
-                      all: t("success.filterAll"),
-                    }}
-                  />
-
-                  {/* CTA Button - European Style */}
-                  <div className="mt-16">
-                    <AnimatedSection delay={0.4}>
-                      <div className="text-center">
-                        <Link
-                          href={getLocalizedPath(
-                            "successCases",
-                            locale as "es" | "en",
-                          )}
-                          className="inline-flex items-center gap-2 px-10 py-4 rounded-lg font-semibold text-base transition-all duration-300 hover:scale-105 font-['Inter']"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, #374151 0%, #1F2937 100%)",
-                            color: "#ffffff",
-                            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                          }}
-                        >
-                          <span>{t("success.viewAll")}</span>
-                          <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2.5}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M13 7l5 5m0 0l-5 5m5-5H6"
-                            />
-                          </svg>
-                        </Link>
-                      </div>
-                    </AnimatedSection>
-                  </div>
-                </>
-              ) : (
-                <div className="text-center py-12">
-                  <p className="text-gray-500 font-['Inter']">
-                    {t("success.noResults")}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
+          />
         </section>
-        </SuccessBrandFilterProvider>
 
         {/* 5. Corporate Testimonials Section - European Premium Style */}
         <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
