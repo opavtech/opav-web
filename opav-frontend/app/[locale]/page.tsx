@@ -28,15 +28,11 @@ const CorporateTestimonials = dynamic(
   },
 );
 
-const SuccessCasesFilter = dynamic(
-  () => import("@/components/SuccessCasesFilter"),
-  {
-    loading: () => (
-      <div className="h-96 animate-pulse bg-gray-100 rounded-2xl" />
-    ),
-    ssr: true,
-  },
-);
+// NOTE: importado directamente (no via `dynamic`) para asegurar que
+// el filtro y `DynamicBrandLayer` compartan el mismo árbol de React
+// y por lo tanto el contexto `SuccessBrandFilterContext` que sincroniza
+// el fondo magenta ⇄ cian con la marca activa.
+import SuccessCasesFilter from "@/components/SuccessCasesFilter";
 
 const InsightsCarousel = dynamic(
   () => import("@/components/InsightsCarousel"),
