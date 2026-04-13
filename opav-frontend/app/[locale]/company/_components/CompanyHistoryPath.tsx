@@ -1,7 +1,7 @@
 "use client";
 
 interface Props {
-  pathRef: React.RefObject<SVGPathElement>;
+  pathRef: React.RefObject<SVGPathElement | null>;
 }
 
 export default function CompanyHistoryPath({ pathRef }: Props) {
