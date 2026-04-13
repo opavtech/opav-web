@@ -433,13 +433,13 @@ export default async function HomePage({ params }: HomePageProps) {
                     </div>
                   </div>
 
-                  <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] lg:aspect-[4/5] rounded-2xl overflow-hidden bg-[#F7F9FC]">
+                  <div className="relative w-full rounded-2xl overflow-hidden bg-[#F7F9FC]" style={{ maxHeight: "440px", aspectRatio: "4/3" }}>
                     <Image
                       src="https://res.cloudinary.com/deyzoekgz/image/upload/v1775768747/43773f03-99d3-443b-ba8b-bca6e58534b8_nym9sw.jpg"
                       alt="OPAV - Administración de Propiedades"
                       fill
                       loading="lazy"
-                      className="object-contain object-top"
+                      className="object-cover object-center"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                     />
                   </div>
