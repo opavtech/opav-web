@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 
@@ -25,7 +24,6 @@ export default function CaseHero({
   nombre,
   ubicacion,
   empresa,
-  imagenUrl,
   locale,
   translations,
 }: CaseHeroProps) {
@@ -35,59 +33,22 @@ export default function CaseHero({
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   const isOPAV = empresa === "OPAV";
   const brandColor = isOPAV ? "#d50058" : "#0e7490";
-  const brandGradient = isOPAV
-    ? "linear-gradient(135deg, #d50058 0%, #a0003d 100%)"
-    : "linear-gradient(135deg, #0e7490 0%, #0a5a6e 100%)";
 
   return (
-    <div ref={containerRef} className="relative min-h-[85vh] overflow-hidden">
-      {/* Background Image with Parallax */}
-      <motion.div className="absolute inset-0 z-0" style={{ y: imageY, scale }}>
-        {imagenUrl ? (
-          <Image
-            src={imagenUrl}
-            alt={`${nombre} - Caso de éxito de ${empresa} en ${ubicacion}`}
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-            quality={90}
-          />
-        ) : (
-          <div
-            className="absolute inset-0"
-            style={{ background: brandGradient }}
-          />
-        )}
-
-        {/* Overlay Layers */}
-        <div className="absolute inset-0 bg-black/50" />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%)`,
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: `linear-gradient(135deg, ${brandColor}40 0%, transparent 50%)`,
-          }}
-        />
-      </motion.div>
-
-      {/* Animated Pattern Overlay */}
+    <div ref={containerRef} className="relative min-h-[85vh] overflow-hidden bg-slate-900">
+      {/* Acento de marca: línea vertical izquierda + blob radial sutil */}
       <div
-        className="absolute inset-0 opacity-5 z-[1]"
+        className="absolute left-0 top-0 bottom-0 w-1 z-[2]"
+        style={{ backgroundColor: brandColor }}
+      />
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-          backgroundSize: "32px 32px",
+          background: `radial-gradient(ellipse 60% 50% at 0% 50%, ${brandColor}18 0%, transparent 70%)`,
         }}
       />
 
