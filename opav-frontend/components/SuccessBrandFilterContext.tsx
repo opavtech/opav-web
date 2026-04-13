@@ -25,11 +25,9 @@ export function SuccessBrandFilterProvider({
 }) {
   const [activeFilter, setActiveFilter] = useState<FilterType>("OPAV");
   return (
-    <SuccessBrandFilterContext.Provider
-      value={{ activeFilter, setActiveFilter }}
-    >
+    <SuccessBrandFilterContext value={{ activeFilter, setActiveFilter }}>
       {children}
-    </SuccessBrandFilterContext.Provider>
+    </SuccessBrandFilterContext>
   );
 }
 
