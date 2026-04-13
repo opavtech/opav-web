@@ -8,5 +8,11 @@
     "build:frontend": "pnpm -C opav-frontend build",
     "build:cms": "pnpm -C opav-cms build",
     "lint:frontend": "pnpm -C opav-frontend lint"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.1.6",
+      "@types/react-dom": "19.1.2"
+    }
   }
 }
