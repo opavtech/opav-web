@@ -439,7 +439,7 @@ export default async function HomePage({ params }: HomePageProps) {
                       alt="OPAV - Administración de Propiedades"
                       fill
                       loading="lazy"
-                      className="object-cover object-center"
+                      className="object-cover object-top"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
                     />
                   </div>
