@@ -18,7 +18,7 @@ function PrivacyModal({
   onClose: () => void;
 }) {
   const [activeTab, setActiveTab] = useState<"categories" | "services">(
-    "categories"
+    "categories",
   );
   const [cookies, setCookies] = useState({
     essential: true,
@@ -51,7 +51,7 @@ function PrivacyModal({
     setCookies({ essential: true, analytics: true, externalMedia: true });
     localStorage.setItem(
       "cookieConsent",
-      JSON.stringify({ essential: true, analytics: true, externalMedia: true })
+      JSON.stringify({ essential: true, analytics: true, externalMedia: true }),
     );
     onClose();
   };
@@ -64,7 +64,7 @@ function PrivacyModal({
         essential: true,
         analytics: false,
         externalMedia: false,
-      })
+      }),
     );
     onClose();
   };
@@ -372,7 +372,7 @@ export default function Footer({ locale }: FooterProps) {
                     </svg>
                   </a>
                   <a
-                    href="https://wa.me/573207036539"
+                    href="https://wa.me/573132092352"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 bg-[#5b6770] hover:bg-[#25D366] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -503,7 +503,8 @@ export default function Footer({ locale }: FooterProps) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-[#5b6770]">
               <p>
-                &copy; {new Date().getFullYear()} OPAV SAS. {t("footerCopyright")}
+                &copy; {new Date().getFullYear()} OPAV SAS.{" "}
+                {t("footerCopyright")}
               </p>
               <div className="flex gap-6">
                 <button

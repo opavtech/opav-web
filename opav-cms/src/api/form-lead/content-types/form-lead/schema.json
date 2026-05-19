@@ -67,13 +67,6 @@
     "notas": {
       "type": "text"
     },
-    "enviadoHubspot": {
-      "type": "boolean",
-      "default": false
-    },
-    "hubspotContactId": {
-      "type": "string"
-    },
     "presupuestoEstimado": {
       "type": "string"
     },

@@ -188,7 +188,7 @@ pids
 # Claude Code
 ############################
 
-.claude/settings.local.json
+.claude/
 
 
 ############################
@@ -196,6 +196,18 @@ pids
 ############################
 
 nul
+
+
+############################
+# Documentación de entrega (contiene credenciales — no commitear en repo público)
+############################
+
+# Bloquear todos los .md y .pdf en la raíz del monorepo
+/*.md
+/*.pdf
+
+# Excepción: si más adelante se agrega un README.md público, descomentar:
+# !/README.md
 
 
 ############################
