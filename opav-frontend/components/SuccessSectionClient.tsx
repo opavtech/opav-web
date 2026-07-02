@@ -62,13 +62,13 @@ export default function SuccessSectionClient({
         }}
       />
 
-      {/* Layer 3: Patrón geométrico ultra-sutil — CSS puro (antes un PNG de
-          2.7MB que a 5% de opacidad no justificaba su peso de red). */}
+      {/* Layer 3: Patrón geométrico ultra-sutil */}
       <div
         className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, transparent, transparent 30px, #9CA3AF 30px, #9CA3AF 31px)",
+          backgroundImage: "url(/patterns/geometric-noise.png)",
+          backgroundSize: "64px 64px",
+          backgroundRepeat: "repeat",
         }}
       />
 

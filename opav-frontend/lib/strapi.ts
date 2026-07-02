@@ -53,10 +53,8 @@ export async function fetchFromStrapi<T = any>(
   const url = `${STRAPI_API_URL}${path}${queryString ? `?${queryString}` : ""}`;
 
   try {
-    // Timeout defensivo: si Strapi se degrada (p99 ~15s observado en incidentes),
-    // fallamos rápido a null en vez de arrastrar el render de toda la página.
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     const res = await fetch(url, {
       ...fetchOptions,
