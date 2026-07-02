@@ -31,9 +31,7 @@ export default ({ env }) => {
     connection: {
       client,
       ...connections[client],
-      // 60s dejaba requests esperando un pool agotado casi un minuto antes de
-      // rendirse. Fallar rápido (15s) evita que se acumulen requests colgados.
-      acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 15000),
+      acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
     },
   };
 };
