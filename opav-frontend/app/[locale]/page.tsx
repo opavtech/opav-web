@@ -122,29 +122,27 @@ export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   const t = await getTranslations("home");
 
-  // Obtener certificaciones desde Strapi
-  let certificaciones = [];
-  try {
-    const response = await getCertificaciones(locale);
-    certificaciones = response.data || [];
-  } catch (error) {
-    console.error("Error fetching certificaciones:", error);
-  }
+  // Cargar las 3 fuentes de Strapi en paralelo. allSettled garantiza que una
+  // fuente lenta/caída no bloquee ni tumbe el render: cada bloque cae a su
+  // fallback vacío de forma independiente (los fetch ya devuelven null en error).
+  const [certResult, casosResult, blogResult] = await Promise.allSettled([
+    getCertificaciones(locale),
+    getCasosExitoDestacados(locale),
+    getBlogPostsDestacados(locale),
+  ]);
+
+  const certificaciones =
+    certResult.status === "fulfilled" ? certResult.value?.data || [] : [];
+  const casosDestacados =
+    casosResult.status === "fulfilled" ? casosResult.value?.data || [] : [];
+  const blogPosts =
+    blogResult.status === "fulfilled" ? blogResult.value?.data || [] : [];
 
   // Obtener la primera certificación (ISO 9001)
   const certificacion = certificaciones.length > 0 ? certificaciones[0] : null;
   const logoUrl = certificacion?.logo
     ? getStrapiMedia(certificacion.logo.url)
     : null;
-
-  // Obtener casos de éxito destacados desde Strapi
-  let casosDestacados = [];
-  try {
-    const response = await getCasosExitoDestacados(locale);
-    casosDestacados = response.data || [];
-  } catch (error) {
-    console.error("Error fetching casos destacados:", error);
-  }
 
   // Helper: Extraer texto plano de richtext de Strapi v5
   const extractRichText = (richtext: any): string => {
@@ -165,15 +163,6 @@ export default async function HomePage({ params }: HomePageProps) {
     }
     return "";
   };
-
-  // Obtener posts destacados del blog desde Strapi
-  let blogPosts = [];
-  try {
-    const response = await getBlogPostsDestacados(locale);
-    blogPosts = response.data || [];
-  } catch (error) {
-    console.error("Error fetching blog posts:", error);
-  }
 
   return (
     <main className="min-h-screen">
@@ -940,16 +929,6 @@ export default async function HomePage({ params }: HomePageProps) {
               className="absolute inset-0 -z-10"
               style={{
                 background: "linear-gradient(165deg, #F7F9FC 0%, #F0F2F6 100%)",
-              }}
-            ></div>
-
-            {/* Layer 3: Ultra-subtle geometric pattern */}
-            <div
-              className="absolute inset-0 opacity-[0.008] -z-10"
-              style={{
-                backgroundImage: "url('/patterns/geometric-noise.png')",
-                backgroundSize: "140px 140px",
-                backgroundRepeat: "repeat",
               }}
             ></div>
 
