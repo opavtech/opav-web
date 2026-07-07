@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { CasoExitoLocation, GroupedCases } from "@/lib/colombiaCities";
-import { colombiaCities, CityName } from "@/lib/colombiaCities";
+import { colombiaCities, CityName, opavPresenceCities } from "@/lib/colombiaCities";
 import Link from "next/link";
 import Image from "next/image";
 import { getStrapiMedia } from "@/lib/strapi";
@@ -148,6 +148,42 @@ export default function OSMColombiaMap({
       iconAnchor: [size / 2, size / 2],
     });
   };
+
+  // Icono de "presencia": anillo pequeño y estático, visualmente secundario
+  // frente a los círculos de proyectos (sin contador ni pulso).
+  const createPresenceIcon = () => {
+    const size = 16;
+    return L.divIcon({
+      html: `
+        <div style="
+          width: ${size}px;
+          height: ${size}px;
+          background: rgba(255, 255, 255, 0.9);
+          border: 3px solid #E91E63;
+          border-radius: 50%;
+          box-shadow: 0 2px 8px rgba(233, 30, 99, 0.45);
+          cursor: pointer;
+        "></div>
+      `,
+      className: "",
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+    });
+  };
+
+  // Ciudades de presencia OPAV a mostrar: se ocultan con el filtro B&S y
+  // cuando la ciudad ya tiene proyectos OPAV (manda el marcador de proyectos).
+  const visiblePresenceCities = useMemo(() => {
+    if (selectedCompany === "B&S") return [];
+    const citiesWithOpavProjects = new Set(
+      Object.entries(groupedCases)
+        .filter(([, data]) => data.opav.length > 0)
+        .map(([city]) => city.trim().toLowerCase()),
+    );
+    return opavPresenceCities.filter(
+      (city) => !citiesWithOpavProjects.has(city.toLowerCase()),
+    );
+  }, [groupedCases, selectedCompany]);
 
   const getCityColor = (city: string) => {
     const cityData = groupedCases[city];
@@ -319,6 +355,45 @@ export default function OSMColombiaMap({
             </Marker>,
           ];
         })}
+
+        {/* Anillos de presencia OPAV (ciudades sin casos de éxito publicados) */}
+        {visiblePresenceCities.map((city) => {
+          const coords = colombiaCities[city];
+          if (!coords) return null;
+          return (
+            <Marker
+              key={`presence-${city}`}
+              position={[coords.lat, coords.lng]}
+              icon={createPresenceIcon()}
+              zIndexOffset={-100}
+            >
+              <Popup className="custom-popup" maxWidth={240}>
+                <div className="p-2">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="font-bold text-base text-slate-900 m-0">
+                      {city}
+                    </h3>
+                    <span className="text-[10px] font-semibold uppercase tracking-wide text-[#E91E63] bg-[#E91E63]/10 border border-[#E91E63]/30 rounded-full px-2 py-0.5">
+                      {locale === "es" ? "Presencia OPAV" : "OPAV presence"}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-600 mb-3">
+                    {locale === "es"
+                      ? "Operaciones y servicios de OPAV en esta ciudad."
+                      : "OPAV operations and services in this city."}
+                  </p>
+                  <Link
+                    href={`/${locale}/contact`}
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#E91E63] hover:underline"
+                  >
+                    {locale === "es" ? "Contáctanos" : "Contact us"}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
 
       {/* Leyenda */}
@@ -341,6 +416,14 @@ export default function OSMColombiaMap({
             <div className="flex items-center gap-1.5 md:gap-2">
               <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#00BCD4] shadow-lg shadow-[#00BCD4]/50" />
               <span className="text-white font-medium">B&S</span>
+            </div>
+          )}
+          {visiblePresenceCities.length > 0 && (
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-white/90 border-2 border-[#E91E63] shadow-lg shadow-[#E91E63]/40" />
+              <span className="text-white font-medium">
+                {locale === "es" ? "Presencia OPAV" : "OPAV presence"}
+              </span>
             </div>
           )}
         </div>

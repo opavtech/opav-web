@@ -1,6 +1,18 @@
 import { Metadata } from "next";
 import { getCasosExitoConUbicacion } from "@/lib/strapi";
+import { opavPresenceCities } from "@/lib/colombiaCities";
 import CoberturaSection from "@/components/CoberturaSection";
+
+// Ciudades con proyectos + ciudades de presencia OPAV, sin duplicados
+// (comparación case-insensitive, conservando el nombre canónico).
+function mergeCitiesWithPresence(projectCities: string[]): string[] {
+  const seen = new Set(projectCities.map((c) => c.trim().toLowerCase()));
+  const merged = [...projectCities];
+  opavPresenceCities.forEach((city) => {
+    if (!seen.has(city.toLowerCase())) merged.push(city);
+  });
+  return merged;
+}
 
 interface CoberturaPageProps {
   params: Promise<{ locale: string }>;
@@ -57,9 +69,11 @@ export async function generateMetadata({
   const response = await getCasosExitoConUbicacion("es");
   const rawCases: unknown[] = response.data || [];
   const cases = rawCases.map(normalizeCoberturaCase);
-  const cities = Array.from(
-    new Set(cases.map((c) => c.ubicacion).filter(Boolean)),
-  ) as string[];
+  const cities = mergeCitiesWithPresence(
+    Array.from(
+      new Set(cases.map((c) => c.ubicacion).filter(Boolean)),
+    ) as string[],
+  );
   const citiesKeywords = cities.slice(0, 5).join(", ");
 
   const title = isSpanish
@@ -258,10 +272,12 @@ export default async function CoberturaPage({ params }: CoberturaPageProps) {
   const rawCases: unknown[] = response.data || [];
   const cases = rawCases.map(normalizeCoberturaCase);
 
-  // Extraer ciudades únicas para structured data
-  const cities = Array.from(
-    new Set(cases.map((c) => c.ubicacion).filter(Boolean)),
-  ) as string[];
+  // Extraer ciudades únicas (proyectos + presencia OPAV) para structured data
+  const cities = mergeCitiesWithPresence(
+    Array.from(
+      new Set(cases.map((c) => c.ubicacion).filter(Boolean)),
+    ) as string[],
+  );
 
   // Generar JSON-LD
   const structuredData = generateStructuredData(cases, locale, cities);

@@ -21,9 +21,26 @@ export const colombiaCities = {
   Valledupar: { lat: 10.4631, lng: -73.2532, x: 445, y: 130 },
   Sincelejo: { lat: 9.3047, lng: -75.3978, x: 380, y: 200 },
   Tunja: { lat: 5.5353, lng: -73.3678, x: 455, y: 420 },
+  Funza: { lat: 4.7180, lng: -74.2120, x: 414, y: 452 },
+  Mosquera: { lat: 4.7059, lng: -74.2302, x: 412, y: 456 },
 };
 
 export type CityName = keyof typeof colombiaCities;
+
+// Ciudades donde OPAV hace presencia operativa sin casos de éxito publicados.
+// Se pintan como anillos de presencia (sin contador) en el mapa de cobertura.
+// Si una de estas ciudades llega a tener casos OPAV reales, su anillo se
+// oculta automáticamente y manda el marcador de proyectos.
+export const opavPresenceCities: CityName[] = [
+  "Cali",
+  "Medellín",
+  "Bucaramanga",
+  "Manizales",
+  "Neiva",
+  "Barranquilla",
+  "Funza",
+  "Mosquera",
+];
 
 export interface CasoExitoLocation {
   id: number;
