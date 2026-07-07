@@ -8,6 +8,7 @@ import Link from "next/link";
 import ProjectsPanel from "@/components/ProjectsPanel";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import type { CasoExitoLocation, GroupedCases } from "@/lib/colombiaCities";
+import { opavPresenceCities } from "@/lib/colombiaCities";
 
 // Importar el mapa de forma dinámica para evitar problemas de SSR
 const OSMColombiaMap = dynamic(() => import("@/components/OSMColombiaMap"), {
@@ -161,7 +162,12 @@ export default function CoberturaSection({
 
   // Estadísticas
   const stats = useMemo(() => {
-    const cities = Object.keys(groupedCases).length;
+    // Ciudades = con proyectos + presencia OPAV (dedupe case-insensitive)
+    const citySet = new Set(
+      Object.keys(groupedCases).map((c) => c.trim().toLowerCase()),
+    );
+    opavPresenceCities.forEach((c) => citySet.add(c.toLowerCase()));
+    const cities = citySet.size;
     const opavCount = casosConUbicacion.filter(
       (c) => c.empresa === "OPAV",
     ).length;
