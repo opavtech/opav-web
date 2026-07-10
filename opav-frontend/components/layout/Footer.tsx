@@ -283,6 +283,14 @@ function PrivacyModal({
             >
               Política de Privacidad
             </a>
+            <a
+              href="/documents/politica-calidad.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#5b6770] hover:text-[#d50058] font-medium transition-colors"
+            >
+              Política de Calidad
+            </a>
             <Link
               href="/legal"
               className="text-[#5b6770] hover:text-[#d50058] font-medium transition-colors"
@@ -520,6 +528,14 @@ export default function Footer({ locale }: FooterProps) {
                   className="hover:text-white transition-colors"
                 >
                   {t("footerPrivacy")}
+                </a>
+                <a
+                  href="/documents/politica-calidad.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  {t("footerQuality")}
                 </a>
               </div>
             </div>
