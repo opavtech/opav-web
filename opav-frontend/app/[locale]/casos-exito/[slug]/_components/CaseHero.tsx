@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 
 interface CaseHeroProps {
@@ -24,6 +25,7 @@ export default function CaseHero({
   nombre,
   ubicacion,
   empresa,
+  imagenUrl,
   locale,
   translations,
 }: CaseHeroProps) {
@@ -40,6 +42,29 @@ export default function CaseHero({
 
   return (
     <div ref={containerRef} className="relative min-h-[85vh] overflow-hidden bg-slate-900">
+      {/* Foto del caso como fondo, con overlay oscuro para mantener el estilo
+          corporativo y la legibilidad del texto blanco. */}
+      {imagenUrl && (
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={imagenUrl}
+            alt={nombre}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          {/* Overlay: oscurece la foto para el texto y refuerza el look slate-900 */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(15,23,42,0.72) 0%, rgba(15,23,42,0.6) 40%, rgba(15,23,42,0.85) 100%)",
+            }}
+          />
+        </div>
+      )}
+
       {/* Acento de marca: línea vertical izquierda + blob radial sutil */}
       <div
         className="absolute left-0 top-0 bottom-0 w-1 z-[2]"
