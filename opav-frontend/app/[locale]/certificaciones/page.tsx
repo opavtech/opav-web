@@ -257,6 +257,7 @@ export default async function CertificacionesPage({
               whatItBrings: t("filters.whatItBrings"),
               showMore: t("filters.showMore"),
               showLess: t("filters.showLess"),
+              featured: t("filters.featured"),
             }}
           />
         </div>
