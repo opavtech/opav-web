@@ -134,6 +134,7 @@ interface CertificacionesGridProps {
     whatItBrings: string;
     showMore: string;
     showLess: string;
+    featured: string;
   };
 }
 
@@ -287,7 +288,7 @@ export default function CertificacionesGrid({
                           <div>
                             {cert.destacado && (
                               <span className="inline-block px-2 py-0.5 bg-[#d50058]/10 text-[#d50058] text-xs font-medium rounded mb-2">
-                                Destacada
+                                {translations.featured}
                               </span>
                             )}
                             <h3 className="text-xl lg:text-2xl font-semibold text-gray-900">
