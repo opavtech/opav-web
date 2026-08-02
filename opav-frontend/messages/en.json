@@ -45,7 +45,9 @@
       "isoTitle": "ISO 9001-2015 Certification",
       "isoBadge": "In Progress 2026",
       "isoDescription": "In the process of obtaining the certification for the year 2026, guaranteeing high quality standards in our services and processes.",
-      "isoLink": "View Certificate →"
+      "isoLink": "View Certificate →",
+      "qualityPolicyLink": "Quality Policy",
+      "qualityPolicyAria": "Open OPAV's Quality Policy PDF in a new tab"
     },
     "company": {
       "title": "Our Companies",
