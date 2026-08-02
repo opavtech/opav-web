@@ -275,19 +275,44 @@ export default async function HomePage({ params }: HomePageProps) {
               {/* Mobile: badge compacto inline. Desktop: card completa */}
               <div className="w-full lg:w-1/2" role="complementary" aria-labelledby="iso-certification-title">
                 {/* Badge compacto — solo mobile */}
-                <div className="flex lg:hidden items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-xl border border-white/20">
-                  <div className="text-2xl shrink-0" aria-hidden="true"></div>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-white/70 uppercase tracking-wide">Certificación</p>
-                    <p className="text-sm font-bold text-white truncate" id="iso-certification-title">{t("hero.isoTitle")}</p>
+                <div className="flex lg:hidden flex-col gap-2 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-xl border border-white/20">
+                  <div className="flex items-center gap-3">
+                    <div className="text-2xl shrink-0" aria-hidden="true"></div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-white/70 uppercase tracking-wide">Certificación</p>
+                      <p className="text-sm font-bold text-white truncate" id="iso-certification-title">{t("hero.isoTitle")}</p>
+                    </div>
+                    <Link
+                      href={getLocalizedPath("certifications", locale as "es" | "en")}
+                      className="ml-auto shrink-0 px-3 py-1.5 bg-white/20 hover:bg-white/30 border border-white/30 rounded-lg text-white text-xs font-medium transition-all"
+                      aria-label="Ver detalles de certificaciones ISO de OPAV"
+                    >
+                      {t("hero.isoLink")}
+                    </Link>
                   </div>
-                  <Link
-                    href={getLocalizedPath("certifications", locale as "es" | "en")}
-                    className="ml-auto shrink-0 px-3 py-1.5 bg-white/20 hover:bg-white/30 border border-white/30 rounded-lg text-white text-xs font-medium transition-all"
-                    aria-label="Ver detalles de certificaciones ISO de OPAV"
+                  {/* Enlace sutil a la Política de Calidad (PDF) */}
+                  <a
+                    href="/documents/politica-calidad.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t("hero.qualityPolicyAria")}
+                    className="inline-flex items-center gap-1.5 text-xs text-white/70 hover:text-white transition-colors pt-1 border-t border-white/10"
                   >
-                    {t("hero.isoLink")}
-                  </Link>
+                    <svg
+                      className="w-3.5 h-3.5 opacity-80"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.8}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                    <span className="underline underline-offset-2">{t("hero.qualityPolicyLink")}</span>
+                  </a>
                 </div>
 
                 {/* Card completa — solo desktop */}
@@ -308,6 +333,32 @@ export default async function HomePage({ params }: HomePageProps) {
                       >
                         {t("hero.isoLink")}
                       </Link>
+
+                      {/* Enlace sutil a la Política de Calidad (PDF) */}
+                      <a
+                        href="/documents/politica-calidad.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={t("hero.qualityPolicyAria")}
+                        className="group mt-4 inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded"
+                      >
+                        <svg
+                          className="w-4 h-4 opacity-80"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.8}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                        <span className="underline-offset-4 group-hover:underline">
+                          {t("hero.qualityPolicyLink")}
+                        </span>
+                      </a>
                     </div>
                   </div>
                 </div>
