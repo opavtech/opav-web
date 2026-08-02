@@ -275,7 +275,7 @@ export default async function HomePage({ params }: HomePageProps) {
               {/* Mobile: badge compacto inline. Desktop: card completa */}
               <div className="w-full lg:w-1/2" role="complementary" aria-labelledby="iso-certification-title">
                 {/* Badge compacto — solo mobile */}
-                <div className="flex lg:hidden flex-col gap-2 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-xl border border-white/20">
+                <div className="flex lg:hidden flex-col gap-3 bg-white/10 backdrop-blur-sm px-4 py-3.5 rounded-xl border border-white/20">
                   <div className="flex items-center gap-3">
                     <div className="text-2xl shrink-0" aria-hidden="true"></div>
                     <div className="min-w-0">
@@ -296,7 +296,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={t("hero.qualityPolicyAria")}
-                    className="inline-flex items-center text-xs text-white/70 hover:text-white transition-colors pt-1 border-t border-white/10"
+                    className="inline-flex items-center text-xs text-white/70 hover:text-white transition-colors pt-2.5 border-t border-white/10"
                   >
                     <span className="underline underline-offset-2">{t("hero.qualityPolicyLink")}</span>
                   </a>
@@ -310,29 +310,34 @@ export default async function HomePage({ params }: HomePageProps) {
                       <h3 id="iso-certification-title" className="text-2xl font-bold mb-2">
                         {t("hero.isoTitle")}
                       </h3>
-                      <p className="text-base text-white/90 mb-4">
+                      <p className="text-base text-white/90 mb-6">
                         {t("hero.isoDescription")}
                       </p>
-                      <Link
-                        href={getLocalizedPath("certifications", locale as "es" | "en")}
-                        className="inline-block px-4 py-2 bg-white/20 hover:bg-white/30 border border-white/30 hover:border-white/50 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-                        aria-label="Ver detalles de certificaciones ISO de OPAV"
-                      >
-                        {t("hero.isoLink")}
-                      </Link>
 
-                      {/* Enlace sutil a la Política de Calidad (PDF) */}
-                      <a
-                        href="/documents/politica-calidad.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={t("hero.qualityPolicyAria")}
-                        className="group mt-4 inline-flex items-center text-sm text-white/70 hover:text-white transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded"
-                      >
-                        <span className="underline-offset-4 group-hover:underline">
-                          {t("hero.qualityPolicyLink")}
-                        </span>
-                      </a>
+                      {/* Bloque de acciones: botón principal + enlace secundario,
+                          separados y alineados para que respiren. */}
+                      <div className="flex flex-col items-start gap-4">
+                        <Link
+                          href={getLocalizedPath("certifications", locale as "es" | "en")}
+                          className="inline-block px-4 py-2 bg-white/20 hover:bg-white/30 border border-white/30 hover:border-white/50 rounded-lg text-white font-medium transition-all duration-300 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                          aria-label="Ver detalles de certificaciones ISO de OPAV"
+                        >
+                          {t("hero.isoLink")}
+                        </Link>
+
+                        {/* Enlace sutil a la Política de Calidad (PDF) */}
+                        <a
+                          href="/documents/politica-calidad.pdf"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={t("hero.qualityPolicyAria")}
+                          className="group inline-flex items-center pt-4 border-t border-white/15 w-full text-sm text-white/70 hover:text-white transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded"
+                        >
+                          <span className="underline-offset-4 group-hover:underline">
+                            {t("hero.qualityPolicyLink")}
+                          </span>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
