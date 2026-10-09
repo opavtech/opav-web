@@ -612,7 +612,8 @@
     "contractTypes": {
       "indefinido": "Permanent",
       "temporal": "Temporary",
-      "porObra": "Contract"
+      "por_obra": "Contract",
+      "freelance": "Freelance"
     },
     "educationLevels": {
       "bachiller": "High School",

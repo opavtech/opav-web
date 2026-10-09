@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
+import VacancyMarkdown from "./VacancyMarkdown";
 
 interface VacancyDescriptionProps {
   title: string;
@@ -46,10 +46,7 @@ export default function VacancyDescription({
         </div>
         <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
       </div>
-      <div
-        className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-ul:text-gray-700"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+      <VacancyMarkdown content={content} brandColor={brandColor} />
     </div>
   );
 }

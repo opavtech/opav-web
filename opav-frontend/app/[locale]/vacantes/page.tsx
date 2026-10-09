@@ -150,7 +150,8 @@ export default async function VacantesPage({ params }: VacantesPageProps) {
     contractTypes: {
       indefinido: t("contractTypes.indefinido"),
       temporal: t("contractTypes.temporal"),
-      porObra: t("contractTypes.porObra"),
+      por_obra: t("contractTypes.por_obra"),
+      freelance: t("contractTypes.freelance"),
     },
     noJobs: {
       title: t("noJobs.title"),

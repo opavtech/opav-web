@@ -1,6 +1,7 @@
 "use client";
 
 import { useInView } from "react-intersection-observer";
+import VacancyMarkdown from "./VacancyMarkdown";
 
 interface RequirementsListProps {
   title: string;
@@ -45,27 +46,7 @@ export default function RequirementsList({
         </div>
         <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
       </div>
-      <div
-        className="prose prose-lg max-w-none 
-          prose-headings:text-gray-900 
-          prose-p:text-gray-700 
-          prose-strong:text-gray-900 
-          prose-ul:text-gray-700
-          prose-ul:space-y-3
-          prose-li:pl-2
-          [&_ul>li]:before:content-['✓']
-          [&_ul>li]:before:mr-3
-          [&_ul>li]:before:font-bold
-          [&_ul>li]:before:inline-block
-          [&_ul>li]:flex
-          [&_ul>li]:items-start"
-        style={
-          {
-            "--tw-prose-bullets": brandColor,
-          } as React.CSSProperties
-        }
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+      <VacancyMarkdown content={content} brandColor={brandColor} />
     </div>
   );
 }

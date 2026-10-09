@@ -616,7 +616,8 @@
     "contractTypes": {
       "indefinido": "Indefinido",
       "temporal": "Temporal",
-      "porObra": "Por Obra"
+      "por_obra": "Por Obra",
+      "freelance": "Freelance"
     },
     "educationLevels": {
       "bachiller": "Bachiller",

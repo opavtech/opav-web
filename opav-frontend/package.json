@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "analyze": "set ANALYZE=true && next build"
+    "analyze": "set ANALYZE=true && next build",
+    "test:vacancies": "tsx --tsconfig tests/tsconfig.json --test tests/*.test.ts"
   },
   "dependencies": {
     "@next/third-parties": "^16.0.8",
@@ -27,6 +28,7 @@
     "react-dom": "19.1.0",
     "react-intersection-observer": "^10.0.0",
     "react-leaflet": "^5.0.0",
+    "react-markdown": "10.1.0",
     "resend": "^6.9.2",
     "sanitize-html": "^2.17.1",
     "web-vitals": "^5.1.0",
@@ -42,6 +44,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.12",
     "tailwindcss": "^4",
+    "tsx": "4.20.6",
     "typescript": "^5"
   }
 }
